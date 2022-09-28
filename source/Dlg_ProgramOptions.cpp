@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 //#include "fdm.h"
-#include "DlgProgramOptions.h"
+#include "Dlg_ProgramOptions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

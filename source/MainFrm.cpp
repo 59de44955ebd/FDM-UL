@@ -390,7 +390,7 @@ void CMainFrame::OnDlddefoptions()
 	_pwndDownloads->OnDownloadDefProperties ();
 }
 
-#include "DlgProgramOptions.h"
+#include "Dlg_ProgramOptions.h"
 void CMainFrame::OnDldroptions()
 {
 	CProgramOptions dlg;
