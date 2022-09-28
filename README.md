@@ -1,6 +1,6 @@
 # Free Download Manager Ultra-Light (FDM-UL)
 
-A stripped-down, portable (not using the Windows Registry at all) version of [Free Download Manager Classic for Windows](https://www.freedownloadmanager.org/) with various outdated and irrelevant features removed, and therefor with small memory footprint (particularly if compared with current FDM versions based on Qt).
+A stripped-down, portable (not using the Windows Registry at all) version of [Free Download Manager](https://www.freedownloadmanager.org/) Classic for Windows with various outdated and irrelevant features removed, and therefor with small memory footprint (particularly if compared with current FDM versions based on Qt).
 
 FDM-UL is based on the source code of [FDM 3.9.7](https://sourceforge.net/p/freedownload/code/HEAD/tree/), with about 50% of the original code removed.
 
@@ -23,7 +23,7 @@ FDM-UL is based on the source code of [FDM 3.9.7](https://sourceforge.net/p/free
 * HTML Spider
 * Floating extra windows
 * Skins
-* Language localisation (UI is just in english)
+* Language localisation (english only UI)
 * Download history
 
 **Screenshot**
