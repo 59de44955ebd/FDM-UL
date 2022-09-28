@@ -1,0 +1,800 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+    <Keyword>AtlProj</Keyword>
+    <ProjectGuid>{8288F773-B19F-3899-B09E-5EEC5BA05D95}</ProjectGuid>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>FDM-UL</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfAtl>Static</UseOfAtl>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfAtl>Static</UseOfAtl>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>.\source\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>obj\$(Platform)\$(Configuration)\FDM.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <BasicRuntimeChecks>
+      </BasicRuntimeChecks>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <DisableSpecificWarnings>4996;4100</DisableSpecificWarnings>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalIncludeDirectories>./uploader/fum/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>bin\$(Platform)\$(Configuration)\fdm.tlb</TypeLibraryName>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\FDM.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hash.lib;inetfile.lib;Mswsock.lib;wininet.lib;Ws2_32.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <TypeLibraryFile>
+      </TypeLibraryFile>
+      <AdditionalManifestDependencies>type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='X86' publicKeyToken='6595b64144ccf1df' language='*';%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>.\source\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>obj\$(Platform)\$(Configuration)\FDM.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <MultiProcessorCompilation>
+      </MultiProcessorCompilation>
+      <DisableSpecificWarnings>4996;4100</DisableSpecificWarnings>
+      <MinimalRebuild />
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalIncludeDirectories>./uploader/fum/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>bin\$(Platform)\$(Configuration)\fdm.tlb</TypeLibraryName>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\FDM.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hash.lib;inetfile.lib;wininet.lib;Ws2_32.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TypeLibraryFile>
+      </TypeLibraryFile>
+      <AdditionalManifestDependencies>type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='X86' publicKeyToken='6595b64144ccf1df' language='*';%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <IgnoreEmbeddedIDL />
+      <TypeLibraryResourceID />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="source\Dlg_AER.cpp" />
+    <ClCompile Include="source\AlsFolderBrowser.cpp" />
+    <ClCompile Include="source\AppStatusBar.cpp" />
+    <ClCompile Include="source\Dlg_CBD_SeeResults.cpp" />
+    <ClCompile Include="source\ChildView.cpp" />
+    <ClCompile Include="source\ClientAreaWnd.cpp" />
+    <ClCompile Include="source\ColumnTreeCtrl.cpp" />
+    <ClCompile Include="source\ComboBox_Ex.cpp" />
+    <ClCompile Include="source\ComboBoxTreeCtrl.cpp" />
+    <ClCompile Include="source\CreateBatchDownload.cpp" />
+    <ClCompile Include="source\Dlg_CreateDownload.cpp" />
+    <ClCompile Include="source\Dlg_CreateDownloads.cpp" />
+    <ClCompile Include="source\CsvParser.cpp" />
+    <ClCompile Include="source\Dlg_DDR.cpp" />
+    <ClCompile Include="source\Dlg_ConnectionSpeedInfo.cpp" />
+    <ClCompile Include="source\Dlg_Options_Webinterface.cpp" />
+    <ClCompile Include="source\Dlg_SpecifyNetworkSpeedValue.cpp" />
+    <ClCompile Include="source\Dlg_TumSettingsPerDirection.cpp" />
+    <ClCompile Include="source\Dlg_CheckFileIntegrity.cpp" />
+    <ClCompile Include="source\Dlg_CheckFileIntegrity_Progress.cpp" />
+    <ClCompile Include="source\Dlg_CheckFileIntegrity_Result.cpp" />
+    <ClCompile Include="source\Dlg_ChooseGroup.cpp" />
+    <ClCompile Include="source\Dlg_Download.cpp" />
+    <ClCompile Include="source\Dlg_Download_OnHide.cpp" />
+    <ClCompile Include="source\Dlg_Options.cpp" />
+    <ClCompile Include="source\Dlg_Options_Downloads.cpp" />
+    <ClCompile Include="source\Dlg_Options_Downloads_Network.cpp" />
+    <ClCompile Include="source\Dlg_Options_Downloads_NewDld.cpp" />
+    <ClCompile Include="source\Dlg_Options_Downloads_TimeLimit.cpp" />
+    <ClCompile Include="source\Dlg_Options_General.cpp" />
+    <ClCompile Include="source\Dlg_Options_General_Misc.cpp" />
+    <ClCompile Include="source\Dlg_Options_Notifications.cpp" />
+    <ClCompile Include="source\Dlg_Options_Page.cpp" />
+    <ClCompile Include="source\Dlg_Options_SiteMgr.cpp" />
+    <ClCompile Include="source\Dlg_SavePassword.cpp" />
+    <ClCompile Include="source\Dlg_SetBatchNumbers.cpp" />
+    <ClCompile Include="source\Dlg_ShutdownType.cpp" />
+    <ClCompile Include="source\Dlg_TUMChanged.cpp" />
+    <ClCompile Include="source\Dlg_DeletedProperties.cpp" />
+    <ClCompile Include="source\Dlg_DL.cpp" />
+    <ClCompile Include="source\Dlg_ExportDownloads.cpp" />
+    <ClCompile Include="source\Dlg_Find.cpp" />
+    <ClCompile Include="source\Dlg_FindAdvanced.cpp" />
+    <ClCompile Include="source\Dlg_ProgramOptions.cpp" />
+    <ClCompile Include="source\Dlg_Sounds.cpp" />
+    <ClCompile Include="source\Dlg_DownloadAlrExists.cpp" />
+    <ClCompile Include="source\DownloaderProperties_ListPage.cpp" />
+    <ClCompile Include="source\DownloaderProperties_NewDownloadPage.cpp" />
+    <ClCompile Include="source\DownloaderProperties_NotificationsPage.cpp" />
+    <ClCompile Include="source\DownloaderPropertiesSheet.cpp" />
+    <ClCompile Include="source\DownloadProperties.cpp" />
+    <ClCompile Include="source\DownloadProperties_ConnectionPage.cpp" />
+    <ClCompile Include="source\DownloadProperties_GeneralPage.cpp" />
+    <ClCompile Include="source\DownloadProperties_IntegrityPage.cpp" />
+    <ClCompile Include="source\DownloadProperties_MiscPage.cpp" />
+    <ClCompile Include="source\DownloadProperties_ProtocolPage.cpp" />
+    <ClCompile Include="source\DownloadProperties_ProxyPage.cpp" />
+    <ClCompile Include="source\DownloadPropertiesSheet.cpp" />
+    <ClCompile Include="source\Downloads_Deleted.cpp" />
+    <ClCompile Include="source\Downloads_Downloads.cpp" />
+    <ClCompile Include="source\Downloads_Groups.cpp" />
+    <ClCompile Include="source\Downloads_Info.cpp" />
+    <ClCompile Include="source\Downloads_InfoFrame.cpp" />
+    <ClCompile Include="source\Downloads_Log.cpp" />
+    <ClCompile Include="source\Downloads_Progress.cpp" />
+    <ClCompile Include="source\Downloads_Tasks.cpp" />
+    <ClCompile Include="source\DownloadsGroupsComboBox.cpp" />
+    <ClCompile Include="source\DownloadsWnd.cpp" />
+    <ClCompile Include="source\FdmApp.cpp" />
+    <ClCompile Include="source\FdmBalloon.cpp" />
+    <ClCompile Include="source\FdmBalloon_Content.cpp" />
+    <ClCompile Include="source\FdmBalloon_OnDownloadDone.cpp" />
+    <ClCompile Include="source\FdmBalloonContent.cpp" />
+    <ClCompile Include="source\FolderBrowser.cpp" />
+    <ClCompile Include="source\fsAppSettings.cpp" />
+    <ClCompile Include="source\fsArchiveFileStream.cpp" />
+    <ClCompile Include="source\fsArchiveInternetStream.cpp" />
+    <ClCompile Include="source\fsArchiveRebuilder.cpp" />
+    <ClCompile Include="source\fsArchiveRebuilderStream.cpp" />
+    <ClCompile Include="source\fsAutorunMgr.cpp" />
+    <ClCompile Include="source\fsClipboardMgr.cpp" />
+    <ClCompile Include="source\fsCmdHistoryMgr.cpp" />
+    <ClCompile Include="source\fsCommandLineParser.cpp" />
+    <ClCompile Include="source\fsContextHelpMgr.cpp" />
+    <ClCompile Include="source\fsDialogsMgr.cpp" />
+    <ClCompile Include="source\fsDldFilter.cpp" />
+    <ClCompile Include="source\fsDownload.cpp" />
+    <ClCompile Include="source\fsDownloadMgr.cpp" />
+    <ClCompile Include="source\fsDownloadRegSaver.cpp" />
+    <ClCompile Include="source\fsDownloadsMgr.cpp" />
+    <ClCompile Include="source\fsEventsMgr.cpp" />
+    <ClCompile Include="source\fsFDMCmdLineParser.cpp" />
+    <ClCompile Include="source\fsFindDownloadMgr.cpp" />
+    <ClCompile Include="source\fsHistoriesMgr.cpp" />
+    <ClCompile Include="source\fsInternetDownloader.cpp" />
+    <ClCompile Include="source\fsLangMgr.cpp" />
+    <ClCompile Include="source\fsMFCLangMgr.cpp" />
+    <ClCompile Include="source\fsMutex.cpp" />
+    <ClCompile Include="source\fsODMenu.cpp" />
+    <ClCompile Include="source\fsPluginMgr.cpp" />
+    <ClCompile Include="source\fsScheduleMgr.cpp" />
+    <ClCompile Include="source\fsSitePingMgr.cpp" />
+    <ClCompile Include="source\fsSitesMgr.cpp" />
+    <ClCompile Include="source\fsSoundsMgr.cpp" />
+    <ClCompile Include="source\fsSpeedMeter.cpp" />
+    <ClCompile Include="source\fsTicksMgr.cpp" />
+    <ClCompile Include="source\fsTrayIconMgr.cpp" />
+    <ClCompile Include="source\fsZipArchiveFastRebuilder.cpp" />
+    <ClCompile Include="source\fsZipArchiveRebuilder.cpp" />
+    <ClCompile Include="source\vmsCrashReporter.cpp" />
+    <ClCompile Include="source\vmsFdmWebInterfaceServer.cpp" />
+    <ClCompile Include="source\vmsHttpConnection.cpp" />
+    <ClCompile Include="source\vmsHttpRequest.cpp" />
+    <ClCompile Include="source\vmsHttpResourceContainer.cpp" />
+    <ClCompile Include="source\vmsHttpResponse.cpp" />
+    <ClCompile Include="source\vmsHttpServer.cpp" />
+    <ClCompile Include="source\MemHandleGuard.cpp" />
+    <ClCompile Include="source\StateInfo.cpp" />
+    <ClCompile Include="source\vmsLogger.cpp" />
+    <ClCompile Include="source\Dlg_Group.cpp" />
+    <ClCompile Include="source\grutil.cpp" />
+    <ClCompile Include="source\inetutil.cpp" />
+    <ClCompile Include="source\ListCtrlEx.cpp" />
+    <ClCompile Include="source\Dlg_Login.cpp" />
+    <ClCompile Include="source\MainFrm.cpp" />
+    <ClCompile Include="source\mfchelp.cpp" />
+    <ClCompile Include="source\misc.cpp" />
+    <ClCompile Include="source\MyBalloon.cpp" />
+    <ClCompile Include="source\MyBalloon_Content.cpp" />
+    <ClCompile Include="source\MyMessageBox.cpp" />
+    <ClCompile Include="source\Dlg_NOW.cpp" />
+    <ClCompile Include="source\PlugFrame2Tabs.cpp" />
+    <ClCompile Include="source\PluginFrame2.cpp" />
+    <ClCompile Include="source\Schedule_AdvancedPage.cpp" />
+    <ClCompile Include="source\Schedule_HTSPage.cpp" />
+    <ClCompile Include="source\Scheduler_Log.cpp" />
+    <ClCompile Include="source\ScheduleSheet.cpp" />
+    <ClCompile Include="source\Dlg_SCR.cpp" />
+    <ClCompile Include="source\Sheduler_Tasks.cpp" />
+    <ClCompile Include="source\ShedulerWnd.cpp" />
+    <ClCompile Include="source\SiteManager_GeneralPage.cpp" />
+    <ClCompile Include="source\SiteManager_PasswordsPage.cpp" />
+    <ClCompile Include="source\SiteManagerSheet.cpp" />
+    <ClCompile Include="source\Sites_AdvancedPage.cpp" />
+    <ClCompile Include="source\Sites_GeneralPage.cpp" />
+    <ClCompile Include="source\SitesSheet.cpp" />
+    <ClCompile Include="source\SitesWnd.cpp" />
+    <ClCompile Include="source\StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="source\system.cpp" />
+    <ClCompile Include="source\ToolBarEx.cpp" />
+    <ClCompile Include="source\TrayIconPosition.cpp" />
+    <ClCompile Include="source\TreeCtrlEx.cpp" />
+    <ClCompile Include="source\UIThread.cpp" />
+    <ClCompile Include="source\Dlg_UrlWithLogin.cpp" />
+    <ClCompile Include="source\UrlWnd.cpp" />
+    <ClCompile Include="source\Utils.cpp" />
+    <ClCompile Include="source\vmsAppSettingsStore.cpp" />
+    <ClCompile Include="source\vmsAppUtil.cpp" />
+    <ClCompile Include="source\vmsBatchList.cpp" />
+    <ClCompile Include="source\vmsCommandLine.cpp" />
+    <ClCompile Include="source\vmsDialogHelper.cpp" />
+    <ClCompile Include="source\vmsDownloadMgrEx.cpp" />
+    <ClCompile Include="source\vmsDownloadsGroupsMgr.cpp" />
+    <ClCompile Include="source\vmsDownloadsListHelper.cpp" />
+    <ClCompile Include="source\vmsDrawHelper.cpp" />
+    <ClCompile Include="source\vmsFdmAppMgr.cpp" />
+    <ClCompile Include="source\vmsFile.cpp" />
+    <ClCompile Include="source\vmsFileExtensionInOs.cpp" />
+    <ClCompile Include="source\vmsFileRecentList.cpp" />
+    <ClCompile Include="source\vmsFilesToDelete.cpp" />
+    <ClCompile Include="source\vmsFileUtil.cpp" />
+    <ClCompile Include="source\vmsInternetSession.cpp" />
+    <ClCompile Include="source\vmsIpHelper.cpp" />
+    <ClCompile Include="source\vmsMaximumSpeedMeter.cpp" />
+    <ClCompile Include="source\vmsMetalinkFile.cpp" />
+    <ClCompile Include="source\vmsNotEverywhereSupportedFunctions.cpp" />
+    <ClCompile Include="source\vmsPersistableListOfDownloads.cpp" />
+    <ClCompile Include="source\vmsPersistObject.cpp" />
+    <ClCompile Include="source\vmsRegisteredApp.cpp" />
+    <ClCompile Include="source\vmsRenderer.cpp" />
+    <ClCompile Include="source\vmsSecurity.cpp" />
+    <ClCompile Include="source\vmsSimpleFileDownloader.cpp" />
+    <ClCompile Include="source\vmsSkinMgr.cpp" />
+    <ClCompile Include="source\vmsSpeedTracker.cpp" />
+    <ClCompile Include="source\vmsStringList.cpp" />
+    <ClCompile Include="source\vmsStringParser.cpp" />
+    <ClCompile Include="source\vmsStringRecentList.cpp" />
+    <ClCompile Include="source\vmsSystem.cpp" />
+    <ClCompile Include="source\vmsTheme.cpp" />
+    <ClCompile Include="source\vmsTickCount.cpp" />
+    <ClCompile Include="source\vmsTrafficUsageModeMgr.cpp" />
+    <ClCompile Include="source\vmsTreeCtrlHelper.cpp" />
+    <ClCompile Include="source\vmsWindowsStatusBar.cpp" />
+    <ClCompile Include="source\vmsXmlHelper.cpp" />
+    <ClCompile Include="source\Dlg_Wait.cpp" />
+    <ClCompile Include="source\Dlg_WaitForConfirmation.cpp" />
+    <ClCompile Include="source\Wnd_DownloadProgress.cpp" />
+    <ClCompile Include="source\WndDlDoneNotification.cpp" />
+    <ClCompile Include="source\WndLog.cpp" />
+    <ClCompile Include="source\WndSplitter.cpp" />
+    <ClCompile Include="source\XInfoTip.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="fdm.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OUTDIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OUTDIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="source\Dlg_AER.h" />
+    <ClInclude Include="source\AlsFolderBrowser.h" />
+    <ClInclude Include="source\AppStatusBar.h" />
+    <ClInclude Include="source\Dlg_CBD_SeeResults.h" />
+    <ClInclude Include="source\CFDM.h" />
+    <ClInclude Include="source\ChildView.h" />
+    <ClInclude Include="source\ClientAreaWnd.h" />
+    <ClInclude Include="source\CmdHistorySaver.h" />
+    <ClInclude Include="source\ColumnTreeCtrl.h" />
+    <ClInclude Include="source\ComboBox_Ex.h" />
+    <ClInclude Include="source\ComboBoxTreeCtrl.h" />
+    <ClInclude Include="source\common.h" />
+    <ClInclude Include="source\CreateBatchDownload.h" />
+    <ClInclude Include="source\Dlg_CreateDownload.h" />
+    <ClInclude Include="source\Dlg_CreateDownloadList.h" />
+    <ClInclude Include="source\Dlg_CreateDownloads.h" />
+    <ClInclude Include="source\CsvParser.h" />
+    <ClInclude Include="source\Dlg_DDR.h" />
+    <ClInclude Include="source\dldscommon.h" />
+    <ClInclude Include="source\Dlg_ConnectionSpeedInfo.h" />
+    <ClInclude Include="source\Dlg_SpecifyNetworkSpeedValue.h" />
+    <ClInclude Include="source\Dlg_TumSettingsPerDirection.h" />
+    <ClInclude Include="source\Dlg_UnhExc2.h" />
+    <ClInclude Include="source\Dlg_CheckFileIntegrity.h" />
+    <ClInclude Include="source\Dlg_CheckFileIntegrity_Progress.h" />
+    <ClInclude Include="source\Dlg_CheckFileIntegrity_Result.h" />
+    <ClInclude Include="source\Dlg_ChooseGroup.h" />
+    <ClInclude Include="source\Dlg_Convert.h" />
+    <ClInclude Include="source\Dlg_Download.h" />
+    <ClInclude Include="source\Dlg_Download_OnHide.h" />
+    <ClInclude Include="source\Dlg_Options.h" />
+    <ClInclude Include="source\Dlg_Options_Downloads.h" />
+    <ClInclude Include="source\Dlg_Options_Downloads_Flv.h" />
+    <ClInclude Include="source\Dlg_Options_Downloads_Mirrors.h" />
+    <ClInclude Include="source\Dlg_Options_Downloads_Network.h" />
+    <ClInclude Include="source\Dlg_Options_Downloads_NewDld.h" />
+    <ClInclude Include="source\Dlg_Options_Downloads_TimeLimit.h" />
+    <ClInclude Include="source\Dlg_Options_General.h" />
+    <ClInclude Include="source\Dlg_Options_General_History.h" />
+    <ClInclude Include="source\Dlg_Options_General_Misc.h" />
+    <ClInclude Include="source\Dlg_Options_General_Misc_Advanced.h" />
+    <ClInclude Include="source\Dlg_Options_Notifications.h" />
+    <ClInclude Include="source\Dlg_Options_Page.h" />
+    <ClInclude Include="source\Dlg_Options_SiteMgr.h" />
+    <ClInclude Include="source\Dlg_SavePassword.h" />
+    <ClInclude Include="source\Dlg_SetBatchNumbers.h" />
+    <ClInclude Include="source\Dlg_ShutdownType.h" />
+    <ClInclude Include="source\Dlg_SpreadHelp.h" />
+    <ClInclude Include="source\Dlg_SpreadHelp2.h" />
+    <ClInclude Include="source\Dlg_SpreadHelp2_wb_Events.h" />
+    <ClInclude Include="source\Dlg_SpreadHelp2_wb_UIHandler.h" />
+    <ClInclude Include="source\Dlg_SpreadHelp_LinkCode.h" />
+    <ClInclude Include="source\Dlg_TUMChanged.h" />
+    <ClInclude Include="source\Dlg_Unpack_AskOverwrite.h" />
+    <ClInclude Include="source\Dlg_Unpack_InstAddPack.h" />
+    <ClInclude Include="source\Dlg_UnpackProgress.h" />
+    <ClInclude Include="source\Dlg_UnpackSettings.h" />
+    <ClInclude Include="source\Dlg_WPD_IgnoreList.h" />
+    <ClInclude Include="source\Dlg_WPD_IL_Add.h" />
+    <ClInclude Include="source\Dlg_DeletedProperties.h" />
+    <ClInclude Include="source\Dlg_DL.h" />
+    <ClInclude Include="source\Dlg_DownloadsHistory.h" />
+    <ClInclude Include="source\Dlg_ElevateRequired.h" />
+    <ClInclude Include="source\Dlg_ExportDownloads.h" />
+    <ClInclude Include="source\Dlg_ExportHistory.h" />
+    <ClInclude Include="source\Dlg_ExtensionsFilter.h" />
+    <ClInclude Include="source\Dlg_Find.h" />
+    <ClInclude Include="source\Dlg_FindAdvanced.h" />
+    <ClInclude Include="source\DlgProgramOptions.h" />
+    <ClInclude Include="source\Dlg_Sounds.h" />
+    <ClInclude Include="source\Dlg_T1ToT2.h" />
+    <ClInclude Include="source\DownloadAlrExistsDlg.h" />
+    <ClInclude Include="source\DownloaderProperties_BtPage.h" />
+    <ClInclude Include="source\DownloaderProperties_CommunityPage.h" />
+    <ClInclude Include="source\DownloaderProperties_ListPage.h" />
+    <ClInclude Include="source\DownloaderProperties_MirrorsPage.h" />
+    <ClInclude Include="source\DownloaderProperties_NewDownloadPage.h" />
+    <ClInclude Include="source\DownloaderProperties_NotificationsPage.h" />
+    <ClInclude Include="source\DownloaderPropertiesSheet.h" />
+    <ClInclude Include="source\DownloadProperties.h" />
+    <ClInclude Include="source\DownloadProperties_ConnectionPage.h" />
+    <ClInclude Include="source\DownloadProperties_GeneralPage.h" />
+    <ClInclude Include="source\DownloadProperties_IntegrityPage.h" />
+    <ClInclude Include="source\DownloadProperties_MirrorsPage.h" />
+    <ClInclude Include="source\DownloadProperties_MiscPage.h" />
+    <ClInclude Include="source\DownloadProperties_ProtocolPage.h" />
+    <ClInclude Include="source\DownloadProperties_ProxyPage.h" />
+    <ClInclude Include="source\DownloadPropertiesSheet.h" />
+    <ClInclude Include="source\Downloads_Deleted.h" />
+    <ClInclude Include="source\Downloads_Downloads.h" />
+    <ClInclude Include="source\Downloads_Groups.h" />
+    <ClInclude Include="source\Downloads_History.h" />
+    <ClInclude Include="source\Downloads_Info.h" />
+    <ClInclude Include="source\Downloads_InfoFrame.h" />
+    <ClInclude Include="source\Downloads_Log.h" />
+    <ClInclude Include="source\Downloads_Progress.h" />
+    <ClInclude Include="source\Downloads_Tasks.h" />
+    <ClInclude Include="source\DownloadsGroupsComboBox.h" />
+    <ClInclude Include="source\DownloadsWnd.h" />
+    <ClInclude Include="source\FDCButton.h" />
+    <ClInclude Include="source\FdmApp.h" />
+    <ClInclude Include="source\FdmBalloon.h" />
+    <ClInclude Include="source\FdmBalloon_Content.h" />
+    <ClInclude Include="source\FdmBalloon_OnDownloadDone.h" />
+    <ClInclude Include="source\FdmBalloonContent.h" />
+    <ClInclude Include="source\FDMDownload.h" />
+    <ClInclude Include="source\FDMDownloadsStat.h" />
+    <ClInclude Include="source\FdmUiWindow.h" />
+    <ClInclude Include="source\FDMUploader.h" />
+    <ClInclude Include="source\FDMUploadPackage.h" />
+    <ClInclude Include="source\FloatingInfo_ListCtrlWnd.h" />
+    <ClInclude Include="source\FloatingInfoWnd.h" />
+    <ClInclude Include="source\FloatingWnd.h" />
+    <ClInclude Include="source\FloatingWndDropTarget.h" />
+    <ClInclude Include="source\FloatingWndsThread.h" />
+    <ClInclude Include="source\FolderBrowser.h" />
+    <ClInclude Include="source\fsAppSettings.h" />
+    <ClInclude Include="source\fsArchiveFileStream.h" />
+    <ClInclude Include="source\fsArchiveInternetStream.h" />
+    <ClInclude Include="source\fsArchiveRebuilder.h" />
+    <ClInclude Include="source\fsArchiveRebuilderStream.h" />
+    <ClInclude Include="source\fsAutorunMgr.h" />
+    <ClInclude Include="source\fsClipboardMgr.h" />
+    <ClInclude Include="source\fsCmdHistoryMgr.h" />
+    <ClInclude Include="source\fsCommandLineParser.h" />
+    <ClInclude Include="source\fsContextHelpMgr.h" />
+    <ClInclude Include="source\fsDialogsMgr.h" />
+    <ClInclude Include="source\fsDldFilter.h" />
+    <ClInclude Include="source\fsDownload.h" />
+    <ClInclude Include="source\fsDownloadMgr.h" />
+    <ClInclude Include="source\fsDownloadRegSaver.h" />
+    <ClInclude Include="source\fsDownloads_GroupsMgr.h" />
+    <ClInclude Include="source\fsDownloadsHistoryMgr.h" />
+    <ClInclude Include="source\fsDownloadsMgr.h" />
+    <ClInclude Include="source\fsEventsMgr.h" />
+    <ClInclude Include="source\fsFDMCmdLineParser.h" />
+    <ClInclude Include="source\fsFindDownloadMgr.h" />
+    <ClInclude Include="source\fsHistoriesMgr.h" />
+    <ClInclude Include="source\fsInternetDownloader.h" />
+    <ClInclude Include="source\fsInternetFileListMgr.h" />
+    <ClInclude Include="source\fsLangMgr.h" />
+    <ClInclude Include="source\fsMFCLangMgr.h" />
+    <ClInclude Include="source\fsMirrorURLsMgr.h" />
+    <ClInclude Include="source\fsMutex.h" />
+    <ClInclude Include="source\fsODMenu.h" />
+    <ClInclude Include="source\fsOpNetIntegrationMgr.h" />
+    <ClInclude Include="source\fsPluginMgr.h" />
+    <ClInclude Include="source\fsScheduleMgr.h" />
+    <ClInclude Include="source\fsSitePingMgr.h" />
+    <ClInclude Include="source\fsSitesMgr.h" />
+    <ClInclude Include="source\fsSoundsMgr.h" />
+    <ClInclude Include="source\fsSpeedMeter.h" />
+    <ClInclude Include="source\fsTicksMgr.h" />
+    <ClInclude Include="source\fsTrayIconMgr.h" />
+    <ClInclude Include="source\fsUpdateMgr.h" />
+    <ClInclude Include="source\fsUrlsToDownloadRegKeyMgr.h" />
+    <ClInclude Include="source\fsWebPageDownloader.h" />
+    <ClInclude Include="source\fsWebPageDownloadsMgr.h" />
+    <ClInclude Include="source\fsZipArchiveFastRebuilder.h" />
+    <ClInclude Include="source\fsZipArchiveRebuilder.h" />
+    <ClInclude Include="source\Dlg_Group.h" />
+    <ClInclude Include="source\grutil.h" />
+    <ClInclude Include="source\HFE_Address.h" />
+    <ClInclude Include="source\HFE_FileList.h" />
+    <ClInclude Include="source\HFE_ListLog.h" />
+    <ClInclude Include="source\HFE_Log.h" />
+    <ClInclude Include="source\HFE_ProtocolPage.h" />
+    <ClInclude Include="source\HFESheet.h" />
+    <ClInclude Include="source\HFEWnd.h" />
+    <ClInclude Include="source\ImportManager.h" />
+    <ClInclude Include="source\ImportWizardPropertySheet.h" />
+    <ClInclude Include="source\inetutil.h" />
+    <ClInclude Include="source\IwManagersPropertyPage.h" />
+    <ClInclude Include="source\IwProgressPropertyPage.h" />
+    <ClInclude Include="source\IwResultPropertyPage.h" />
+    <ClInclude Include="source\ListCtrlEx.h" />
+    <ClInclude Include="source\Dlg_Login.h" />
+    <ClInclude Include="source\MainFrm.h" />
+    <ClInclude Include="source\MemHandleGuard.h" />
+    <ClInclude Include="source\mfchelp.h" />
+    <ClInclude Include="source\misc.h" />
+    <ClInclude Include="source\MyBalloon.h" />
+    <ClInclude Include="source\MyBalloon_Content.h" />
+    <ClInclude Include="source\MyMessageBox.h" />
+    <ClInclude Include="source\Dlg_NOW.h" />
+    <ClInclude Include="source\PlugFrame2Tabs.h" />
+    <ClInclude Include="source\plugincmds.h" />
+    <ClInclude Include="source\PluginFrame2.h" />
+    <ClInclude Include="source\plugins.h" />
+    <ClInclude Include="source\Prg_Data.h" />
+    <ClInclude Include="source\Prg_GeneralPage.h" />
+    <ClInclude Include="source\Dlg_Prg_GeneralPage_FW.h" />
+    <ClInclude Include="source\Prg_HistoryPage.h" />
+    <ClInclude Include="source\Prg_MiscPage.h" />
+    <ClInclude Include="source\Prg_SkinsPage.h" />
+    <ClInclude Include="source\Prg_UpdatePage.h" />
+    <ClInclude Include="source\PrgSheet.h" />
+    <ClInclude Include="source\Resource.h" />
+    <ClInclude Include="source\StateInfo.h" />
+    <ClInclude Include="source\vmsAppFileUpdateInfo.h" />
+    <ClInclude Include="source\vmsCrashCatcher.h" />
+    <ClInclude Include="source\vmsCrashReporter.h" />
+    <ClInclude Include="source\vmsElevatedFdm.h" />
+    <ClInclude Include="source\vmsFdmCrashReporter.h" />
+    <ClInclude Include="source\vmsFdmFilesDeleter.h" />
+    <ClInclude Include="source\vmsFdmUiDetails.h" />
+    <ClInclude Include="source\vmsFdmUtils.h" />
+    <ClInclude Include="source\vmsFileDeleter.h" />
+    <ClInclude Include="source\vmsLogger.h" />
+    <ClInclude Include="source\Schedule_AdvancedPage.h" />
+    <ClInclude Include="source\Schedule_HTSPage.h" />
+    <ClInclude Include="source\Schedule_WTSPage.h" />
+    <ClInclude Include="source\Scheduler_Log.h" />
+    <ClInclude Include="source\ScheduleSheet.h" />
+    <ClInclude Include="source\Dlg_SCR.h" />
+    <ClInclude Include="source\Sheduler_Tasks.h" />
+    <ClInclude Include="source\ShedulerWnd.h" />
+    <ClInclude Include="source\shockwaveflash.h" />
+    <ClInclude Include="source\SiteManager_GeneralPage.h" />
+    <ClInclude Include="source\SiteManager_PasswordsPage.h" />
+    <ClInclude Include="source\SiteManagerSheet.h" />
+    <ClInclude Include="source\Sites_AdvancedPage.h" />
+    <ClInclude Include="source\Sites_GeneralPage.h" />
+    <ClInclude Include="source\SitesSheet.h" />
+    <ClInclude Include="source\SitesWnd.h" />
+    <ClInclude Include="source\SmallTipWnd.h" />
+    <ClInclude Include="source\Dlg_SpiderAddPage.h" />
+    <ClInclude Include="source\SpiderTasks.h" />
+    <ClInclude Include="source\SpiderTaskTree.h" />
+    <ClInclude Include="source\SpiderWnd.h" />
+    <ClInclude Include="source\StdAfx.h" />
+    <ClInclude Include="source\system.h" />
+    <ClInclude Include="source\ToolBarEx.h" />
+    <ClInclude Include="source\TreeCtrlEx.h" />
+    <ClInclude Include="source\Dlg_UE.h" />
+    <ClInclude Include="source\UIThread.h" />
+    <ClInclude Include="source\Dlg_UrlWithLogin.h" />
+    <ClInclude Include="source\UrlWnd.h" />
+    <ClInclude Include="source\Utils.h" />
+    <ClInclude Include="source\vms7zipArchive.h" />
+    <ClInclude Include="source\vms7zipArchiveExtractCallback.h" />
+    <ClInclude Include="source\vms7zipFormatDLL.h" />
+    <ClInclude Include="source\vmsAnimatedGIF.h" />
+    <ClInclude Include="source\vmsAppSettingsStore.h" />
+    <ClInclude Include="source\vmsAppTipsMgr.h" />
+    <ClInclude Include="source\vmsAppUtil.h" />
+    <ClInclude Include="source\vmsArchive.h" />
+    <ClInclude Include="source\vmsArchiveCallback.h" />
+    <ClInclude Include="source\vmsArchiveMgr.h" />
+    <ClInclude Include="source\vmsArchiveRAR.h" />
+    <ClInclude Include="source\vmsBatchList.h" />
+    <ClInclude Include="source\vmsComDLL.h" />
+    <ClInclude Include="source\vmsDataFile.h" />
+    <ClInclude Include="source\vmsDialogHelper.h" />
+    <ClInclude Include="source\vmsDLL.h" />
+    <ClInclude Include="source\vmsDocHostUIHandler.h" />
+    <ClInclude Include="source\vmsDownloadMgrEx.h" />
+    <ClInclude Include="source\vmsDownloadsGroupsMgr.h" />
+    <ClInclude Include="source\vmsDownloadsListHelper.h" />
+    <ClInclude Include="source\vmsDrawHelper.h" />
+    <ClInclude Include="source\vmsFdmApiDownloadImpl.h" />
+    <ClInclude Include="source\vmsFdmApiDownloadsMgrImpl.h" />
+    <ClInclude Include="source\vmsFdmApiImpl.h" />
+    <ClInclude Include="source\vmsFdmAppMgr.h" />
+    <ClInclude Include="source\vmsFile.h" />
+    <ClInclude Include="source\vmsFileExtensionInOs.h" />
+    <ClInclude Include="source\vmsFileRecentList.h" />
+    <ClInclude Include="source\vmsFilesToDelete.h" />
+    <ClInclude Include="source\vmsFileUtil.h" />
+    <ClInclude Include="source\vmsIeHelper.h" />
+    <ClInclude Include="source\vmsImage.h" />
+    <ClInclude Include="source\vmsImage_CtxFree.h" />
+    <ClInclude Include="source\vmsInternetSession.h" />
+    <ClInclude Include="source\vmsIpHelper.h" />
+    <ClInclude Include="source\vmsMaximumSpeedMeter.h" />
+    <ClInclude Include="source\vmsMetalinkFile.h" />
+    <ClInclude Include="source\vmsNotEverywhereSupportedFunctions.h" />
+    <ClInclude Include="source\vmsPersistableListOfDownloads.h" />
+    <ClInclude Include="source\vmsPersistObject.h" />
+    <ClInclude Include="source\vmsPluginSupport.h" />
+    <ClInclude Include="source\vmsProcessesInjector.h" />
+    <ClInclude Include="source\vmsProcessList.h" />
+    <ClInclude Include="source\vmsRegisteredApp.h" />
+    <ClInclude Include="source\vmsRenderer.h" />
+    <ClInclude Include="source\vmsSecurity.h" />
+    <ClInclude Include="source\vmsSimpleFileDownloader.h" />
+    <ClInclude Include="source\vmsSingleLineTooltip.h" />
+    <ClInclude Include="source\vmsSkinMgr.h" />
+    <ClInclude Include="source\vmsSpeedTracker.h" />
+    <ClInclude Include="source\vmsStringList.h" />
+    <ClInclude Include="source\vmsStringParser.h" />
+    <ClInclude Include="source\vmsStringRecentList.h" />
+    <ClInclude Include="source\vmsSystem.h" />
+    <ClInclude Include="source\vmsTheme.h" />
+    <ClInclude Include="source\vmsTickCount.h" />
+    <ClInclude Include="source\vmsTrafficUsageModeMgr.h" />
+    <ClInclude Include="source\vmsTreeCtrlHelper.h" />
+    <ClInclude Include="source\vmsUiFonts.h" />
+    <ClInclude Include="source\vmsUiLinkWindow.h" />
+    <ClInclude Include="source\vmsUiStaticTextWindow.h" />
+    <ClInclude Include="source\vmsUiWindow.h" />
+    <ClInclude Include="source\vmsUiWindowsHoster.h" />
+    <ClInclude Include="source\vmsUnRARDLL.h" />
+    <ClInclude Include="source\vmsUploaderDllPersist.h" />
+    <ClInclude Include="source\vmsUploadsDllCaller.h" />
+    <ClInclude Include="source\vmsUploadsDllCallerSettings.h" />
+    <ClInclude Include="source\vmsValueLog.h" />
+    <ClInclude Include="source\vmsVideoSiteHtmlCodeParser.h" />
+    <ClInclude Include="source\vmsWebBrowserEvents.h" />
+    <ClInclude Include="source\vmsXmlHelper.h" />
+    <ClInclude Include="source\Dlg_Wait.h" />
+    <ClInclude Include="source\Dlg_WaitForConfirmation.h" />
+    <ClInclude Include="source\webbrowser2.h" />
+    <ClInclude Include="source\WebBrowser2Customization.h" />
+    <ClInclude Include="source\WgUrlListReceiver.h" />
+    <ClInclude Include="source\WGUrlReceiver.h" />
+    <ClInclude Include="source\Wnd_Banner.h" />
+    <ClInclude Include="source\Wnd_DownloadProgress.h" />
+    <ClInclude Include="source\Wnd_FDMGetCustVer_Btn.h" />
+    <ClInclude Include="source\WndDlDoneNotification.h" />
+    <ClInclude Include="source\WndLog.h" />
+    <ClInclude Include="source\WndSplitter.h" />
+    <ClInclude Include="source\WPDS_FilesPage.h" />
+    <ClInclude Include="source\WPDS_GeneralPage.h" />
+    <ClInclude Include="source\WPDS_ImagesPages.h" />
+    <ClInclude Include="source\WPDS_Sheet.h" />
+    <ClInclude Include="source\WPDS_WebPagesPage.h" />
+    <ClInclude Include="source\XInfoTip.h" />
+    <ClInclude Include="source\Dlg_ZipPreview.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\back.bmp" />
+    <CustomBuild Include="res\back_d.bmp" />
+    <CustomBuild Include="res\checks.bmp" />
+    <CustomBuild Include="res\choosefolder.ico" />
+    <CustomBuild Include="res\close.bmp" />
+    <CustomBuild Include="res\closebtn.ico" />
+    <CustomBuild Include="res\creategr.ico" />
+    <CustomBuild Include="res\dldsinfo.bmp" />
+    <CustomBuild Include="res\dldsinfo_sel.bmp" />
+    <CustomBuild Include="res\dldtasks_sel.bmp" />
+    <CustomBuild Include="res\download.bmp" />
+    <CustomBuild Include="res\downloadstasks.bmp" />
+    <CustomBuild Include="res\dropbox.ico" />
+    <CustomBuild Include="res\Fdm.ico" />
+    <CustomBuild Include="res\manifest.rc">
+      <FileType>RC</FileType>
+    </CustomBuild>
+    <CustomBuild Include="FDM.rgs" />
+    <CustomBuild Include="res\fdm_getcver_btn.bmp" />
+    <CustomBuild Include="FdmApp.rgs" />
+    <CustomBuild Include="FDMDownload.rgs" />
+    <CustomBuild Include="FDMDownloadsStat.rgs" />
+    <CustomBuild Include="res\filelist.bmp" />
+    <CustomBuild Include="res\filelist_sel.bmp" />
+    <CustomBuild Include="res\go.bmp" />
+    <CustomBuild Include="res\groups.bmp" />
+    <CustomBuild Include="res\groupsmenu_d.bmp" />
+    <CustomBuild Include="res\grpmenu.bmp" />
+    <CustomBuild Include="res\hand.cur" />
+    <CustomBuild Include="res\login.ico" />
+    <CustomBuild Include="res\logo2.ico" />
+    <CustomBuild Include="res\logstat.bmp" />
+    <CustomBuild Include="res\scheduler_sel.bmp" />
+    <CustomBuild Include="res\setfolderdef.ico" />
+    <CustomBuild Include="res\settime.ico" />
+    <CustomBuild Include="res\sheduler.bmp" />
+    <CustomBuild Include="res\sitelist.bmp" />
+    <CustomBuild Include="res\sitelist_sel.bmp" />
+    <CustomBuild Include="res\sortimages.bmp" />
+    <CustomBuild Include="res\test_ok.ico" />
+    <CustomBuild Include="res\tool0.bmp" />
+    <CustomBuild Include="res\tool0_16.bmp" />
+    <CustomBuild Include="res\tool0_16_d.bmp" />
+    <CustomBuild Include="res\tool0_d.bmp" />
+    <CustomBuild Include="res\tool_dld.bmp" />
+    <CustomBuild Include="res\tool_dld_16.bmp" />
+    <CustomBuild Include="res\tool_dld_16_d.bmp" />
+    <CustomBuild Include="res\tool_hfe.bmp" />
+    <CustomBuild Include="res\tool_hfe_16.bmp" />
+    <CustomBuild Include="res\tool_hfe_16_d.bmp" />
+    <CustomBuild Include="res\tool_sch.bmp" />
+    <CustomBuild Include="res\tool_sch_16.bmp" />
+    <CustomBuild Include="res\tool_sch_16_d.bmp" />
+    <CustomBuild Include="res\tool_sites.bmp" />
+    <CustomBuild Include="res\tool_sites_16.bmp" />
+    <CustomBuild Include="res\tool_sites_16_d.bmp" />
+    <CustomBuild Include="res\tool_sites_d.bmp" />
+    <CustomBuild Include="res\tool_spider.bmp" />
+    <CustomBuild Include="res\tool_spider_16.bmp" />
+    <CustomBuild Include="res\tool_spider_16_d.bmp" />
+    <CustomBuild Include="res\tool_spider_d.bmp" />
+    <CustomBuild Include="res\tooldlds_d.bmp" />
+    <CustomBuild Include="res\toolhfe_d.bmp" />
+    <CustomBuild Include="res\toolschedule_d.bmp" />
+    <CustomBuild Include="res\tosel.ico" />
+    <CustomBuild Include="res\tounsel.ico" />
+    <CustomBuild Include="res\tray.ico" />
+    <CustomBuild Include="res\tray_dow.ico" />
+    <CustomBuild Include="res\tray_err.ico" />
+    <CustomBuild Include="res\tray_unk.ico" />
+    <CustomBuild Include="WgUrlListReceiver.rgs" />
+    <CustomBuild Include="WGUrlReceiver.rgs" />
+    <CustomBuild Include="lang\eng.lng">
+      <FileType>Document</FileType>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FdmUiWindow.rgs" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="fdm.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
