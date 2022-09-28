@@ -7,9 +7,8 @@ FDM-UL is based on the source code of [FDM 3.9.7](https://sourceforge.net/p/free
 **New Features**
 
 * SOCKS5 proxy support
-* Integrated minimal Web Interface
-
-  If activated, it only provides the single endpoint "/adddownload.req?URL=[url]", where [url] can either be a single URL or a list of multiple URLs separated by linefeed (\n). Useful for adding download jobs to FDM-UL from a browser via boomarklet.
+* Integrated minimal web interface  
+  If activated, it only provides the single HTTP endpoint "/adddownload.req?URL=[url]". Useful for adding download jobs to FDM-UL from a browser via [boomarklet](https://en.wikipedia.org/wiki/Bookmarklet) or [contextlet](https://github.com/davidmhammond/contextlets).
 
 **Removed Features**
 
