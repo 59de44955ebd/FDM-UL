@@ -21,6 +21,7 @@ FDM-UL is based on the source code of [FDM 3.9.7](https://sourceforge.net/p/free
 * "Mirrors" (looking up files at file-hosting services which were common back then)
 * Site Explorer
 * HTML Spider
+* Floating extra windows
 * Skins
 * Language localisation (UI is just in english)
 * Download history
