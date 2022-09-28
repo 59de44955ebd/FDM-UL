@@ -56,3 +56,6 @@
 hash/Win32/
 inetfile/Win32/
 lib/
+*.sav
+*.ini
+*.aps
