@@ -25,6 +25,11 @@ FDM-UL is based on the source code of [FDM 3.9.7](https://sourceforge.net/p/free
 * Skins
 * Language localisation (english only UI)
 * Download history
+* Registry access
+
+**Usage**
+
+FDM-UI.exe is a single file app that must be run from a folder with write access. Application settings are saved in an INI file in the same folder, and additional state infos in (at most) 3 binary *.sav files.
 
 **Screenshot**
 
