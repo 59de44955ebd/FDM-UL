@@ -22,7 +22,6 @@ CScheduleSheet::CScheduleSheet(UINT nIDCaption, CWnd* pParentWnd, UINT iSelectPa
 CScheduleSheet::CScheduleSheet(LPCTSTR pszCaption, CWnd* pParentWnd, UINT iSelectPage)
 	:CPropertySheet(pszCaption, pParentWnd, iSelectPage)
 {
-
 }
 
 CScheduleSheet::~CScheduleSheet()
@@ -36,12 +35,10 @@ END_MESSAGE_MAP()
 
 void CScheduleSheet::Init(fsSchedule *task, BOOL bWTSPage)
 {
-	//m_wts.m_task =
-	m_hts.m_task = task = m_advanced.m_task = task;
+	m_wts.m_task = m_hts.m_task = task = m_advanced.m_task = task;
 
-//	if (bWTSPage)
-//		AddPage (&m_wts);
-
+	if (bWTSPage)
+		AddPage (&m_wts);
 	AddPage (&m_hts);
 	AddPage (&m_advanced);
 }

@@ -273,6 +273,7 @@
     <ClCompile Include="source\fsTrayIconMgr.cpp" />
     <ClCompile Include="source\fsZipArchiveFastRebuilder.cpp" />
     <ClCompile Include="source\fsZipArchiveRebuilder.cpp" />
+    <ClCompile Include="source\Schedule_WTSPage.cpp" />
     <ClCompile Include="source\vmsCrashReporter.cpp" />
     <ClCompile Include="source\vmsFdmWebInterfaceServer.cpp" />
     <ClCompile Include="source\vmsHttpConnection.cpp" />

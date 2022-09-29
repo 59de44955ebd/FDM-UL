@@ -5,7 +5,7 @@
 #if !defined(AFX_SCHEDULESHEET_H__95158EF1_1653_4F5E_94C4_36C7F7EAD5CF__INCLUDED_)
 #define AFX_SCHEDULESHEET_H__95158EF1_1653_4F5E_94C4_36C7F7EAD5CF__INCLUDED_
 
-//#include "Schedule_WTSPage.h"
+#include "Schedule_WTSPage.h"
 #include "Schedule_HTSPage.h"
 #include "Schedule_AdvancedPage.h"
 #if _MSC_VER > 1000
@@ -32,7 +32,7 @@ public:
 protected:
 	CSchedule_AdvancedPage m_advanced;
 	CSchedule_HTSPage m_hts;
-	//CSchedule_WTSPage m_wts;
+	CSchedule_WTSPage m_wts;
 	//{{AFX_MSG(CScheduleSheet)
 	virtual BOOL OnInitDialog();
 	//}}AFX_MSG

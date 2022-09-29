@@ -35,6 +35,10 @@ BOOL vmsHttpResponse::Send(SOCKET sConnection)
 	str += sz; str += "\r\n";
 	send (sConnection, str.c_str (), str.length (), 0);
 
+	// allows CORS
+	str = "Access-Control-Allow-Origin: *\r\n";
+	send (sConnection, str.c_str (), str.length (), 0);
+
 	send (sConnection, "\r\n", 2, 0);
 
 	if (m_pBody)

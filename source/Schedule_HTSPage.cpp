@@ -91,8 +91,8 @@ BOOL CSchedule_HTSPage::OnInitDialog()
 	m_wndEveryDim.SetCurSel (0);
 
 	m_wndEvent.AddString (LS (L_ATSTARTUP));
-	m_wndEvent.AddString (LS (L_AFTERDIALOK));
-	m_wndEvent.AddString (LS (L_DIALWASFAILED));
+//	m_wndEvent.AddString (LS (L_AFTERDIALOK));
+//	m_wndEvent.AddString (LS (L_DIALWASFAILED));
 	m_wndEvent.AddString (LS (L_WHENNOACTIVEDLDS));
 	m_wndEvent.AddString (LS (L_WHENSPEEDSMALL));
 	m_wndEvent.AddString (LS (L_WHENALLDLDSINERRSTATE));
@@ -140,13 +140,13 @@ void CSchedule_HTSPage::UpdateEnabled()
 	GetDlgItem (IDC_TIME)->EnableWindow (!b);
 	GetDlgItem (IDC_STARTTIME)->EnableWindow (!b);
 
-	b = b && m_wndEvent.GetCurSel () > 3;
+	b = b && m_wndEvent.GetCurSel () > 1; //3;
 	GetDlgItem (IDC_DURING)->EnableWindow (b);
 	GetDlgItem (IDC_DURINGSPIN)->EnableWindow (b);
 	GetDlgItem (IDC__DURING)->EnableWindow (b);
 	GetDlgItem (IDC__MINUTES)->EnableWindow (b);
 
-	b = b && m_wndEvent.GetCurSel () == 4;
+	b = b && m_wndEvent.GetCurSel () == 2;//4;
 	GetDlgItem (IDC__LOWSPEED)->EnableWindow (b);
 	GetDlgItem (IDC_LOWSPEED)->EnableWindow (b);
 	GetDlgItem (IDC__BPS)->EnableWindow (b);

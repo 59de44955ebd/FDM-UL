@@ -629,11 +629,9 @@
     <ClCompile Include="source\Dlg_Options_Webinterface.cpp">
       <Filter>Source Files\dlg</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="source\vmsLogger.h">
-      <Filter>Header Files\vms</Filter>
-    </ClInclude>
+    <ClCompile Include="source\Schedule_WTSPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\back.bmp">

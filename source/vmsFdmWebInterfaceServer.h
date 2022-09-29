@@ -21,17 +21,9 @@ public:
 	virtual ~vmsFdmWebInterfaceServer();
 
 protected:
-	//BOOL RequestListOfCompletedDownloads(LPCSTR pszRes, vmsHttpResponse &response);
-	//void LoadDocuments();
-
 	BOOL RequestCreateNewDownload (LPCSTR pszRes, vmsHttpResponse &response);
-
-	//std::string m_strRootHtml;
 	std::string m_strAddDownloadRes_ok = "Your request has been procceded successfully.";
 	std::string m_strAddDownloadRes_err = "An error occured while trying to process this request.";
-	//std::string m_strCompDldsHtml;
-
-	//BOOL RequestRootPage (vmsHttpResponse &response);
 };
 
 #endif

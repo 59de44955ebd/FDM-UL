@@ -196,55 +196,58 @@ void CShedulerWnd::OnProperties(fsSchedule *task)
 	m_mgr.OnTaskUpdated (task);
 }
 
+extern CFdmApp theApp;
+
 void CShedulerWnd::LoadTasks()
 {
-	return;
-//	CString strFile = fsGetDataFilePath ("schedules.sav");
-//
-//	if (GetFileAttributes (strFile) == DWORD (-1))
-//		return;
-//
-//	HANDLE hFile = CreateFile (strFile, GENERIC_READ, 0, NULL, OPEN_EXISTING, 0, NULL);
-//	if (hFile == INVALID_HANDLE_VALUE)
-//		return;
-//
-//	DWORD dw = 0;
-//	DWORD dwRequiredSize = ::GetFileSize(hFile, NULL);
-//	if (dwRequiredSize <= 0) {
-//		CloseHandle (hFile);
-//		return;
-//	}
-//
-//	std::auto_ptr<BYTE> pbtBufferGuard( new BYTE[dwRequiredSize] );
-//	LPBYTE pbtBuffer = pbtBufferGuard.get();
-//	if (pbtBuffer == 0) {
-//		CloseHandle (hFile);
-//		return;
-//	}
-//	memset(pbtBuffer, 0, dwRequiredSize);
-//
-//	if (!ReadFile (hFile, pbtBuffer, dwRequiredSize, &dw, NULL) || dw != dwRequiredSize) {
-//		CloseHandle (hFile);
-//		return;
-//	}
-//
-//	if (!loadFromStateBuffer(pbtBuffer, &dwRequiredSize, 0)) {
-//		CloseHandle (hFile);
-//
-//		if (m_bIsSchedulerMgrLoadedSuccessfully && !m_bIsEventsMgrLoadedSuccessfully) {
-//			m_evMgr.clear();
-//			MessageBox (LS (L_CANTLOADSCHEDULERLOG), LS (L_ERR), MB_ICONERROR);
-//		}
-//
-//		return;
-//	}
-//
-//	CloseHandle (hFile);
-//	resetDirty();
-//
-//	int cEvents = m_evMgr.GetEventCount ();
-//	for (int i = 0; i < cEvents; i++)
-//		m_wndLog.AddRecord (m_evMgr.GetEvent (i));
+	//CString strFile = fsGetDataFilePath ("schedules.sav");
+	fsString strFile = theApp.m_strAppPath;
+	strFile += "schedules.sav";
+
+	if (GetFileAttributes (strFile) == DWORD (-1))
+		return;
+
+	HANDLE hFile = CreateFile (strFile, GENERIC_READ, 0, NULL, OPEN_EXISTING, 0, NULL);
+	if (hFile == INVALID_HANDLE_VALUE)
+		return;
+
+	DWORD dw = 0;
+	DWORD dwRequiredSize = ::GetFileSize(hFile, NULL);
+	if (dwRequiredSize <= 0) {
+		CloseHandle (hFile);
+		return;
+	}
+
+	std::auto_ptr<BYTE> pbtBufferGuard( new BYTE[dwRequiredSize] );
+	LPBYTE pbtBuffer = pbtBufferGuard.get();
+	if (pbtBuffer == 0) {
+		CloseHandle (hFile);
+		return;
+	}
+	memset(pbtBuffer, 0, dwRequiredSize);
+
+	if (!ReadFile (hFile, pbtBuffer, dwRequiredSize, &dw, NULL) || dw != dwRequiredSize) {
+		CloseHandle (hFile);
+		return;
+	}
+
+	if (!loadFromStateBuffer(pbtBuffer, &dwRequiredSize, 0)) {
+		CloseHandle (hFile);
+
+		if (m_bIsSchedulerMgrLoadedSuccessfully && !m_bIsEventsMgrLoadedSuccessfully) {
+			m_evMgr.clear();
+			MessageBox (LS (L_CANTLOADSCHEDULERLOG), LS (L_ERR), MB_ICONERROR);
+		}
+
+		return;
+	}
+
+	CloseHandle (hFile);
+	resetDirty();
+
+	int cEvents = m_evMgr.GetEventCount ();
+	for (int i = 0; i < cEvents; i++)
+		m_wndLog.AddRecord (m_evMgr.GetEvent (i));
 }
 
 bool CShedulerWnd::loadObjectItselfFromStateBuffer(LPBYTE pb, LPDWORD pdwSize, DWORD dwVer)
@@ -383,63 +386,6 @@ void CShedulerWnd::Plugin_GetMenuImages(fsSetImage **ppImages, int *pcImages)
 	*pcImages = sizeof (images) / sizeof (fsSetImage);
 }
 
-//BOOL CShedulerWnd::HangupWhenDone(int* ppos)
-//{
-//	int pos = -1;
-//	bool bEn = false;
-//
-//	do {
-//		pos = m_mgr.FindTask (WTS_HANGUP, pos);
-//		if (pos != -1 && m_mgr.GetTask (pos)->hts.enType == HTS_WHENDONE)
-//			break;
-//	}
-//	while (pos != -1);
-//
-//	if (pos != -1)
-//		bEn = (m_mgr.GetTask (pos)->dwFlags & SCHEDULE_ENABLED) != 0;
-//
-//	if (ppos)
-//		*ppos = pos;
-//
-//	return pos != -1 && bEn;
-//}
-
-//void CShedulerWnd::HangupWhenDone(BOOL bUse)
-//{
-//	int pos;
-//	if (!bUse == !HangupWhenDone (&pos))
-//		return;
-//
-//	if (bUse)
-//	{
-//		if (pos != -1) {
-//			m_mgr.GetTask (pos)->dwFlags |= SCHEDULE_ENABLED;
-//			m_mgr.setDirtyFlagForTask(pos);
-//			m_wndTasks.UpdateTask (pos);
-//			return;
-//		}
-//
-//		fsScheduleEx schScheduleParam;
-//		fsSchedule& task = schScheduleParam.schTask;
-//		task.dwFlags = SCHEDULE_ENABLED;
-//		if (_App.WD_DisableAfterExec ())
-//			task.dwFlags |= SCHEDULE_AUTODIS;
-//		task.uWaitForConfirmation = _App.ConfTimeout_Hangup ();
-//		task.wts.enType = WTS_HANGUP;
-//		task.wts.pszHangupConnection = NULL;
-//		task.hts.uTimeNothingReceived = 30;
-//		task.hts.enType = HTS_WHENDONE;
-//		m_mgr.AddTask (&task);
-//		m_wndTasks.AddTask (m_mgr.GetTask (m_mgr.GetTaskCount () - 1));
-//	}
-//	else
-//	{
-//		m_mgr.GetTask (pos)->dwFlags &= ~SCHEDULE_ENABLED;
-//		m_mgr.setDirtyFlagForTask(pos);
-//		m_wndTasks.UpdateTask (pos);
-//	}
-//}
-
 BOOL CShedulerWnd::ExitWhenDone(int* ppos)
 {
 	int pos = -1;
@@ -469,7 +415,8 @@ void CShedulerWnd::ExitWhenDone(BOOL bUse)
 
 	if (bUse)
 	{
-		if (pos != -1) {
+		if (pos != -1) 
+		{
 			m_mgr.GetTask (pos)->dwFlags |= SCHEDULE_ENABLED;
 			m_mgr.setDirtyFlagForTask(pos);
 			m_wndTasks.UpdateTask (pos);
@@ -490,7 +437,6 @@ void CShedulerWnd::ExitWhenDone(BOOL bUse)
 	}
 	else
 	{
-
 		m_mgr.GetTask (pos)->dwFlags &= ~SCHEDULE_ENABLED;
 		m_mgr.setDirtyFlagForTask(pos);
 		m_wndTasks.UpdateTask (pos);
@@ -499,7 +445,6 @@ void CShedulerWnd::ExitWhenDone(BOOL bUse)
 
 BOOL CShedulerWnd::TurnoffWhenDone(fsShutdownType , int* ppos)
 {
-
 	int pos = -1;
 	bool bEn = false;
 
@@ -528,7 +473,8 @@ void CShedulerWnd::TurnoffWhenDone(fsShutdownType enST, BOOL bUse)
 
 	if (bUse)
 	{
-		if (pos != -1) {
+		if (pos != -1) 
+		{
 			fsSchedule* task = m_mgr.GetTask (pos);
 			task->wts.shutdown.enShutdown = enST;
 			task->dwFlags |= SCHEDULE_ENABLED;
@@ -601,40 +547,42 @@ void CShedulerWnd::Plugin_GetPluginNames(LPCSTR *ppszLong, LPCSTR *ppszShort)
 
 BOOL CShedulerWnd::SaveSchedules()
 {
-//	if (!isDirty())
-//		return TRUE;
-//
-//	DWORD dwRequiredSize = 0;
-//	DWORD dw = 0;
-//
-//	CString strFile = fsGetDataFilePath ("schedules.sav");
-//
-//	HANDLE hFile = CreateFile (strFile, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS,
-//		FILE_ATTRIBUTE_HIDDEN, NULL);
-//
-//	getStateBuffer(0, &dwRequiredSize, false);
-//
-//	if (dwRequiredSize == 0) {
-//		CloseHandle (hFile);
-//		return FALSE;
-//	}
-//
-//	std::auto_ptr<BYTE> apbtBufferGuard( new BYTE[dwRequiredSize] );
-//	LPBYTE pbtBuffer = apbtBufferGuard.get();
-//	if (pbtBuffer == 0) {
-//		CloseHandle (hFile);
-//		return FALSE;
-//	}
-//	memset(pbtBuffer, 0, dwRequiredSize);
-//
-//	getStateBuffer(pbtBuffer, &dwRequiredSize, true);
-//
-//	if (FALSE == WriteFile (hFile, pbtBuffer, dwRequiredSize, &dw, NULL) || dw != dwRequiredSize) {
-//		CloseHandle (hFile);
-//		return FALSE;
-//	}
-//	CloseHandle (hFile);
-//	onStateSavedSuccessfully();
+	if (!isDirty())
+		return TRUE;
+
+	DWORD dwRequiredSize = 0;
+	DWORD dw = 0;
+
+	//CString strFile = fsGetDataFilePath ("schedules.sav");
+	fsString strFile = theApp.m_strAppPath;
+	strFile += "schedules.sav";
+
+	HANDLE hFile = CreateFile (strFile, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS,
+		FILE_ATTRIBUTE_HIDDEN, NULL);
+
+	getStateBuffer(0, &dwRequiredSize, false);
+
+	if (dwRequiredSize == 0) {
+		CloseHandle (hFile);
+		return FALSE;
+	}
+
+	std::auto_ptr<BYTE> apbtBufferGuard( new BYTE[dwRequiredSize] );
+	LPBYTE pbtBuffer = apbtBufferGuard.get();
+	if (pbtBuffer == 0) {
+		CloseHandle (hFile);
+		return FALSE;
+	}
+	memset(pbtBuffer, 0, dwRequiredSize);
+
+	getStateBuffer(pbtBuffer, &dwRequiredSize, true);
+
+	if (FALSE == WriteFile (hFile, pbtBuffer, dwRequiredSize, &dw, NULL) || dw != dwRequiredSize) {
+		CloseHandle (hFile);
+		return FALSE;
+	}
+	CloseHandle (hFile);
+	onStateSavedSuccessfully();
 
 	return TRUE;
 }
