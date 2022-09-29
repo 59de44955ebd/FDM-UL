@@ -23,7 +23,6 @@ public:
 
 	//{{AFX_DATA(CDlg_Options_Downloads)
 	enum { IDD = IDD_OPTIONS_DOWNLOADS };
-	//CComboBox	m_wndVirName;
 	CComboBox	m_wndWhenDel;
 	//}}AFX_DATA
 
@@ -33,18 +32,12 @@ public:
 	//}}AFX_VIRTUAL
 
 protected:
-	//BOOL DlgToVir();
-	//void AvirToDlg();
 	void UpdateEnabled();
 	void ApplyLanguage();
 
 	//{{AFX_MSG(CDlg_Options_Downloads)
 	virtual BOOL OnInitDialog();
-	//afx_msg void OnVircheck();
-	//afx_msg void OnChoosevir();
 	afx_msg void OnUsewc();
-	//afx_msg void OnSelchangeVirname();
-	//afx_msg void OnCheckifmal2();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

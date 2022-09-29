@@ -426,6 +426,13 @@ BOOL CCreateDownloadDlg::ReadDNP()
 		m_dld->pMgr->GetDownloadMgr ()->GetDownloader ()->DeleteAllSections ();
 		GetDlgItemText (IDC_URL, m_strUrl);
 
+		// new
+		if (lstrcmpi(m_strUrl, "https://") == 0 || lstrcmpi(m_strUrl, "http://") == 0 || lstrcmpi(m_strUrl, "ftp://") == 0)
+		{ 
+			WrongURL();
+			return FALSE;
+		}
+
 		fsURL url;
 		if (IR_SUCCESS != url.Crack (m_strUrl))
 		{

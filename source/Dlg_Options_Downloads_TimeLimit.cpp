@@ -3,7 +3,6 @@
 */
 
 #include "stdafx.h"
-//#include "fdm.h"
 #include "Dlg_Options_Downloads_TimeLimit.h"
 
 #ifdef _DEBUG

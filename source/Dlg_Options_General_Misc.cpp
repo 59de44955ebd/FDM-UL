@@ -3,7 +3,6 @@
 */
 
 #include "stdafx.h"
-//#include "fdm.h"
 #include "Dlg_Options_General_Misc.h"
 #include "ShedulerWnd.h"
 #include "MainFrm.h"

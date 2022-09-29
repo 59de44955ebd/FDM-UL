@@ -616,11 +616,13 @@ void CDownloadsWnd::OnDldstop()
 UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, LPCSTR pszComment, LPCSTR pszReferer,
 	BOOL bSilent, DWORD dwForceAutoLaunch, BOOL *pbAutoStart, vmsDWCD_AdditionalParameters* pParams, UINT* pRes)
 {
+	//TRACE1("pszStartUrl_ %s\n", pszStartUrl);
+	UINT res = IDOK;
+
 	std::string strUrlTmp;
 	if (pszStartUrl == NULL || *pszStartUrl == NULL)
 	{
 		pszStartUrl = "http://";
-
 		if (!bSilent)
 		{
 			LPCSTR psz = _ClipbrdMgr.Text ();
@@ -640,7 +642,6 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 	vmsDownloadSmartPtr dld;
 	Download_CreateInstance (dld);
 
-	UINT res = IDOK;
 	bool bPlaceToTop = false;
 	BOOL bScheduled = FALSE;
 
@@ -683,7 +684,7 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 
 		if (res == IDOK)
 		{
-			assert (dlg.m_strUrl != pszStartUrl);
+			//assert (dlg.m_strUrl != pszStartUrl);
 			if (dlg.m_strUrl != pszStartUrl)
 				return CreateDownload (dlg.m_strUrl, bReqTopMostDialog, pszComment, pszReferer, bSilent, dwForceAutoLaunch, pbAutoStart, pParams, pRes);
 		}

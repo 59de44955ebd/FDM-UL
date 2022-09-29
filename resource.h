@@ -934,11 +934,11 @@
 #define ID_SB_TOTALSPEED                61207
 
 // Next default values for new objects
-//
+// 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        502
+#define _APS_NEXT_RESOURCE_VALUE        503
 #define _APS_NEXT_COMMAND_VALUE         33238
 #define _APS_NEXT_CONTROL_VALUE         1561
 #define _APS_NEXT_SYMED_VALUE           137

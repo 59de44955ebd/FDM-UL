@@ -976,11 +976,12 @@ void CMainFrame::ApplyLanguage()
 	ApplyLanguageToMenu ();
 
 	LPCSTR ppszToolTips [] = {
-		"", LS (L_LIGHT), LS (L_MEDIUM),
-		LS (L_HEAVY), "", LS (L_STARTALLDLDS), LS (L_STOPALLDLDS),
-		LS (L_PAUSEALLDOWNLOADS), "", LS (L_SETTINGS), LS (L_DIALUP),
-		LS (L_HELP), LS (L_ABOUT), "", "Make a donation",
-		LS (L_SAVEALL), "", LS (L_CUT), LS (L_COPY), LS (L_PASTE), "",
+		"",
+		LS (L_LIGHT), LS (L_MEDIUM), LS (L_HEAVY),
+		"",
+		LS (L_STARTALLDLDS), LS (L_STOPALLDLDS), LS (L_PAUSEALLDOWNLOADS),
+		"",
+		LS (L_SETTINGS)
 	};
 
 	_TBMgr.UpdateGroupToolTips (0, ppszToolTips, sizeof (ppszToolTips) / sizeof (LPCSTR));
@@ -1025,6 +1026,7 @@ void CMainFrame::ApplyLanguageToMenu()
 		strExit = LS (L_EXIT),
 		strExport = LS (L_EXPORTSETTINGS),
 		strSaveAll = LS (L_SAVEALL),
+		//strSaveAll(MAKEINTRESOURCE(IDS_SAVEALL)),
 		strImpFromClip = LS (L_IMPORTURLSFROMCLIPBOARD);
 
 	strCut += "\tCtrl+X"; strCopy += "\tCtrl+C"; strPaste += "\tCtrl+V";

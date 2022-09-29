@@ -3,7 +3,6 @@
 */
 
 #include "stdafx.h"
-//#include "fdm.h"
 #include "vmsTreeCtrlHelper.h"
 
 #ifdef _DEBUG

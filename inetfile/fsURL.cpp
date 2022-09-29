@@ -18,7 +18,6 @@ fsURL::~fsURL()
 
 fsInternetResult fsURL::Crack(LPCSTR pszUrl, BOOL bCheckScheme)
 {
-	
 	if (lstrcmpi (pszUrl, "http://") == 0)
 		pszUrl = "http://url";
 	else if (lstrcmpi (pszUrl, "ftp://") == 0)
@@ -26,15 +25,15 @@ fsInternetResult fsURL::Crack(LPCSTR pszUrl, BOOL bCheckScheme)
 	else if (lstrcmpi (pszUrl, "https://") == 0)
 		pszUrl = "https://url";
 
+	//if (lstrcmpi(pszUrl, "https://") == 0 || lstrcmpi(pszUrl, "http://") == 0 || lstrcmpi(pszUrl, "ftp://") == 0)
+	//	return IR_BADURL;
+
 	DWORD urlLen = strlen (pszUrl) * 2;
 	CHAR *pszCanUrl = NULL;
 	fsString strUrl;
 
-	
 	if (*pszUrl == '"' || *pszUrl == '\'')
 	{
-		
-		
 		strUrl = pszUrl + 1;
 		if (strUrl [0] == 0)
 			return IR_BADURL;
@@ -43,12 +42,10 @@ fsInternetResult fsURL::Crack(LPCSTR pszUrl, BOOL bCheckScheme)
 	}
 		
 	fsnew (pszCanUrl, CHAR, urlLen);
-	bool isMagnet = false;
-	const char* magnetStart = _tcsstr (pszUrl, _T("magnet:"));
-	isMagnet = (magnetStart != 0 && pszUrl == magnetStart);
-
-	
-	if ((pszUrl [0] == '\\' && pszUrl [1] == '\\') || isMagnet)
+	//bool isMagnet = false;
+	//const char* magnetStart = _tcsstr (pszUrl, _T("magnet:"));
+	//isMagnet = (magnetStart != 0 && pszUrl == magnetStart);	
+	if ((pszUrl [0] == '\\' && pszUrl [1] == '\\'))
 	{
 		m_url.nScheme = INTERNET_SCHEME_FILE; 
 		strcpy (m_szPath, pszUrl);
@@ -56,16 +53,11 @@ fsInternetResult fsURL::Crack(LPCSTR pszUrl, BOOL bCheckScheme)
 		*m_szUser = 0;
 		*m_szPassword = 0;
 		m_url.nPort = 0;
-		if (isMagnet)
-		{
-			m_szHost[0] = 0;
-		}
 	}
 	else 
 	{
 		if (strnicmp (pszUrl, "file://", 7)) 
 		{
-			
 			if (!InternetCanonicalizeUrl (pszUrl, pszCanUrl, &urlLen, ICU_BROWSER_MODE))
 			{
 				delete pszCanUrl;

@@ -3,7 +3,6 @@
 */
 
 #include "stdafx.h"
-//#include "fdm.h"
 #include "MyBalloon_Content.h"
 
 #ifdef _DEBUG

@@ -6,7 +6,6 @@
 #include "FdmApp.h"
 #include "DownloaderProperties_ListPage.h"
 #include "DownloadsWnd.h"
-#include "vmsRegisteredApp.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

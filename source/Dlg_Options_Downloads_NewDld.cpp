@@ -3,7 +3,6 @@
 */
 
 #include "stdafx.h"
-//#include "fdm.h"
 #include "Dlg_Options_Downloads_NewDld.h"
 #include "FolderBrowser.h"
 //#include "SpiderWnd.h"

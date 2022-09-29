@@ -3,7 +3,6 @@
 */
 
 #include "stdafx.h"
-//#include "fdm.h"
 #include "Dlg_Options_SiteMgr.h"
 
 #ifdef _DEBUG

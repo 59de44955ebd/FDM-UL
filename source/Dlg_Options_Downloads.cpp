@@ -3,9 +3,7 @@
 */
 
 #include "stdafx.h"
-//#include "fdm.h"
 #include "Dlg_Options_Downloads.h"
-#include "vmsRegisteredApp.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -31,7 +29,6 @@ void CDlg_Options_Downloads::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CDlg_Options_Downloads, CDlg_Options_Page)
 	//{{AFX_MSG_MAP(CDlg_Options_Downloads)
 	ON_BN_CLICKED(IDC_USEWC, OnUsewc)
-	//ON_BN_CLICKED(IDC_CHECKIFMAL2, OnCheckifmal2)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -126,7 +123,6 @@ void CDlg_Options_Downloads::ApplyLanguage()
 			fsDlgLngInfo (IDC_PREVENT_STANDBY, L_PREVENT_STANDBY_WHILE_DLDING),
 			fsDlgLngInfo (IDC__FDM_COMMUNITY, L_FDMCOMMUNITY),
 			fsDlgLngInfo (IDC_SWITCHTOOPINIONS2, L_SWITCHTOOPINIONS),
-			fsDlgLngInfo (IDC_CHECKIFMAL2, L_CHECKNEWDLDIFITISMALICIOUS),
 			fsDlgLngInfo (IDC_DISPLAYOPINIONS2, L_DISPLAYOPINIONSWHENDOWNLOADING),
 			fsDlgLngInfo (IDC__S0, L_CONSIDER_DLD_AS_MAL_IF_MIN_0),
 			fsDlgLngInfo (IDC__S1, L_CONSIDER_DLD_AS_MAL_IF_MIN_1),

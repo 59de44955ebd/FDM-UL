@@ -3,7 +3,6 @@
 */
 
 #include "stdafx.h"
-//#include "fdm.h"
 #include "Dlg_Options_Downloads_Network.h"
 #include "vmsDialogHelper.h"
 #include "Dlg_SpecifyNetworkSpeedValue.h"

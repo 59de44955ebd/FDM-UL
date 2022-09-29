@@ -3,7 +3,6 @@
 */
 
 #include "stdafx.h"
-//#include "fdm.h"
 #include "Dlg_Options_Notifications.h"
 #include "Dlg_Sounds.h"
 #include "MainFrm.h"

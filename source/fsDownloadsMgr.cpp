@@ -6,7 +6,7 @@
 #include "fsDownloadsMgr.h"
 #include "inetutil.h"
 #include "mfchelp.h"
-#include "vmsRegisteredApp.h"
+//#include "vmsRegisteredApp.h"
 
 #include "Dlg_DDR.h"
 #include "Dlg_Wait.h"

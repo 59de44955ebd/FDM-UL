@@ -91,8 +91,6 @@ BOOL CSchedule_HTSPage::OnInitDialog()
 	m_wndEveryDim.SetCurSel (0);
 
 	m_wndEvent.AddString (LS (L_ATSTARTUP));
-//	m_wndEvent.AddString (LS (L_AFTERDIALOK));
-//	m_wndEvent.AddString (LS (L_DIALWASFAILED));
 	m_wndEvent.AddString (LS (L_WHENNOACTIVEDLDS));
 	m_wndEvent.AddString (LS (L_WHENSPEEDSMALL));
 	m_wndEvent.AddString (LS (L_WHENALLDLDSINERRSTATE));

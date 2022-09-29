@@ -17,9 +17,6 @@
 //#include "fdm.h"
 #include "fsFDMCmdLineParser.h"
 
-//#include "vmsHttpServer.h"
-//#include "vmsFdmWebInterfaceServer.h"
-
 class CFdmApp : public CWinApp
 {
 public:
@@ -53,15 +50,9 @@ public:
 	afx_msg void OnAppAbout();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-protected:
-	//void CheckRegistry();
-	static DWORD WINAPI _threadExitProcess (LPVOID);
 
-	//void Install_UnregisterServer();
-	//void Install_RegisterServer();
-	//BOOL RegisterServer(BOOL bGlobal);
-	//BOOL m_bCOMInited;
-	//void UninstallCustomizations();
+protected:
+	static DWORD WINAPI _threadExitProcess (LPVOID);
 
 	BOOL m_bForceSilentSpecified;
 
@@ -71,27 +62,9 @@ protected:
 
 	BOOL m_bStarting;
 
-	//static LONG WINAPI _UEF (_EXCEPTION_POINTERS*);
-
 	BOOL CheckFdmStartedAlready(BOOL bSetForIfEx = TRUE);
 	BOOL m_bEmbedding;
 	BOOL InitLanguage();
-
-//	vmsFdmWebInterfaceServer m_fdmServer;
-//	vmsHttpServer m_http;
-
-private:
-	//BOOL m_bATLInited;
-	//BOOL m_bATLInited2;
-
-private:
-	//BOOL InitATL();
-
-//protected:
-//	bool onNeedRegisterServer(void);
-//	bool onNeedUnregisterServer(void);
-//	void RunAsElevatedTasksProcessor(fsFDMCmdLineParser& cmdline);
-
 };
 
 //{{AFX_INSERT_LOCATION}}

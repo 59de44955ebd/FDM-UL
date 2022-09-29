@@ -345,10 +345,8 @@
     <ClCompile Include="source\vmsIpHelper.cpp" />
     <ClCompile Include="source\vmsMaximumSpeedMeter.cpp" />
     <ClCompile Include="source\vmsMetalinkFile.cpp" />
-    <ClCompile Include="source\vmsNotEverywhereSupportedFunctions.cpp" />
     <ClCompile Include="source\vmsPersistableListOfDownloads.cpp" />
     <ClCompile Include="source\vmsPersistObject.cpp" />
-    <ClCompile Include="source\vmsRegisteredApp.cpp" />
     <ClCompile Include="source\vmsRenderer.cpp" />
     <ClCompile Include="source\vmsSecurity.cpp" />
     <ClCompile Include="source\vmsSimpleFileDownloader.cpp" />
@@ -455,6 +453,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FdmUiWindow.rgs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
