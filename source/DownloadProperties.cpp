@@ -110,7 +110,7 @@ BOOL fsDP_GetDefaults (fsDownload_Properties *pDP, fsDP_BuffersInfo* pBuffs, BOO
 	//if (_App.UseZipPreview ())
 	//	pDP->dwFlags |= DPF_USEZIPPREVIEW;
 	//else
-		pDP->dwFlags &= ~DPF_USEZIPPREVIEW;
+//		pDP->dwFlags &= ~DPF_USEZIPPREVIEW;
 
 	pDP->bCheckIntegrityWhenDone = _App.Download_CheckIntegrityWhenDone ();
 	pDP->dwIntegrityCheckAlgorithm = HA_MD5;

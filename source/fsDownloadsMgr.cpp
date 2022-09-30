@@ -33,8 +33,6 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
-using namespace fsArchive;
-
 const double DLD_HP_START_COEFF = 3.0;
 
 fsDownloadsMgr::fsDownloadsMgr()

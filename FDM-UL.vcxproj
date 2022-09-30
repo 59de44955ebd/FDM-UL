@@ -239,10 +239,6 @@
     <ClCompile Include="source\FdmBalloonContent.cpp" />
     <ClCompile Include="source\FolderBrowser.cpp" />
     <ClCompile Include="source\fsAppSettings.cpp" />
-    <ClCompile Include="source\fsArchiveFileStream.cpp" />
-    <ClCompile Include="source\fsArchiveInternetStream.cpp" />
-    <ClCompile Include="source\fsArchiveRebuilder.cpp" />
-    <ClCompile Include="source\fsArchiveRebuilderStream.cpp" />
     <ClCompile Include="source\fsAutorunMgr.cpp" />
     <ClCompile Include="source\fsClipboardMgr.cpp" />
     <ClCompile Include="source\fsCmdHistoryMgr.cpp" />
@@ -270,8 +266,6 @@
     <ClCompile Include="source\fsSpeedMeter.cpp" />
     <ClCompile Include="source\fsTicksMgr.cpp" />
     <ClCompile Include="source\fsTrayIconMgr.cpp" />
-    <ClCompile Include="source\fsZipArchiveFastRebuilder.cpp" />
-    <ClCompile Include="source\fsZipArchiveRebuilder.cpp" />
     <ClCompile Include="source\Schedule_WTSPage.cpp" />
     <ClCompile Include="source\vmsCrashReporter.cpp" />
     <ClCompile Include="source\vmsFdmWebInterfaceServer.cpp" />

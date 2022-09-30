@@ -8,16 +8,11 @@
 #include "misc.h"
 #include "inetutil.h"
 #include <math.h>
-#include "fsArchiveInternetStream.h"
-#include "fsZipArchiveFastRebuilder.h"
-#include "fsArchiveFileStream.h"
 #include "vmsSpeedTracker.h"
 #include "vmsInternetSession.h"
 #include "../InetFile/base64.h"
 #include "QueryStoringServiceInfoGuard.h"
 #include "vmsLogger.h"
-
-using namespace fsArchive;
 
 BOOL fsInternetDownloader::m_bPauseMode = FALSE;
 UINT64 fsInternetDownloader::m_nTotalTraffic = 0;
@@ -64,7 +59,6 @@ fsInternetDownloader::fsInternetDownloader()
 
 	m_bDetLog = FALSE;
 
-	//m_pMirrURLMgr = NULL;
 	m_bSearchForMirrors = FALSE;
 	m_bMirrMeasureSpeed = FALSE;
 	m_uMirrFileMinSize = 1000*1024;
@@ -74,7 +68,6 @@ fsInternetDownloader::fsInternetDownloader()
 
 	m_strContentType = "";
 
-	m_pZipPreviewStream = NULL;
 	m_uTimeout = 120;
 
 	m_bAddingSection = FALSE;
@@ -94,8 +87,8 @@ fsInternetDownloader::~fsInternetDownloader()
 	while (m_cThreads)
 		Sleep (10);
 
-	//for (int i = 0; i < m_vMirrs.size (); i++)
-	//	fsDNP_GetByUrl_Free (&m_vMirrs [i].dnp);
+	for (int i = 0; i < m_vMirrs.size (); i++)
+		fsDNP_GetByUrl_Free (&m_vMirrs [i].dnp);
 }
 
 fsDownload_NetworkProperties* fsInternetDownloader::DNP(int nSection)
@@ -190,12 +183,12 @@ fsInternetResult fsInternetDownloader::CreateAdditionalSection(BOOL bQueryCreati
 	int iSection = -1;
 	fsInternetResult ir;
 
-	if (IsMayZIP (TRUE) && m_vSections.size () == 1 &&
-			m_vSections [0].uCurrent < ZIP_SFXMAXSIZE)
-	{
-		m_bAddingSection = FALSE;
-		return IR_S_FALSE;
-	}
+//	if (IsMayZIP (TRUE) && m_vSections.size () == 1 &&
+//			m_vSections [0].uCurrent < ZIP_SFXMAXSIZE)
+//	{
+//		m_bAddingSection = FALSE;
+//		return IR_S_FALSE;
+//	}
 
 	if (IsResumeSupported () == RST_NONE)
 	{
@@ -589,9 +582,9 @@ DWORD WINAPI fsInternetDownloader::_threadDownload(LPVOID lp)
 
 	sect->pThis->UpdateTrafficLimit ();
 
-	BOOL bMayZIP;
-	bMayZIP = sect->uStart == 0 && sect->uCurrent < ZIP_SFXMAXSIZE &&
-		sect->pThis->IsMayZIP (TRUE) && sect->pThis->m_vSections.size () == 1;
+//	BOOL bMayZIP;
+//	bMayZIP = sect->uStart == 0 && sect->uCurrent < ZIP_SFXMAXSIZE &&
+//		sect->pThis->IsMayZIP (TRUE) && sect->pThis->m_vSections.size () == 1;
 	UINT32 uLast3BytesRead;
 	uLast3BytesRead = 0;
 
@@ -832,107 +825,6 @@ DWORD WINAPI fsInternetDownloader::_threadDownload(LPVOID lp)
 		dwLastRead += dwRead;
 		sect->pThis->m_speed.Done (dwRead);
 		fsInternetDownloader::OnDataDownloaded (dwRead);
-
-		if (bMayZIP)
-		{
-			LPBYTE pBuf = pBuffer;
-			BOOL bZIP = FALSE;
-
-			UINT64 uZIPStart = 0;
-
-			for (int i = 0; i <= (int)dwRead - (int)sizeof (UINT32); i++)
-			{
-				UINT32* p = (UINT32*)(pBuf++);
-				if (*p == ZIP_BEGIN_SIG)
-				{
-					bZIP = TRUE;
-					uZIPStart = CURRENT_DL_POS - dwRead + i;
-					break;
-				}
-			}
-
-			if (bZIP == FALSE && uLast3BytesRead)
-			{
-				BYTE buf [3+3];
-				buf [0] = BYTE (uLast3BytesRead);
-				buf [1] = BYTE (uLast3BytesRead >> 8);
-				buf [2] = BYTE (uLast3BytesRead >> 16);
-				buf [3] = pBuffer [0];
-				buf [4] = pBuffer [1];
-				buf [5] = pBuffer [2];
-
-				for (UINT i = 0; i <= 6-sizeof(UINT32); i++)
-				{
-					UINT32* p = (UINT32*)(buf+i);
-					if (*p == ZIP_BEGIN_SIG)
-					{
-						bZIP = TRUE;
-						uZIPStart = CURRENT_DL_POS - dwRead - i + 3;
-						break;
-					}
-				}
-			}
-
-			uLast3BytesRead = UINT32 (pBuffer [dwRead-1]) << 16 |
-				UINT32 (pBuffer [dwRead-2]) << 8 | UINT32 (pBuffer [dwRead-3]);
-
-			if (bZIP)
-			{
-				fsInternetDownloader* pThis = sect->pThis;
-
-				pThis->m_speed.Reset ();
-
-				fsInternetResult ir = sect->pThis->CheckIsZIP (uZIPStart, &sect->file);
-
-				if (IR_SUCCESS == ir)
-				{
-					SAFE_DELETE_ARRAY (pBuffer);
-					pThis->m_cRunningThreads--;
-					pThis->Event (DE_SECTIONSTOPPED, 0);
-					pThis->m_cThreads--;
-					return 0;
-				}
-				else
-				{
-					if (ir == 0x1000)
-					{
-						sect->pThis->m_bNeedStop = TRUE;
-						EnterCriticalSection (&sect->pThis->m_csSections);
-
-						sect->uDCurrent -= CURRENT_DL_POS - uZIPStart;
-						sect->uCurrent = uZIPStart;
-						sect->dwCacheLen -= min (sect->dwCacheLen, (DWORD)(CURRENT_DL_POS - uZIPStart));
-						sect->pThis->setDirty();
-						LeaveCriticalSection (&sect->pThis->m_csSections);
-						TSECT (sect);
-						CHECK_NEED_STOP;
-					}
-					else if (ir == IR_S_FALSE && sect->pThis->m_bNeedStop == FALSE)
-					{
-						bMayZIP = FALSE;
-						sect->pThis->Event (DE_MAYADDSECTION);
-					}
-					else
-					{
-						sect->state = SS_ERRSTOPPED;
-						EnterCriticalSection (&sect->pThis->m_csSections);
-						sect->uDCurrent -= CURRENT_DL_POS - uZIPStart;
-						sect->uCurrent = uZIPStart;
-						sect->dwCacheLen -= min (sect->dwCacheLen, (DWORD)(CURRENT_DL_POS - uZIPStart));
-						sect->pThis->setDirty();
-						LeaveCriticalSection (&sect->pThis->m_csSections);
-						TSECT (sect);
-						goto _exit;
-					}
-				}
-			}
-
-			if (CURRENT_DL_POS > ZIP_SFXMAXSIZE)
-			{
-				bMayZIP = FALSE;
-				sect->pThis->Event (DE_MAYADDSECTION);
-			}
-		}
 
 		timeNew.Now ();
 
@@ -1483,22 +1375,6 @@ void fsInternetDownloader::StopDownloading()
 		{
 			m_pOpeningFile->CloseHandle ();
 		}
-	}
-	catch (const std::exception& ex)
-	{
-		ASSERT (FALSE);
-		vmsLogger::WriteLog("fsInternetDownloader::StopDownloading " + tstring(ex.what()));
-	}
-	catch (...)
-	{
-		ASSERT (FALSE);
-		vmsLogger::WriteLog("fsInternetDownloader::StopDownloading unknown exception");
-	}
-
-	try
-	{
-		if (m_pZipPreviewStream)
-			m_pZipPreviewStream->Stop ();
 	}
 	catch (const std::exception& ex)
 	{
@@ -2885,192 +2761,6 @@ BOOL fsInternetDownloader::RestoreSectionsState_v5(LPBYTE pBuffer, DWORD )
 	return TRUE;
 }
 
-fsInternetResult fsInternetDownloader::CheckIsZIP(UINT64 uStartPosition, fsInternetURLFile **ppFileToCloseIfNeed)
-{
-
-	if (FALSE == IsMayZIP (uStartPosition ? TRUE : FALSE))
-		return IR_S_FALSE;
-
-	if ((m_dwState & IDS_ZIPPREVIEWALLOWED) == 0 &&
-			FALSE == Event (DE_CONFIRMARCHIVEDETECTION))
-	{
-		m_dwState |= IDS_ZIPPREVIEWPERFORMED;
-		setDirty();
-		return IR_S_FALSE;
-	}
-
-	SAFE_DELETE (*ppFileToCloseIfNeed);
-	m_dwState |= IDS_ZIPPREVIEWALLOWED;
-
-	setDirty();
-
-	fsArchiveInternetStream file;
-	fsZipArchiveFastRebuilder zip;
-	zip.SetSFXSize ((DWORD)uStartPosition);
-	zip.SetFileSize ((DWORD)m_uSSFileSize);
-
-	m_pZipPreviewStream = &file;
-
-	fsInternetResult ir;
-
-	Event (DE_ZIPPREVIEWSTARTED, int ((fsArchiveRebuilder*)&zip));
-
-	file.Set_MaxRetriesCount (m_uMaxAttempts);
-	ir = file.Open (this, uStartPosition);
-	if (ir != IR_SUCCESS)
-	{
-		m_pZipPreviewStream = NULL;
-
-		m_dwState &= ~IDS_ZIPPREVIEWALLOWED;
-
-		setDirty();
-
-		Event (DE_ZIPPREVIEWFAILED);
-		return ir;
-	}
-
-	DWORD dwRes = zip.OpenArchive (m_pZipPreviewStream);
-	if (dwRes != NOERROR)
-	{
-		m_pZipPreviewStream = NULL;
-		m_dwState &= ~IDS_ZIPPREVIEWALLOWED;
-
-		setDirty();
-
-		Event (DE_ZIPPREVIEWFAILED);
-
-		if (dwRes == ARR_STREAMERROR)
-			return file.GetLastNetworkErr ();
-
-		return IR_S_FALSE;
-	}
-
-	file.Close ();
-	m_pZipPreviewStream = NULL;
-
-	if (FALSE == Event (DE_ARCHIVEDETECTED, int ((fsArchiveRebuilder*)&zip)))
-	{
-		m_dwState &= ~IDS_ZIPPREVIEWALLOWED;
-
-		setDirty();
-
-		return (fsInternetResult) 0x1000;
-	}
-
-	m_dwState |= IDS_ZIPPREVIEWPERFORMED;
-
-	setDirty();
-
-	if (FALSE == Event (DE_NEEDFILE))
-		return IR_S_FALSE;
-
-	fsArchiveFileStream outfile;
-	outfile.Attach (m_hOutFile);
-	outfile.Seek (uStartPosition, ST_BEGIN);
-
-	zip.SaveArchiveHeaders (&outfile);
-
-	outfile.Detach ();
-
-	ApplyArchiveRebuilding (&zip, uStartPosition);
-
-	return IR_SUCCESS;
-}
-
-void fsInternetDownloader::UseZipPreview(BOOL b)
-{
-	if (b)
-		m_dwState |= IDS_USEZIPPREVIEW;
-	else
-		m_dwState &= ~IDS_USEZIPPREVIEW;
-	setDirty();
-}
-
-void fsInternetDownloader::ApplyArchiveRebuilding(fsArchiveRebuilder *ar, UINT64 uAddOffset)
-{
-	m_vSections.clear ();
-	setDirty();
-
-	int i = 0;
-	for (i = 0; i < ar->GetFileCount (); i++)
-	{
-		const fsArchiveFilePosition* filepos = ar->GetFilePosition (i);
-
-		fsSection sect;
-		sect.file = NULL;
-		sect.iSection = i;
-		sect.lastErr = IR_SUCCESS;
-		sect.nMirrorURL = UINT_MAX;
-		sect.pThis = this;
-		sect.state = SS_STOPPED;
-
-		sect.uStart = sect.uCurrent = filepos->dwSrcBegin + uAddOffset;
-		sect.uEnd = filepos->dwSrcEnd + uAddOffset;
-
-		sect.uDStart = sect.uDCurrent = filepos->dwDstBegin + uAddOffset;
-		sect.uDEnd = filepos->dwDstEnd + uAddOffset;
-
-		TSECT (&sect);
-
-		if (filepos->dwSrcBegin == 0)
-			sect.uDStart = sect.uStart = 0;
-
-		m_vSections.add (sect);
-
-		setDirty();
-	}
-
-	for (i = 1; i < m_vSections.size (); i++)
-	{
-		fsSection* prev = &m_vSections [i-1];
-		fsSection* cur  = &m_vSections [i];
-
-		if (prev->uEnd == cur->uStart)
-		{
-			prev->uEnd = cur->uEnd;
-			prev->uDEnd = cur->uDEnd;
-
-			m_vSections.del (i);
-
-			setDirty();
-
-			for (int j = i; j < m_vSections.size (); j++)
-				m_vSections [j].iSection--;
-
-			if (m_vSections.size () > 0) {
-				setDirty();
-			}
-
-			i--;
-		}
-	}
-
-	UINT64 uMaxPos = m_vSections [m_vSections.size ()-1].uEnd;
-	UINT64 uDMaxPos = m_vSections [m_vSections.size ()-1].uDEnd;
-
-	fsSection sect;
-	sect.file = NULL;
-	sect.iSection = m_vSections.size ();
-	sect.lastErr = IR_SUCCESS;
-	sect.nMirrorURL = UINT_MAX;
-	sect.pThis = this;
-	sect.state = SS_DONE;
-
-	sect.uStart = uMaxPos;
-	sect.uEnd = sect.uCurrent = uMaxPos;
-
-	m_uLDFileSize = ar->GetResultingArchiveSize () + uAddOffset;
-
-	sect.uDStart = uDMaxPos;
-	sect.uDEnd = sect.uDCurrent = GetLDFileSize ();
-
-	TSECT (&sect);
-
-	m_vSections.add (sect);
-
-	setDirty();
-}
-
 DWORD fsInternetDownloader::GetState()
 {
 	return m_dwState;
@@ -3079,32 +2769,6 @@ DWORD fsInternetDownloader::GetState()
 UINT64 fsInternetDownloader::GetLDFileSize()
 {
 	return m_uLDFileSize;
-}
-
-BOOL fsInternetDownloader::IsMayZIP(BOOL bIsExeMay)
-{
-	bIsExeMay = FALSE;
-
-	if ((m_dwState & IDS_USEZIPPREVIEW) == 0)
-		return FALSE;
-
-	if (m_dwState & IDS_ZIPPREVIEWPERFORMED)
-		return FALSE;
-
-	if (GetSSFileSize () == _UI64_MAX)
-		return FALSE;
-
-	LPCSTR pszExt = strrchr (m_strFileName, '.');
-	if (pszExt++ == NULL)
-		return FALSE;
-
-	if (stricmp (pszExt, "zip") == 0)
-		return TRUE;
-
-	if (bIsExeMay && stricmp (pszExt, "exe") == 0)
-		return TRUE;
-
-	return FALSE;
 }
 
 void fsInternetDownloader::ApplyProxySettings(fsInternetSession *pSession, fsDownload_NetworkProperties* dnp)

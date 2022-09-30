@@ -317,7 +317,7 @@ void CCreateDownloadsDlg::OnOK()
 		//if (bUseZipPreview)
 		//	m_vpDldsToStart [i]->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags |= DPF_USEZIPPREVIEW;
 		//else
-			m_vpDldsToStart [i]->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
+//			m_vpDldsToStart [i]->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
 		m_vpDldsToStart [i]->pMgr->GetDownloadMgr ()->setDirty();
 	}
 

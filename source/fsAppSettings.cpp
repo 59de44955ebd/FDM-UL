@@ -1253,16 +1253,6 @@ void fsAppSettings::NewDL_AutoStart(BOOL b)
 	m_stgs.WriteProfileInt (_T ("NewDownload"), _T ("AutoStart"), b);
 }
 
-//BOOL fsAppSettings::NewDL_UseZIPPreview()
-//{
-//	return m_stgs.GetProfileInt (_T ("NewDownload"), _T ("UseZIPPreview"), TRUE);
-//}
-//
-//void fsAppSettings::NewDL_UseZIPPreview(BOOL b)
-//{
-//	m_stgs.WriteProfileInt (_T ("NewDownload"), _T ("UseZIPPreview"), b);
-//}
-
 WORD fsAppSettings::RollBackSize()
 {
 	return (WORD)m_stgs.GetProfileInt (_T ("Network"), _T ("RollBackSize"), 3000);

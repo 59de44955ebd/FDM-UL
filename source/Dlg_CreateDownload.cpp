@@ -171,11 +171,10 @@ void CCreateDownloadDlg::OnOK()
 
 	//BOOL bUseZipPreview = _App.NewDL_UseZIPPreview ();
 	//_App.UseZipPreview (bUseZipPreview);
-
 	//if (bUseZipPreview)
 	//	m_dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags |= DPF_USEZIPPREVIEW;
 	//else
-		m_dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
+//		m_dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
 
 	if (nDldType == 1)
 	{

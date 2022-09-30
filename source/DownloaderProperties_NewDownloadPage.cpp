@@ -138,7 +138,6 @@ void CDownloaderProperties_NewDownloadPage::ApplyLanguage()
 		fsDlgLngInfo (IDC_NEWGRP_2, L_ALWAYSUSESAMEGRPANDAUTOUPDATEOUTFOLDER),
 		fsDlgLngInfo (IDC_ADVANCED, L_ADVANCED),
 		fsDlgLngInfo (IDC_AUTOSTART, L_STARTDLDAUTOMATICALLY),
-//		fsDlgLngInfo (IDC_USEZIP, L_USEZIPPREVIEW),
 		fsDlgLngInfo (IDC_SETGRPSFLDR, L_SETDEFDLDFLDR),
 	};
 
@@ -153,7 +152,6 @@ void CDownloaderProperties_NewDownloadPage::PrepareCHMgr(CPoint point)
 		fsCtrlContextHelp (IDC_CREATEGROUP, LS (L_CREATEGRP)),
 		fsCtrlContextHelp (IDC_ADVANCED, LS (L_ADVANCEDHERE)),
 		fsCtrlContextHelp (IDC_AUTOSTART, LS (L_DLDAUTOSTARTHERE)),
-//		fsCtrlContextHelp (IDC_USEZIP, LS (L_USEZIPPREVIEWHERE)),
 	};
 
 	static fsCtrlContextHelp aCH [sizeof (aCH1) / sizeof (fsCtrlContextHelp)];

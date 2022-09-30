@@ -155,8 +155,6 @@ void fsDownloadMgr::ApplyProperties()
 	m_dldr.SetSectionMinSize (m_dp.uSectionMinSize);
 	m_dldr.DontRestartIfNoRanges (m_dp.dwFlags & DPF_DONTRESTARTIFNORESUME);
 
-	//m_dldr.UseZipPreview (_App.NewDL_UseZIPPreview ());
-
 	m_dldr.StopOnAccDenied (m_dp.aEP [DFE_ACCDENIED] == DFEP_STOP);
 	m_dldr.StopOnFileNotFound (m_dp.aEP [DFE_NOTFOUND] == DFEP_STOP);
 
@@ -2040,11 +2038,6 @@ void fsDownloadMgr::CloneSettings(fsDownloadMgr *src)
 	strcpy (mydnp->pszPassword, dnp->pszPassword);
 }
 
-//void fsDownloadMgr::Set_MirrRecalcSpeedTime(UINT u)
-//{
-//	m_uMirrRecalcSpeedTime = u;
-//}
-
 fsInternetResult fsDownloadMgr::SetToRestartState()
 {
 	if (IsRunning ())
@@ -2064,48 +2057,6 @@ fsInternetResult fsDownloadMgr::SetToRestartState()
 
 	return IR_SUCCESS;
 }
-
-//void fsDownloadMgr::CheckMirrSpeedRecalcRequired()
-//{
-//	if (m_uMirrRecalcSpeedTime == 0)
-//		return;
-//
-//	fsTicksMgr tikNow;
-//
-//	tikNow.Now ();
-//
-//	if (tikNow - m_tikLastMirrMeasureTime > m_uMirrRecalcSpeedTime*60*1000)
-//	{
-//		m_tikLastMirrMeasureTime.Now ();
-//		DWORD dwThread;
-//		InterlockedIncrement (&m_iThread);
-//		CloseHandle (CreateThread (NULL, 0, _threadCalcMirrSpeed, this, 0, &dwThread));
-//	}
-//}
-
-//DWORD WINAPI fsDownloadMgr::_threadCalcMirrSpeed(LPVOID lp)
-//{
-//	fsDownloadMgr* pThis = (fsDownloadMgr*) lp;
-//
-//	try
-//	{
-//		pThis->MeasureMirrorsSpeed ();
-//	}
-//	catch (const std::exception& ex)
-//	{
-//		ASSERT (FALSE);
-//		vmsLogger::WriteLog("fsDownloadMgr::_threadCalcMirrSpeed " + tstring(ex.what()));
-//	}
-//	catch (...)
-//	{
-//		ASSERT (FALSE);
-//		vmsLogger::WriteLog("fsDownloadMgr::_threadCalcMirrSpeed unknown exception");
-//	}
-//
-//	InterlockedDecrement (&pThis->m_iThread);
-//
-//	return 0;
-//}
 
 BOOL fsDownloadMgr::OnNeedFile_FinalInit()
 {

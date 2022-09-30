@@ -15,7 +15,6 @@
 #include "fsDownloadRegSaver.h"
 #include "vmsFileRecentList.h"
 #include "fsDownloadsHistoryMgr.h"
-#include "fsArchiveRebuilder.h"
 #include "vmsStringRecentList.h"
 #include "fsDownload.h"
 #include "vmsPersistableListOfDownloads.h"

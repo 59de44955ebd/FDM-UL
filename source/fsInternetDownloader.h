@@ -12,13 +12,8 @@
 
 #include "list.h"
 #include "fsSpeedMeter.h"
-
-//#include "fsMirrorURLsMgr.h"
 #include "fsSitePingMgr.h"
-
 #include "fsMutex.h"
-#include "fsArchiveInternetStream.h"
-#include "fsArchiveRebuilder.h"
 #include "vmsCriticalSection.h"
 #include "vmsPersistObject.h"
 
@@ -259,8 +254,6 @@ public:
 
 	DWORD GetState();
 
-	void UseZipPreview (BOOL b);
-
 	LPCSTR Get_FileName();
 
 	UINT64 GetDownloadedBytesCount();
@@ -441,12 +434,6 @@ protected:
 
 	UINT m_uTimeout;
 
-	BOOL IsMayZIP (BOOL bIsExeMay);
-
-	void ApplyArchiveRebuilding (fsArchive::fsArchiveRebuilder* ar, UINT64 uAddOffset = 0);
-	fsArchiveInternetStream* m_pZipPreviewStream;
-
-	fsInternetResult CheckIsZIP(UINT64 uStartPosition, fsInternetURLFile **ppFileToCloseIfNeed);
 	BOOL RestoreSectionsState_v5(LPBYTE pBuffer, DWORD dwSize);
 	fsString m_strContentType;
 	DWORD m_dwState;

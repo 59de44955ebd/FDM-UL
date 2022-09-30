@@ -601,8 +601,6 @@ Pause
 Filter
 Use hidden attribute for uncompleted download
 Append comment to the file name when done
-Use ZIP preview
-Check this box if you want to preview the contents of ZIP archive at the beginning of downloading to download only part of the archive.
 Start download automatically
 Check this box if you want FDM to start each new download automatically
 Add

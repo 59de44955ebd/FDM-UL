@@ -1516,7 +1516,7 @@ BOOL CDownloadsWnd::CreateDownloadWithDefSettings(vmsDownloadSmartPtr dld, LPCST
 	//if (_App.NewDL_UseZIPPreview ())
 	//	dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags |= DPF_USEZIPPREVIEW;
 	//else
-		dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
+//		dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
 
 	if (strFolder.GetLength () == 0)
 		strFolder = pGroup->strOutFolder;

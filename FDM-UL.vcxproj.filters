@@ -428,18 +428,6 @@
     <ClCompile Include="source\fsAppSettings.cpp">
       <Filter>Source Files\fs</Filter>
     </ClCompile>
-    <ClCompile Include="source\fsArchiveFileStream.cpp">
-      <Filter>Source Files\fs</Filter>
-    </ClCompile>
-    <ClCompile Include="source\fsArchiveInternetStream.cpp">
-      <Filter>Source Files\fs</Filter>
-    </ClCompile>
-    <ClCompile Include="source\fsArchiveRebuilder.cpp">
-      <Filter>Source Files\fs</Filter>
-    </ClCompile>
-    <ClCompile Include="source\fsArchiveRebuilderStream.cpp">
-      <Filter>Source Files\fs</Filter>
-    </ClCompile>
     <ClCompile Include="source\fsAutorunMgr.cpp">
       <Filter>Source Files\fs</Filter>
     </ClCompile>
@@ -519,12 +507,6 @@
       <Filter>Source Files\fs</Filter>
     </ClCompile>
     <ClCompile Include="source\fsTrayIconMgr.cpp">
-      <Filter>Source Files\fs</Filter>
-    </ClCompile>
-    <ClCompile Include="source\fsZipArchiveFastRebuilder.cpp">
-      <Filter>Source Files\fs</Filter>
-    </ClCompile>
-    <ClCompile Include="source\fsZipArchiveRebuilder.cpp">
       <Filter>Source Files\fs</Filter>
     </ClCompile>
     <ClCompile Include="source\Dlg_CreateDownloads.cpp">

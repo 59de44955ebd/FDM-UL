@@ -197,7 +197,7 @@ BOOL CCreateBatchDownload::OnInitDialog()
 	m_dld->dwFlags |= DLD_BATCH;
 
 	return TRUE;
-	
+
 }
 
 void CCreateBatchDownload::OnChangeGroups()
@@ -670,11 +670,10 @@ void CCreateBatchDownload::OnOK()
 	}
 
 	//BOOL bUseZipPreview = _App.NewDL_UseZIPPreview ();
-
 	//if (bUseZipPreview)
 	//	m_dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags |= DPF_USEZIPPREVIEW;
 	//else
-		m_dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
+//		m_dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
 
 	CString strOutFolder;
 
