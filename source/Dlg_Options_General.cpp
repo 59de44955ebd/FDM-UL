@@ -66,7 +66,7 @@ BOOL CDlg_Options_General::OnInitDialog()
 	ApplyLanguage ();
 
 	return TRUE;
-	
+
 }
 
 CString CDlg_Options_General::get_PageTitle()
@@ -90,30 +90,6 @@ BOOL CDlg_Options_General::Apply()
 	pFrame->m_bCloseAsMinimize = IsDlgButtonChecked (IDC_CLOSEASMINIMIZE) == BST_CHECKED;
 	pFrame->m_bMinToTray = IsDlgButtonChecked (IDC_MINTOTRAY) == BST_CHECKED;
 
-	//if (IsDlgButtonChecked (IDC_AUTOUPDATES_INSTALL) == BST_CHECKED)
-	//	_UpdateMgr.m_enAUT = AUT_DLANDINST;
-	//else if (IsDlgButtonChecked (IDC_AUTOUPDATES_NOTIFYONLY) == BST_CHECKED)
-	//	_UpdateMgr.m_enAUT = AUT_NOTIFYONLY;
-	//else
-	//	_UpdateMgr.m_enAUT = AUT_TURNOFF;
-
-	//CString str;
-	//m_wndSkins.GetLBText (m_wndSkins.GetCurSel (), str);
-	//
-	//if (str == LS (L_OLDSTYLE))
-	//	str = "Old Style";
-	//else if (str == LS (L_NEWSTYLE))
-	//	str = "";
-	//
-	//_App.Skin_Current (str);
-	//
-	//DWORD dw = 0;
-	//if (IsDlgButtonChecked (IDC_ALLOWICONS2) == BST_CHECKED)
-	//	dw |= SM_ALLOWICONS;
-	//if (IsDlgButtonChecked (IDC_ALLOWBITMAPS2) == BST_CHECKED)
-	//	dw |= SM_ALLOWBITMAPS;
-	//_App.Skin_Flags (dw);
-
 	return TRUE;
 }
 
@@ -126,17 +102,6 @@ void CDlg_Options_General::ApplyLanguage()
 		fsDlgLngInfo (IDC__SYSTEM, L_SYSTEM),
 		fsDlgLngInfo (IDC_MINTOTRAY, L_MINTOTRAY),
 		fsDlgLngInfo (IDC_CLOSEASMINIMIZE, L_CLOSEASMINIMIZE),
-
-		//fsDlgLngInfo (IDC__UPDATE, L_UPDATE),
-		//fsDlgLngInfo (IDC_AUTOUPDATES_INSTALL, L_AUTOUPDATE_DLANDINST),
-		//fsDlgLngInfo (IDC_AUTOUPDATES_NOTIFYONLY, L_AUTOUPDATE_NOTIFYONLY),
-		//fsDlgLngInfo (IDC_AUTOUPDATES_TURNOFF, L_AUTOUPDATE_TURNOFF),
-
-	/*	fsDlgLngInfo (IDC__SKINS, L_SKINS),
-		fsDlgLngInfo (IDC__SKIN, L_SKIN, TRUE),
-		fsDlgLngInfo (IDC_ALLOWBITMAPS2, L_SKIN_ALLOWBITMAPS),
-		fsDlgLngInfo (IDC_ALLOWICONS2, L_SKIN_ALLOWICONS),
-		fsDlgLngInfo (IDC__AFTERRESTART, L_AFTERRESTART),*/
 	};
 
 	_LngMgr.ApplyLanguage (this, lnginfo, sizeof (lnginfo) / sizeof (fsDlgLngInfo), 0);

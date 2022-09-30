@@ -432,14 +432,6 @@ void CDownloads_Groups::ApplyLanguage()
 	SetItemText (m_hInProgress, LS (L_INPROGRESS));
 	SetItemText (m_hScheduled, LS (L_SCHEDULED));
 	SetItemText (m_hStopped, LS (L_STOPPED));
-
-	//SetItemText (m_hHistory, LS (L_HISTORY));
-	//SetItemText (m_hToday, LS (L_TODAY));
-	//SetItemText (m_hYesterday, LS (L_YESTERDAY));
-	//SetItemText (m_hLastWeek, LS (L_LASTWEEK));
-	//SetItemText (m_hLastMonth, LS (L_LASTMONTH));
-	//SetItemText (m_hHistCustom, LS (L_CUSTOMttt));
-
 	SetItemText (m_hDeleted, LS (L_DELETED));
 }
 
@@ -645,28 +637,6 @@ fsDldFilter* CDownloads_Groups::GetCurrentFilter()
 
 	return NULL;
 }
-
-//void CDownloads_Groups::InsertHistory()
-//{
-//	m_hHistory = InsertItem (TVIF_IMAGE  | TVIF_SELECTEDIMAGE | TVIF_STATE | TVIF_TEXT, LS (L_HISTORY), 0, 0,
-//		TVIS_BOLD, TVIS_BOLD, 0, TVI_ROOT, TVI_LAST);
-//	SetItemData (m_hHistory, ULONG (&m_filterAllHist));
-//
-//	m_hToday = InsertItem (LS (L_TODAY), 1, 1, m_hHistory, TVI_LAST);
-//	SetItemData (m_hToday, ULONG (&m_filterToday));
-//
-//	m_hYesterday = InsertItem (LS (L_YESTERDAY), 1, 1, m_hHistory, TVI_LAST);
-//	SetItemData (m_hYesterday, ULONG (&m_filterYesterday));
-//
-//	m_hLastWeek = InsertItem (LS (L_LASTWEEK), 1, 1, m_hHistory, TVI_LAST);
-//	SetItemData (m_hLastWeek, ULONG (&m_filterLastWeek));
-//
-//	m_hLastMonth = InsertItem (LS (L_LASTMONTH), 1, 1, m_hHistory, TVI_LAST);
-//	SetItemData (m_hLastMonth, ULONG (&m_filterLastMonth));
-//
-//	m_hHistCustom = InsertItem (LS (L_CUSTOMttt), 1, 1, m_hHistory, TVI_LAST);
-//	SetItemData (m_hHistCustom, ULONG (&m_filterCustomHist));
-//}
 
 void CDownloads_Groups::InsertDeleted()
 {

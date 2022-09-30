@@ -82,15 +82,15 @@ _COM_SMARTPTR_TYPEDEF(IXMLDOMNodeList, __uuidof(IXMLDOMNodeList));
 //#include <atlcom.h>
 //#include <atlsecurity.h>
 
-class CFdmModule : public CComModule
-{
-public:
-	LONG Unlock();
-	LONG Lock();
-	LPCTSTR FindOneOf(LPCTSTR p1, LPCTSTR p2);
-	DWORD dwThreadID;
-};
-extern CFdmModule _Module;
+//class CFdmModule : public CComModule
+//{
+//public:
+//	LONG Unlock();
+//	LONG Lock();
+//	LPCTSTR FindOneOf(LPCTSTR p1, LPCTSTR p2);
+//	DWORD dwThreadID;
+//};
+//extern CFdmModule _Module;
 
 #ifndef LONG_PTR
 #define LONG_PTR		LONG
@@ -123,8 +123,6 @@ extern CFdmModule _Module;
 #include "fsPluginMgr.h"
 #include "../inetfile/inetfile.h"
 
-//#include "vmsMediaConvertMgr.h"
-
 #include "fsDownload.h"
 #include "vmsPersistObject.h"
 
@@ -137,7 +135,6 @@ extern CFdmModule _Module;
 #include "fsDialogsMgr.h"
 #include "fsClipboardMgr.h"
 #include "ToolBarEx.h"
-//#include "fsUpdateMgr.h"
 #include "fsAutorunMgr.h"
 #include "fsCmdHistoryMgr.h"
 #include <exdispid.h>
@@ -146,15 +143,11 @@ extern CFdmModule _Module;
 #include "fsMFCLangMgr.h"
 #include "fsSitesMgr.h"
 #include "fsSoundsMgr.h"
-#include "fsHistoriesMgr.h"
 #include "vmsSkinMgr.h"
 #include "vmsDownloadsGroupsMgr.h"
 #include "fsDownloadsMgr.h"
 #include "vmsTheme.h"
 #include "fsPluginMgr.h"
-//#include "zlib/zlib.h"
-//#include "vmsZip.h"
-//#include "vmsUnZip.h"
 
 #include "vmsHttpServer.h"
 #include "vmsFdmWebInterfaceServer.h"

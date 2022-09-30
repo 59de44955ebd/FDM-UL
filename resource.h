@@ -44,7 +44,6 @@
 #define IDD_DOWNLOAD_MISC               152
 #define IDM_LOG                         153
 #define IDD_DLDR_LIST                   155
-#define IDD_OPTMASTER                   156
 #define IDM_TASKS                       157
 #define IDB_SHEDULER                    158
 #define IDD_SCHEDULE_WHATTOSTART        159
@@ -72,7 +71,6 @@
 #define IDB_TOOL0                       184
 #define IDB_TOOL_DLDS                   185
 #define IDB_TOOL_SCHEDULE               186
-#define IDB_TOOL_HFE                    187
 #define IDI_TRAY_DOWNLOADING            188
 #define IDI_TRAY_ERRORS                 189
 #define IDB_GROUPSMENU                  191
@@ -82,7 +80,6 @@
 #define IDD_ENTERKEY                    199
 #define IDB_TOOL0_D                     200
 #define IDB_TOOL_DLDS_D                 201
-#define IDB_TOOL_HFE_D                  202
 #define IDB_TOOL_SCHEDULE_D             203
 #define IDB_GROUPSMENU_D                204
 #define IDD_BUY                         205
@@ -93,8 +90,6 @@
 #define IDD_SITES_GENERAL               210
 #define IDR_SPIDER                      211
 #define IDM_SPIDER                      211
-#define IDB_TOOL_SPIDER                 212
-#define IDB_TOOL_SPIDER_D               213
 #define IDD_WPD_GENERAL                 215
 #define IDD_WPD_WEBPAGES                216
 #define IDD_WPD_IMAGES                  217
@@ -133,12 +128,8 @@
 #define IDB_TOOL_DLD_16_D               271
 #define IDB_TOOL_SCH_16                 272
 #define IDB_TOOL_SCH_16_D               273
-#define IDB_TOOL_HFE_16                 274
-#define IDB_TOOL_HFE_16_D               275
 #define IDB_TOOL_SITES_16               276
 #define IDB_TOOL_SITES_16_D             277
-#define IDB_TOOL_SPIDER_16              278
-#define IDB_TOOL_SPIDER_16_D            279
 #define IDB_FDM_GETCVER_BTN             283
 #define IDI_LOGO2                       284
 #define IDD_SM_GENERAL                  286
@@ -186,6 +177,9 @@
 #define IDD_CONNECTIONSPEEDINFO         388
 #define IDD_WEBINTERFACE_DIALOG         389
 #define IDD_DIALOG2                     495
+#define IDS_STRING503                   503
+#define IDS_FOO                         503
+#define IDS_STRING504                   504
 #define IDC_URL                         1001
 #define IDC_BUTTON2                     1003
 #define IDC_SETTIME                     1003
@@ -306,7 +300,6 @@
 #define IDC_SECTMINSIZEDIM              1033
 #define IDC_AER                         1033
 #define IDC_WHENDEL                     1033
-#define IDC_CT                          1033
 #define IDC_WTS                         1033
 #define IDC_EVERYDIM                    1033
 #define IDC_CHECK9                      1033
@@ -637,10 +630,7 @@
 #define IDC__MIN                        1144
 #define IDC__STARTUP                    1146
 #define IDC__SYSTEM                     1147
-#define IDC__WELCOMETONOW               1148
 #define IDC__UPDATE                     1148
-#define IDC__MASTERDESC                 1149
-#define IDC__CONNTYPE                   1150
 #define IDC__CONFIRMATION               1151
 #define IDC__LOGINREQ                   1153
 #define IDC__SAVEDIN                    1154
@@ -938,7 +928,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        503
+#define _APS_NEXT_RESOURCE_VALUE        505
 #define _APS_NEXT_COMMAND_VALUE         33238
 #define _APS_NEXT_CONTROL_VALUE         1561
 #define _APS_NEXT_SYMED_VALUE           137

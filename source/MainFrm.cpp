@@ -85,7 +85,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_SHOWMAINWINDOW, OnShowmainwindow)
 	ON_COMMAND(ID_STARTALL, OnStartall)
 	ON_COMMAND(ID_STOPALL, OnStopall)
-//	ON_COMMAND(ID_PROGGENERALSETTINGS, OnProggeneralsettings)
+
 	ON_WM_SYSCOMMAND()
 	ON_WM_ENDSESSION()
 	ON_COMMAND(ID_ADDSITE, OnAddsite)
@@ -109,8 +109,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_DLD_CREATEBATCH, OnDldCreatebatch)
 	ON_COMMAND(ID_FILE_IMPORT_IMPORTLISTOFDOWNLOADSFROMCLIPBOARD, OnFileImportImportlistofdownloadsfromclipboard)
 	ON_COMMAND(ID_OPTIONS_SM, OnOptionsSm)
-//	ON_COMMAND(ID_LDF_CLEAR, OnLdfClear)
-//	ON_UPDATE_COMMAND_UI(ID_LDF_CLEAR, OnUpdateLdfClear)
+
 	ON_COMMAND(ID_PAUSEALLDLDS, OnPausealldlds)
 	ON_UPDATE_COMMAND_UI(ID_PAUSEALLDLDS, OnUpdatePausealldlds)
 	ON_COMMAND(ID_APP_EXIT_2, OnAppExit2)
@@ -119,13 +118,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_MESSAGE (WM_TRAYMSG, OnTrayMsg)
 	ON_COMMAND(ID_VIEW_TOOLBAR, OnViewToolbar)
 	ON_COMMAND(ID_VIEW_STATUS_BAR, OnViewStatusbar)
-
-#ifdef FLOATING_WIN
-	ON_COMMAND(ID_DLINFOBOX, OnDlinfobox)
-	ON_UPDATE_COMMAND_UI(ID_DLINFOBOX, OnUpdateDlinfobox)
-	ON_COMMAND(ID_DROPBOX, OnDropBox)
-	ON_UPDATE_COMMAND_UI(ID_DROPBOX, OnUpdateDropBox)
-#endif
 
 	ON_COMMAND(ID_EXITWHENDONE, OnExitwhendone)
 	ON_UPDATE_COMMAND_UI(ID_EXITWHENDONE, OnUpdateExitwhendone)
@@ -146,8 +138,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND_RANGE(ID_ALT1, ID_ALT9, OnAltPlusDigit)
 
 	ON_COMMAND (ID_TUM_CHANGED, OnTUMChanged)
-	//ON_COMMAND_RANGE (ID_LDF_0, ID_LDF_0+9, OnLDF)
-	//ON_UPDATE_COMMAND_UI_RANGE(ID_LDF_0, ID_LDF_0+9, OnUpdateLdf0)
+
 	ON_UPDATE_COMMAND_UI(ID_SB_TOTALSPEED, OnUpdateTotalSpeed)
 	ON_MESSAGE(WM_SHOW_BALLOON, OnShowBalloon)
 	ON_MESSAGE(WM_MYBALLOON_CLOSED, OnMyBalloonClosed)
@@ -186,10 +177,6 @@ CMainFrame::CMainFrame()
 
 	m_pFdmBalloon = NULL;
 	m_pFdmBalloonContent = NULL;
-
-#ifdef FLOATING_WIN
-	m_pFloatWndsThread = NULL;
-#endif
 }
 
 CMainFrame::~CMainFrame()
@@ -298,10 +285,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	UINT pnIcons [] = {IDI_TRAY_NORMAL, IDI_TRAY_DOWNLOADING, IDI_TRAY_ERRORS, IDI_TRAY_UNKNOWN};
 	_TrayMgr.Create (m_hWnd, pnIcons, sizeof (pnIcons) / sizeof (UINT),
 		vmsFdmAppMgr::getAppName (), WM_TRAYMSG);
-
-#ifdef FLOATING_WIN
-	m_pFloatWndsThread = (CFloatingWndsThread*) AfxBeginThread (RUNTIME_CLASS (CFloatingWndsThread));
-#endif
 
 	PostMessage (WM_COMMAND, ID_PROCCEEDFURTHERINIT);
 
@@ -463,11 +446,6 @@ void CMainFrame::OnUpdateTumMedium(CCmdUI* pCmdUI)
 	pCmdUI->SetCheck (_TumMgr.GetTUM () == TUM_MEDIUM);
 }
 
-void CMainFrame::OnOptmaster()
-{
-	_pwndDownloads->OnOptimizationWizard ();
-}
-
 void CMainFrame::OnDldCreate()
 {
 	if (_DldsMgr.IsDeletingNow ())
@@ -558,18 +536,6 @@ void CMainFrame::ShowTrayMenu(BOOL bModeTray)
 	menu.LoadMenu (IDM_TRAY);
 	CMenu *pPopup = menu.GetSubMenu (0);
 
-//	const vmsFileRecentList* pLFD = _DldsMgr.get_LastFilesDownloaded ();
-//	CMenu* pmenuLFD = pPopup->GetSubMenu (LFD_MENU_POS);
-//	for (int i = 0; i < pLFD->get_Count (); i++)
-//	{
-//		if (i == 0)
-//			pmenuLFD->RemoveMenu (0, MF_BYPOSITION);
-//		LPCSTR pszDispName = pLFD->get_FileDispName (i);
-//		if (*pszDispName == 0)
-//			pszDispName = LS (L_UNKNOWN);
-//		pmenuLFD->InsertMenu (0, MF_STRING | MF_BYPOSITION, ID_LDF_0 + i, pszDispName);
-//	}
-
 	pPopup->SetDefaultItem (ID_SHOWMAINWINDOW);
 
 	CPoint pt;
@@ -603,7 +569,6 @@ void CMainFrame::ShowTrayMenu(BOOL bModeTray)
 
 	fsSetText texts [] = {
 		fsSetText (ID_SHOWMAINWINDOW, strSMW),
-		//fsSetText (ID_MONITORCLIPBOARD, LS (L_MONITORCLIPBOARD)),
 		fsSetText (ID_DLD_CREATE, strCND),
 		fsSetText (ID_DLD_CREATEBATCH, LS (L_CREATEBATCHDLD)),
 		fsSetText (ID_FILE_IMPORT_IMPORTLISTOFDOWNLOADSFROMCLIPBOARD, sImpFromClip),
@@ -612,20 +577,12 @@ void CMainFrame::ShowTrayMenu(BOOL bModeTray)
 		fsSetText (ID_TUM_LIGHT, strL),
 		fsSetText (ID_TUM_MEDIUM, strM),
 		fsSetText (ID_TUM_HEAVY, strH),
-		//fsSetText (ID_DLINFOBOX, LS (L_SHOWDLDSINFOWHILEDOWNLOADING)),
-		//fsSetText (ID_DROPBOX, LS (L_DROPBOX)),
 		fsSetText (ID_APP_ABOUT, LS (L_ABOUT)),
 		fsSetText (ID_APP_EXIT, strExit),
-//		fsSetText (ID_LDF_CLEAR, LS (L_CLEAR)),
 		fsSetText (ID_PAUSEALLDLDS, LS (L_PAUSEALLDOWNLOADS)),
 		fsSetText (ID_LOADATSTARTUP, LS (L_AUTOSTART)),
 	};
 	m_odTrayMenu.SetMenuItemsText (&menu, texts, sizeof (texts) / sizeof (fsSetText), FALSE);
-
-	//m_odTrayMenu.SetMenuItemText (menu.GetSubMenu (0), LS (L_LASTDOWNLOADEDFILES), LFD_MENU_POS, TRUE);
-
-	//if (pLFD->get_Count () == 0)
-	//	m_odTrayMenu.SetMenuItemText (menu.GetSubMenu (0)->GetSubMenu (LFD_MENU_POS), LS (L_EMPTY), 0, TRUE);
 
 	// trafic usage mode
 	m_odTrayMenu.SetMenuItemText (menu.GetSubMenu (0), LS (L_TUM), TUM_MENU_POS, TRUE);
@@ -692,14 +649,14 @@ void CMainFrame::LoadMenuImages()
 		IDB_TOOL0_16, IDB_TOOL_DLD_16, IDB_TOOL_DLD_16,
 		IDB_TOOL_DLD_16,
 		IDB_TOOL_SCH_16,
-		IDB_TOOL_HFE_16, IDB_TOOL_SITES_16, IDB_TOOL_SPIDER_16,
+		IDB_TOOL_SITES_16,
 	};
 
 	UINT adImgs[] = {
 		IDB_TOOL0_16_D, IDB_TOOL_DLD_16_D, IDB_TOOL_DLD_16_D,
 		IDB_TOOL_DLD_16_D,
 		IDB_TOOL_SCH_16_D,
-		IDB_TOOL_HFE_16_D, IDB_TOOL_SITES_16_D, IDB_TOOL_SPIDER_16_D,
+		IDB_TOOL_SITES_16_D
 	};
 
 	ASSERT (sizeof (aImgs) == sizeof (adImgs));
@@ -768,18 +725,6 @@ void CMainFrame::OnHomepage()
 {
 	fsOpenUrlInBrowser ("http://www.freedownloadmanager.org/");
 }
-
-//void CMainFrame::OnProggeneralsettings()
-//{
-//	CPrgSheet sheet (LS (L_PRGGENSET), this);
-//
-//	sheet.Init ();
-//
-//	_DlgMgr.OnDoModal (&sheet);
-//	sheet.DoModal ();
-//	SaveSettings (0xffffffff);
-//	_DlgMgr.OnEndDialog (&sheet);
-//}
 
 void CMainFrame::ReadSettings()
 {
@@ -959,15 +904,6 @@ void CMainFrame::SaveState(DWORD dwWhat)
 	{
 		m_wndView.m_wndClient.SaveState ();
 		_App.View_SaveWndPlacement (this, "MainFrm");
-
-#ifdef FLOATING_WIN
-		if (m_pFloatWndsThread)
-		{
-			m_pFloatWndsThread->m_wndFloating.SaveState ();
-			m_pFloatWndsThread->m_wndFloatingInfo.SaveState ();
-		}
-#endif
-
 	}
 }
 
@@ -1026,7 +962,6 @@ void CMainFrame::ApplyLanguageToMenu()
 		strExit = LS (L_EXIT),
 		strExport = LS (L_EXPORTSETTINGS),
 		strSaveAll = LS (L_SAVEALL),
-		//strSaveAll(MAKEINTRESOURCE(IDS_SAVEALL)),
 		strImpFromClip = LS (L_IMPORTURLSFROMCLIPBOARD);
 
 	strCut += "\tCtrl+X"; strCopy += "\tCtrl+C"; strPaste += "\tCtrl+V";
@@ -1054,8 +989,6 @@ void CMainFrame::ApplyLanguageToMenu()
 		fsSetText (ID_APP_EXIT, strExit),
 		fsSetText (ID_VIEW_TOOLBAR, LS (L_TOOLBAR)),
 		fsSetText (ID_VIEW_STATUS_BAR, LS (L_STATUSBAR)),
-		//fsSetText (ID_DLINFOBOX, LS (L_DLSINFO)),
-		//fsSetText (ID_DROPBOX, LS (L_DROPBOX)),
 		fsSetText (ID_DLDROPTIONS, strDldOpt),
 		fsSetText (ID_OPTIONS_SM, LS (L_OPTIONS_SM)),
 		fsSetText (ID_DLDDEFOPTIONS, strDldDef),
@@ -1099,18 +1032,6 @@ void CMainFrame::UpdateSettings()
 	_DldsMgr.ReadSettings ();
 	_DldsMgr.setNeedApplyTrafficLimit ();
 }
-
-#ifdef FLOATING_WIN
-void CMainFrame::OnDropBox()
-{
-	m_pFloatWndsThread->m_wndFloating.Show (!_App.View_FloatingWindow ());
-}
-
-void CMainFrame::OnUpdateDropBox(CCmdUI *pCmdUI)
-{
-	pCmdUI->SetCheck (_App.View_FloatingWindow () ? 1 : 0);
-}
-#endif
 
 UINT CMainFrame::m_umsgTaskBarCreated = 0;
 
@@ -1458,21 +1379,6 @@ void CMainFrame::ShowTimeoutBalloon(LPCSTR pszInfo, LPCSTR pszTitle, DWORD dwIco
 	AfxGetApp ()->m_pMainWnd->PostMessage (WM_SHOW_BALLOON, 0, (LPARAM)info);
 }
 
-#ifdef FLOATING_WIN
-void CMainFrame::OnDlinfobox()
-{
-	if (_App.View_FloatingInfoWindow ())
-	{
-		m_pFloatWndsThread->m_wndFloatingInfo.TurnOffWindow ();
-	}
-	else
-	{
-		_App.View_FloatingInfoWindow (TRUE);
-		_pwndDownloads->UpdateTrayIconPlusOthers ();
-	}
-}
-#endif
-
 void CMainFrame::OnActivateWebinterface()
 {
 	if (_httpServer.is_Running())
@@ -1488,10 +1394,6 @@ void CMainFrame::OnUpdateActivateWebinterface(CCmdUI* pCmdUI)
 
 void CMainFrame::RebuidDownloadsList()
 {
-#ifdef FLOATING_WIN
-	if (m_pFloatWndsThread)
-		m_pFloatWndsThread->m_wndFloatingInfo.RebuildList ();
-#endif
 }
 
 void CMainFrame::RecalcLayout(BOOL bNotify)
@@ -1666,18 +1568,6 @@ void CMainFrame::OnDldCreatebatch()
 {
 	_pwndDownloads->OnDldcreatebatch ();
 }
-
-#ifdef FLOATING_WIN
-void CMainFrame::ShowFloatingInfoWindow(BOOL bShow)
-{
-	m_pFloatWndsThread->m_wndFloatingInfo.NeedToShow (bShow);
-}
-
-BOOL CMainFrame::IsFloatingInfoWindowVisible()
-{
-	return (m_pFloatWndsThread) ? ::IsWindowVisible (m_pFloatWndsThread->m_wndFloatingInfo.m_hWnd) : FALSE;
-}
-#endif
 
 bool mainfrm__is_separator (char c)
 {
@@ -1956,27 +1846,6 @@ BOOL CMainFrame::ImportDownload(IXMLDOMNode *pNode, DLDS_LIST_REF v)
 	return TRUE;
 }
 
-//void CMainFrame::OnUpdateLdf0(CCmdUI* pCmdUI)
-//{
-//	pCmdUI->Enable (_DldsMgr.get_LastFilesDownloaded ()->get_Count () != 0);
-//}
-//
-//void CMainFrame::OnLDF(UINT nID)
-//{
-//	ShellExecute (NULL, "open", _DldsMgr.get_LastFilesDownloaded ()->get_FilePathName (nID - ID_LDF_0),
-//		NULL, NULL, SW_SHOW);
-//}
-//
-//void CMainFrame::OnLdfClear()
-//{
-//	_DldsMgr.LastFilesDownloaded_Clear ();
-//}
-//
-//void CMainFrame::OnUpdateLdfClear(CCmdUI* pCmdUI)
-//{
-//	pCmdUI->Enable (_DldsMgr.get_LastFilesDownloaded ()->get_Count () != 0);
-//}
-
 void CMainFrame::OnPausealldlds()
 {
 	_TumMgr.setRestrainAll (!_TumMgr.getRestrainAll ());
@@ -2001,13 +1870,6 @@ void CMainFrame::OnUpdateTotalSpeed(CCmdUI *pCmdUI)
 	str.Format("%s/%s", BytesToString(_pwndDownloads->getTotalDownloadingSpeed()).GetString(), LS(L_S));
 	pCmdUI->SetText (str);
 }
-
-#ifdef FLOATING_WIN
-void CMainFrame::OnUpdateDlinfobox(CCmdUI* pCmdUI)
-{
-	pCmdUI->SetCheck (_App.View_FloatingInfoWindow () ? 1 : 0);
-}
-#endif
 
 void CMainFrame::OnAppExit2()
 {
@@ -2201,11 +2063,6 @@ bool CMainFrame::onExit(bool bQueryExit)
 
 	m_odmenu.Detach ();
 	_TrayMgr.Remove ();
-
-#ifdef FLOATING_WIN
-	m_pFloatWndsThread->m_wndFloating.HideAlways ();
-	m_pFloatWndsThread->m_wndFloatingInfo.HideAlways ();
-#endif
 
 	ShowWindow (SW_HIDE);
 

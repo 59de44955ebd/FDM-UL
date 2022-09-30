@@ -647,17 +647,9 @@ IDB_TOOL_SCH_16         BITMAP                  "res\\tool_sch_16.bmp"
 
 IDB_TOOL_SCH_16_D       BITMAP                  "res\\tool_sch_16_d.bmp"
 
-IDB_TOOL_HFE_16         BITMAP                  "res\\tool_hfe_16.bmp"
-
-IDB_TOOL_HFE_16_D       BITMAP                  "res\\tool_hfe_16_d.bmp"
-
 IDB_TOOL_SITES_16       BITMAP                  "res\\tool_sites_16.bmp"
 
 IDB_TOOL_SITES_16_D     BITMAP                  "res\\tool_sites_16_d.bmp"
-
-IDB_TOOL_SPIDER_16      BITMAP                  "res\\tool_spider_16.bmp"
-
-IDB_TOOL_SPIDER_16_D    BITMAP                  "res\\tool_spider_16_d.bmp"
 
 IDB_FDM_GETCVER_BTN     BITMAP                  "res\\fdm_getcver_btn.bmp"
 
@@ -1006,23 +998,6 @@ BEGIN
     LTEXT           "MB",IDC__WC_MB,280,151,20,10
     GROUPBOX        "List of downloads",IDC__LISTOFDLDS,7,3,295,174
     CONTROL         "prevent stand-by",IDC_PREVENT_STANDBY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,164,265,9
-END
-
-IDD_OPTMASTER DIALOGEX 0, 0, 222, 126
-STYLE DS_SETFONT | DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-EXSTYLE WS_EX_CONTEXTHELP
-CAPTION "Network usage optimization Wizard"
-FONT 8, "MS Shell Dlg", 0, 0, 0x1
-BEGIN
-    COMBOBOX        IDC_CT,7,74,208,87,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    DEFPUSHBUTTON   "Finish",IDOK,112,104,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,165,104,50,14
-    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,95,208,1
-    LTEXT           "Welcome to Network optimization Wizard!",IDC__WELCOMETONOW,7,7,205,9
-    LTEXT           "-",IDC__MASTERDESC,7,24,208,27
-    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,19,208,1
-    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,55,208,1
-    LTEXT           "Please select the type of your connection",IDC__CONNTYPE,7,60,208,9
 END
 
 IDD_SCHEDULE_WHATTOSTART DIALOGEX 0, 0, 246, 218
@@ -1469,10 +1444,6 @@ BEGIN
     BEGIN
     END
 
-    IDD_OPTMASTER, DIALOG
-    BEGIN
-    END
-
     IDD_SCHEDULE_WHATTOSTART, DIALOG
     BEGIN
     END
@@ -1843,8 +1814,6 @@ IDB_TOOL_DLDS           BITMAP                  "res\\tool_dld.bmp"
 
 IDB_TOOL_SCHEDULE       BITMAP                  "res\\tool_sch.bmp"
 
-IDB_TOOL_HFE            BITMAP                  "res\\tool_hfe.bmp"
-
 IDB_GROUPSMENU          BITMAP                  "res\\grpmenu.bmp"
 
 IDB_TOOL_SITES          BITMAP                  "res\\tool_sites.bmp"
@@ -1852,10 +1821,6 @@ IDB_TOOL_SITES          BITMAP                  "res\\tool_sites.bmp"
 IDB_TOOL_SITES_D        BITMAP                  "res\\tool_sites_d.bmp"
 
 IDB_SITELIST            BITMAP                  "res\\sitelist.bmp"
-
-IDB_TOOL_SPIDER         BITMAP                  "res\\tool_spider.bmp"
-
-IDB_TOOL_SPIDER_D       BITMAP                  "res\\tool_spider_d.bmp"
 
 IDB_GO                  BITMAP                  "res\\go.bmp"
 
@@ -2302,8 +2267,6 @@ END
 IDB_TOOL0_D             BITMAP                  "res\\tool0_d.bmp"
 
 IDB_TOOL_DLDS_D         BITMAP                  "res\\tooldlds_d.bmp"
-
-IDB_TOOL_HFE_D          BITMAP                  "res\\toolhfe_d.bmp"
 
 IDB_TOOL_SCHEDULE_D     BITMAP                  "res\\toolschedule_d.bmp"
 

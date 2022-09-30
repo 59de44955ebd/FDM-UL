@@ -14,9 +14,7 @@ enum fsSoundsMgrEvent
 	SME_DOWNLOADCOMPLETE,
 	SME_DOWNLOADADDED,
 	SME_NOACTIVEDOWNLOADS,
-	SME_DIALINGOK,
-	SME_DIALINGFAILED,
-	SME_DOWNLOADFAILED,
+	SME_DOWNLOADFAILED
 };
 
 class fsSoundsMgr
@@ -34,8 +32,7 @@ protected:
 	BOOL m_bUseSounds;
 
 	fsString m_strDownloadComplete, m_strDownloadAdded,
-		m_strNoActiveDownloads, m_strDialingOK, m_strDialingFailed,
-		m_strDownloadFailed;
+		m_strNoActiveDownloads, m_strDownloadFailed;
 };
 
 #endif

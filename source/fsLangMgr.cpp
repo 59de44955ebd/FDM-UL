@@ -195,7 +195,7 @@ LPCSTR fsLangMgr::GetString(int iIndex)
 
 CString fsLangMgr::GetStringNP(int iIndex)
 {
-	CString str = GetString (iIndex);
+	CString str = LS(iIndex);// GetString(iIndex);
 	str.Remove ('&');
 	return str;
 }

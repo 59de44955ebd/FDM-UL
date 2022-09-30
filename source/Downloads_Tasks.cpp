@@ -1775,7 +1775,7 @@ void CDownloads_Tasks::ScheduleSelectedDlds(BOOL bStart)
 		pTask = &task;
 	}
 
-	CScheduleSheet sheet (LS (bStart ? L_SCHEDULE_DLDSTART : L_SCHEDULE_DLDSTOP), this);
+	CScheduleSheet sheet (bStart ? LS(L_SCHEDULE_DLDSTART) : LS(L_SCHEDULE_DLDSTOP), this);
 	sheet.Init (pTask, FALSE);
 	_DlgMgr.OnDoModal (&sheet);
 	UINT uIDRet = sheet.DoModal ();

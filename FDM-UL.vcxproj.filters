@@ -482,9 +482,6 @@
     <ClCompile Include="source\fsFindDownloadMgr.cpp">
       <Filter>Source Files\fs</Filter>
     </ClCompile>
-    <ClCompile Include="source\fsHistoriesMgr.cpp">
-      <Filter>Source Files\fs</Filter>
-    </ClCompile>
     <ClCompile Include="source\fsInternetDownloader.cpp">
       <Filter>Source Files\fs</Filter>
     </ClCompile>
@@ -588,9 +585,6 @@
       <Filter>Source Files\dlg</Filter>
     </ClCompile>
     <ClCompile Include="source\Dlg_SCR.cpp">
-      <Filter>Source Files\dlg</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Dlg_NOW.cpp">
       <Filter>Source Files\dlg</Filter>
     </ClCompile>
     <ClCompile Include="source\Dlg_Login.cpp">
@@ -763,15 +757,6 @@
     <CustomBuild Include="res\tool_dld_16_d.bmp">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="res\tool_hfe.bmp">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\tool_hfe_16.bmp">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\tool_hfe_16_d.bmp">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="res\tool_sch.bmp">
       <Filter>Resource Files</Filter>
     </CustomBuild>
@@ -791,18 +776,6 @@
       <Filter>Resource Files</Filter>
     </CustomBuild>
     <CustomBuild Include="res\tool_sites_d.bmp">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\tool_spider.bmp">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\tool_spider_16.bmp">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\tool_spider_16_d.bmp">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="res\tool_spider_d.bmp">
       <Filter>Resource Files</Filter>
     </CustomBuild>
     <CustomBuild Include="res\tooldlds_d.bmp">

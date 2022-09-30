@@ -510,46 +510,6 @@ DWORD fsDownloadMgr::_DownloaderEvents(fsDownloaderEvent enEvent, UINT uInfo, LP
 			pThis->Event (info->pszMsg, info->dir == IFDD_TOSERVER ? EDT_INQUIRY2 : EDT_RESPONSE_S2);
 			break;
 
-		case DE_STARTINGSEARCHINGFORMIRRORS:
-			pThis->Event (LS (L_SEARCHINGFORMIRRORS));
-			break;
-
-		case DE_CONNECTINGMIRRSERVER:
-			pThis->Event (LS (L_CONNECTINGSEARCHSERVER));
-			break;
-
-		case DE_GETTINGMIRRSEARCHRESULTS:
-			pThis->Event (LS (L_SUCCESS), EDT_RESPONSE_S);
-			pThis->Event (LS (L_GETTINGRESULTS));
-			break;
-
-		case DE_MEASURINGMIRRSPEED:
-			pThis->m_tikLastMirrMeasureTime.Now ();
-			pThis->Event (LS (L_CALCULATINGMIRRORSSPEED));
-			break;
-
-		case DE_MIRRFOUND:
-			char _szEv [10000];
-			sprintf (_szEv, LS (L_NMIRRORSFOUND), pThis->m_dldr.GetFoundMirrorCount ());
-			pThis->Event (_szEv, EDT_RESPONSE_S);
-			break;
-
-		case DE_MIRRDONE:
-			pThis->Event (LS (L_MIRRORSEARCHINGDONE));
-			break;
-
-		case DE_MIRRFAILED:
-			pThis->Event (LS (L_FAILED), EDT_RESPONSE_E);
-			break;
-
-		case DE_NOMIRRFOUND:
-			pThis->Event (LS (L_NOMIRRORSFOUND), EDT_WARNING);
-			break;
-
-		case DE_TRYINGANOTHERMIRROR:
-			pThis->Event (LS (L_TRYINGANOTHERMIRROR));
-			break;
-
 		case DE_FILESIZETOOBIG:
 			pThis->Event (LS (L_FILESIZEEXCEEDS2GB), EDT_WARNING);
 			break;
@@ -2145,14 +2105,6 @@ fsInternetResult fsDownloadMgr::SetToRestartState()
 //	InterlockedDecrement (&pThis->m_iThread);
 //
 //	return 0;
-//}
-//
-//void fsDownloadMgr::MeasureMirrorsSpeed()
-//{
-//	Event (LS (L_CALCULATINGMIRRORSSPEED));
-//	m_dldr.MeasureMirrorsSpeed ();
-//	m_tikLastMirrMeasureTime.Now ();
-//	Event (LS (L_MIRRORSSPEEDWASMEASURED), EDT_RESPONSE_S);
 //}
 
 BOOL fsDownloadMgr::OnNeedFile_FinalInit()

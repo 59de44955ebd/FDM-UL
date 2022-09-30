@@ -223,7 +223,7 @@ public:
 
 	afx_msg void OnDownloadCreate();
 
-	void OnOptimizationWizard();
+//	void OnOptimizationWizard();
 
 	void OnDownloaderProperties();
 

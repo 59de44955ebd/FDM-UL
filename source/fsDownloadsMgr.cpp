@@ -6,15 +6,11 @@
 #include "fsDownloadsMgr.h"
 #include "inetutil.h"
 #include "mfchelp.h"
-//#include "vmsRegisteredApp.h"
-
 #include "Dlg_DDR.h"
 #include "Dlg_Wait.h"
-//#include "Dlg_ZipPreview.h"
 #include "Dlg_WaitForConfirmation.h"
 #include "DownloadsWnd.h"
 #include "UIThread.h"
-
 #include "fsSitesMgr.h"
 #include "misc.h"
 #include "system.h"
@@ -57,8 +53,6 @@ fsDownloadsMgr::fsDownloadsMgr()
 	m_bDisablePD = FALSE;
 	m_bDeletingNow = m_bDeletingDeletedNow = m_bRestoringNow = FALSE;
 
-	//m_histmgr.SetEventFunc (_HistoryMgrEvents, this);
-
 	fsInternetSession::InitializeWinInet ();
 
 	m_bIsDownloadListChanged = false;
@@ -97,9 +91,6 @@ UINT fsDownloadsMgr::Add(vmsDownloadSmartPtr dld, BOOL bKeepIDAsIs, bool bPlaceT
 	{
 		dld->nID = m_siStateInfo.IncIdSafely();
 	}
-
-	//if (dld->pMgr->GetDownloadMgr () != NULL)
-	//	Apply_MirrParameters (dld);
 
 	SYSTEMTIME time;
 	GetLocalTime (&time);
@@ -264,11 +255,11 @@ DWORD fsDownloadsMgr::_DownloadMgrEvents(fsDownloadMgr *pMgr, fsDownloaderEvent 
 				pThis->Event (dld, DME_UPDATEDLDDIALOG);
 				break;
 
-			case DE_NOMIRRFOUND:
-				dld->dwFlags |= DLD_DONTUSEMIRRORS;
-				dld->setDirty();
-				pMgr->GetDownloader ()->Set_SearchForMirrors (FALSE);
-				break;
+			//case DE_NOMIRRFOUND:
+			//	dld->dwFlags |= DLD_DONTUSEMIRRORS;
+			//	dld->setDirty();
+			//	pMgr->GetDownloader ()->Set_SearchForMirrors (FALSE);
+			//	break;
 
 			case DE_FILESIZETOOBIG:
 				dld->bAutoStart = FALSE;
@@ -277,19 +268,6 @@ DWORD fsDownloadsMgr::_DownloadMgrEvents(fsDownloadMgr *pMgr, fsDownloaderEvent 
 
 			case DE_NEEDFILE:
 				return pThis->OnBeforeDownload (dld);
-
-			//case DE_CONFIRMARCHIVEDETECTION:
-			//{
-			//	UINT nRes;
-			//	UIThread *thr = (UIThread*) RUNTIME_CLASS (UIThread)->CreateObject ();
-			//	thr->set_Thread (_threadConfirmZIP, &nRes);
-			//	thr->CreateThread ();
-			//	WaitForSingleObject (thr->m_hThread, INFINITE);
-			//	return nRes;
-			//}
-
-			//case DE_ARCHIVEDETECTED:
-			//	return pThis->OnArchiveDetected (dld, (fsArchiveRebuilder*) uInfo);
 		}
 	}
 	catch (const std::exception& ex)
@@ -474,7 +452,6 @@ void fsDownloadsMgr::ProcessDownloads()
 								}
 							}
 						}
-
 						cDlds--;
 					}
 				}
@@ -677,10 +654,6 @@ BOOL fsDownloadsMgr::LoadDownloads()
 			break;
 	}
 
-	//_App.NonUtf8NameFixed (1);
-
-	//m_histmgr.LoadHistory ();
-
 	m_siStateInfo.SetId(0);
 
 	size_t i = 0;
@@ -718,8 +691,6 @@ BOOL fsDownloadsMgr::LoadDownloads()
 	m_siStateInfo.IncId();
 
 	//LoadStateInformation ();
-
-	//Apply_MirrParameters ();
 
 	return TRUE;
 }
@@ -1275,17 +1246,6 @@ void fsDownloadsMgr::ManageTraffic()
 
 void fsDownloadsMgr::ApplyTrafficLimit()
 {
-	//if (_BT.is_Initialized ())
-	//{
-	//	_BT.get_Session ()->SetUploadLimit (_TumMgr.getRestrainAll () ? 1 :
-	//		_App.Bittorrent_UploadTrafficLimit (_TumMgr.GetTUM ()));
-	//	_BT.get_Session ()->SetMaxUploads (
-	//		_App.Bittorrent_UploadConnectionLimit (_TumMgr.GetTUM ()));
-	//	_BT.get_Session ()->SetMaxHalfOpenConnections (
-	//		_App.Bittorrent_MaxHalfConnections (_TumMgr.GetTUM ()));
-	//	_BT.get_Session ()->SetMaxConnections (
-	//		_App.Bittorrent_MaxConnections (_TumMgr.GetTUM ()));
-	//}
 }
 
 void fsDownloadsMgr::StartAllDownloads(BOOL bByUser)
@@ -1448,11 +1408,6 @@ void fsDownloadsMgr::SaveSettings()
 	_App.DDR (m_enDDR);
 	_App.AutoDelCompleted (m_bAutoDelCompleted);
 	_App.DetLog (m_bDetLog);
-
-	//_App.Avir_Perform (m_bVirCheck);
-	//_App.Avir_Name (m_strVirName);
-	//_App.Avir_Args (m_strVirArgs);
-	//_App.Avir_Exts (m_strVirExts);
 	_App.DldsMgrPDTimeLimit (m_dwPDTimeLimit);
 }
 
@@ -1482,17 +1437,7 @@ void fsDownloadsMgr::ReadSettings()
 	m_enDDR = _App.DDR ();
 	m_bAutoDelCompleted = _App.AutoDelCompleted ();
 	m_bDetLog = _App.DetLog ();
-
-	//m_bVirCheck = _App.Avir_Perform ();
-	//m_strVirName = _App.Avir_Name ();
-	//m_strVirArgs = _App.Avir_Args ();
-	//m_strVirExts = _App.Avir_Exts ();
-
-	//ReadMirrParameters ();
 	ReadDeletedSettings ();
-
-	//m_histmgr.ReadSettings ();
-
 	m_dwPDTimeLimit = _App.DldsMgrPDTimeLimit ();
 }
 
@@ -1509,9 +1454,6 @@ int fsDownloadsMgr::GetRunningDownloadCount(bool bIncludeBtSeeds)
 			if (m_vDownloads [i]->pMgr->IsRunning ())
 			{
 				cRunning ++;
-				//if (false == bIncludeBtSeeds && m_vDownloads [i]->pMgr->IsBittorrent () &&
-				//		m_vDownloads [i]->pMgr->IsDone ())
-				//	cRunning--;
 			}
 		}
 	}
@@ -1588,7 +1530,6 @@ int fsDownloadsMgr::DeleteDownloads2(DLDS_LIST *vDlds, BOOL bByUser, BOOL bDontC
 
 		for (i = 0; i < (UINT)vDlds->size (); i++)
 		{
-
 			if (pbNeedStop && *pbNeedStop)
 				break;
 
@@ -1628,16 +1569,12 @@ int fsDownloadsMgr::DeleteDownloads2(DLDS_LIST *vDlds, BOOL bByUser, BOOL bDontC
 			if (FALSE == bBypassBin &&
 				(m_bBypassBinForCompletedDownloads == FALSE || bDone == FALSE))
 			{
-
 				dld = PutDownloadToDeleted (dld);
 				enDDR = m_enDDR;
 			}
 			else
 			{
-
 				Event (dld, DME_DLDWILLBEFULLYDELETED);
-				//if ((dld->dwFlags & DLD_DONTPUTTOHISTORY) == 0 && bDone == FALSE)
-				//	m_histmgr.AddToHistory (dld);
 				enDDR = vDldsDDRs [i];
 			}
 
@@ -1782,80 +1719,6 @@ void fsDownloadsMgr::Download_CloneSettings(vmsDownloadSmartPtr dst, vmsDownload
 	dst->setDirty();
 }
 
-//BOOL fsDownloadsMgr::PerformVirusCheck(vmsDownloadSmartPtr dld, BOOL bCheckExtReqs, BOOL bWaitDone)
-//{
-//	if (m_strVirName == "")
-//		return TRUE;
-//
-//	int nFiles = 1;
-//	fsString strFile;
-//
-//	int i = 0;
-//	for (i = 0; i < nFiles; i++)
-//	{
-//		char szFile [MY_MAX_PATH];
-//		strFile = dld->pMgr->get_OutputFilePathName ();
-//		fsGetFileName (strFile, szFile);
-//
-//		if (bCheckExtReqs)
-//		{
-//			char *pszExt = strrchr (strFile, '.');
-//			if (pszExt && IsExtInExtsStr (m_strVirExts, pszExt+1))
-//				break;
-//		}
-//		else
-//			break;
-//	}
-//	if (i == nFiles)
-//		return TRUE;
-//
-//	Event (dld, LS (L_LAUNCHAVIR), EDT_INQUIRY);
-//
-//	CString strArgs = m_strVirArgs;
-//	CString _str = '"'; _str += strFile; _str += '"';
-//	strArgs.Replace ("%file%", _str);
-//
-//	if (bWaitDone == FALSE)
-//	{
-//		DWORD dwErr = (DWORD) ShellExecute (HWND_DESKTOP, "open", m_strVirName, strArgs, NULL, SW_SHOW);
-//		if (dwErr <= 32)
-//		{
-//			SetLastError (dwErr);
-//			goto _lErr;
-//		}
-//	}
-//	else
-//	{
-//		STARTUPINFO si;
-//		PROCESS_INFORMATION pi;
-//
-//		ZeroMemory (&si, sizeof (si));
-//		si.cb = sizeof (si);
-//		ZeroMemory (&pi, sizeof (pi));
-//
-//		fsString str = m_strVirName;
-//		if (strchr (str, '\\') == NULL && strchr (str, '/') == NULL)
-//			str = vmsRegisteredApp::GetFullPath (str);
-//
-//		CString strCmdLine;
-//		strCmdLine.Format ("\"%s\" %s", (LPCSTR)str, (LPCSTR)strArgs);
-//
-//		if (FALSE == CreateProcess (NULL, (LPSTR)(LPCSTR)strCmdLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
-//			goto _lErr;
-//
-//		WaitForSingleObject (pi.hProcess, INFINITE);
-//	}
-//
-//	Event (dld, LS (L_SUCCESS), EDT_RESPONSE_S);
-//	return TRUE;
-//
-//_lErr:
-//	CHAR szErr [1000]; DWORD dwErr = GetLastError ();
-//	fsErrorToStr (szErr, sizeof (szErr), &dwErr);
-//	Event (dld, szErr, EDT_RESPONSE_E);
-//	return FALSE;
-//}
-
 DWORD fsDownloadsMgr::OnBeforeDownload(vmsDownloadSmartPtr dld)
 {
 	BOOL bOK = TRUE;
@@ -1958,9 +1821,6 @@ vmsDownloadSmartPtr fsDownloadsMgr::PutDownloadToDeleted(vmsDownloadSmartPtr dld
 		m_vDeletedDownloads_tmp.erase (it);
 		Event (ret, DME_DLDREMOVEDFROMDELETED);
 		Event (ret, DME_DLDWILLBEFULLYDELETED);
-		//if ((ret->dwFlags & DLD_DONTPUTTOHISTORY) == 0 &&
-		//		ret->pMgr->IsDone () == FALSE)
-		//	m_histmgr.AddToHistory (ret);
 	}
 
 	return ret;
@@ -2134,9 +1994,6 @@ int fsDownloadsMgr::DeleteDeletedDownloads2(DLDS_LIST *vDlds, BOOL bNoCancel, BO
 				*piProgress = (int) ((double)i / vDlds->size () * 100);
 
 			Event (dld, DME_DLDWILLBEFULLYDELETED);
-			//if ((dld->dwFlags & DLD_DONTPUTTOHISTORY) == 0 &&
-			//		dld->pMgr->IsDone () == FALSE)
-			//	m_histmgr.AddToHistory (dld);
 
 			m_vDeletedDownloads [iIndex] = dldFake;
 
@@ -2378,30 +2235,6 @@ DWORD fsDownloadsMgr::Event(fsDownload *dld, fsDownloadsMgrEvent ev)
 	return Event (dld, NULL, ev);
 }
 
-//struct _threadArchiveDetectedInfo
-//{
-//	fsArchiveRebuilder *ar;
-//	BOOL* pbRes;
-//};
-//
-//DWORD fsDownloadsMgr::OnArchiveDetected(vmsDownloadSmartPtr dld, fsArchiveRebuilder *ar)
-//{
-//	BOOL b;
-//	UIThread *thr = (UIThread*) RUNTIME_CLASS (UIThread)->CreateObject ();
-//	_threadArchiveDetectedInfo inf;
-//	inf.ar = ar; inf.pbRes = &b;
-//	thr->set_Thread (_threadArchiveDetected, &inf);
-//	thr->CreateThread ();
-//	WaitForSingleObject (thr->m_hThread, INFINITE);
-//
-//	if (b == FALSE) {
-//		dld->bAutoStart = FALSE;
-//		dld->setDirty();
-//	}
-//
-//	return b;
-//}
-
 void fsDownloadsMgr::MoveDownloadToEndOfList(vmsDownloadSmartPtr dld)
 {
 	vmsAUTOLOCKRW_WRITE (m_rwlDownloads);
@@ -2412,32 +2245,6 @@ void fsDownloadsMgr::MoveDownloadToEndOfList(vmsDownloadSmartPtr dld)
 		DownloadsList_Add (dld);
 	}
 }
-
-//DWORD WINAPI fsDownloadsMgr::_threadConfirmZIP(LPVOID lp)
-//{
-//	CWaitForConfirmationDlg dlg;
-//	UINT* pnRes = (UINT*) lp;
-//
-//	dlg.Init (LS (L_ZIPDETECTED), 30, TRUE, TRUE, LS (L_DONTPREVIEWINFUTURE), LS (L_YOUTURNEDOFFPREVIEW));
-//
-//	*pnRes = _DlgMgr.DoModal (&dlg) == IDOK;
-//
-//	if (dlg.m_bDontAsk)
-//		_App.NewDL_UseZIPPreview (FALSE);
-//
-//	return 0;
-//}
-
-//DWORD WINAPI fsDownloadsMgr::_threadArchiveDetected(LPVOID lp)
-//{
-//	CZipPreviewDlg dlg;
-//	_threadArchiveDetectedInfo* inf = (_threadArchiveDetectedInfo*) lp;
-//
-//	dlg.m_ar = inf->ar;
-//	*inf->pbRes = _DlgMgr.DoModal (&dlg) == IDOK;
-//
-//	return 0;
-//}
 
 void fsDownloadsMgr::Initialize()
 {
@@ -2838,24 +2645,6 @@ DWORD WINAPI fsDownloadsMgr::_threadIntegrityCheckAndVirCheckAndLaunch(LPVOID lp
 		}
 	}
 
-	//if (_DldsMgr.m_bVirCheck)
-	//{
-	//	BOOL bOk = _DldsMgr.PerformVirusCheck (dld, TRUE, bNeedLaunchDld);
-
-	//	if (bOk == FALSE && bNeedLaunchDld)
-	//	{
-	//		CWaitForConfirmationDlg dlg;
-	//		dlg.Init (LS (L_VIRCHECKFAILEDLAUNCHDLDANYWAY), 60, FALSE, TRUE);
-	//		dlg.m_pszIcon = IDI_WARNING;
-
-	//		if (IDOK != _DlgMgr.DoModal (&dlg))
-	//			bNeedLaunchDld = false;
-	//	}
-	//}
-
-	//if (dld->dwFlags & DLD_FLASH_VIDEO)
-	//	_pwndFVDownloads->OnDownloadDone (dld);
-
 	if (bNeedLaunchDld)
 	{
 		dld->AddRef ();
@@ -3214,19 +3003,13 @@ BOOL fsDownloadsMgr::OnDownloadStoppedOrDone(vmsDownloadSmartPtr dld)
 		Event (dld, DME_DOWNLOADSTOPPEDORDONE);
 		Event (dld, DME_UPDATEDLDDIALOG);
 
-		//if ((dld->dwFlags & DLD_DONTPUTTOHISTORY) == 0)
-		//	m_histmgr.AddToHistory (dld);
-
 		if (dld->pMgr->IsDescriptionFileShouldBeGenerated ())
 			GenerateDescriptionFile (dld);
 
-//		if (FALSE == dld->pMgr->IsHtmlSpiderDownload ())
-//		{
-			fsString strPath = dld->pMgr->get_OutputFilePathName ();
-			char sz [MY_MAX_PATH] = "";
-			fsGetFileName (strPath, sz);
-			m_siStateInfo.GetFileRecentList().Add (sz, strPath);
-//		}
+		fsString strPath = dld->pMgr->get_OutputFilePathName ();
+		char sz [MY_MAX_PATH] = "";
+		fsGetFileName (strPath, sz);
+		m_siStateInfo.GetFileRecentList().Add (sz, strPath);
 
 		if (dld->dwFlags & DLD_DELETEFILEATRESTART)
 			vmsDeleteFileAtWinBoot  (dld->pMgr->get_OutputFilePathName ());

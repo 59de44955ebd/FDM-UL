@@ -23,7 +23,6 @@ fsContextHelpMgr _CHMgr;
 fsMFCLangMgr _LngMgr;
 fsSitesMgr _SitesMgr;
 fsSoundsMgr _Snds;
-//fsHistoriesMgr _HsMgr;
 
 vmsSkinMgr _SkinMgr;
 fsDownloadsMgr _DldsMgr;

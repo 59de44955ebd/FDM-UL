@@ -26,7 +26,6 @@ END_MESSAGE_MAP()
 
 CFdmApp::CFdmApp()
 {
-
 #ifdef _DEBUG
 	// temporarily turn off
 	AfxEnableMemoryTracking(FALSE);
@@ -45,6 +44,9 @@ CFdmApp::CFdmApp()
 	SystemTimeToFileTime (&time, &_timeAppHasStarted);
 
 	m_pModuleState;
+
+
+
 }
 
 CFdmApp theApp;
@@ -260,44 +262,6 @@ HBRUSH CAboutDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 	return hbr;
 }
-
-//CFdmModule _Module;
-//
-////BEGIN_OBJECT_MAP(ObjectMap)
-////OBJECT_ENTRY(CLSID_WGUrlReceiver, CWGUrlReceiver)
-////OBJECT_ENTRY(CLSID_WGUrlListReceiver, CWgUrlListReceiver)
-////OBJECT_ENTRY(CLSID_FDM, CFDM)
-////OBJECT_ENTRY(CLSID_FDMDownloadsStat, CFDMDownloadsStat)
-////OBJECT_ENTRY(CLSID_FDMDownload, CFDMDownload)
-////OBJECT_ENTRY(CLSID_FdmUiWindow, CFdmUiWindow)
-////END_OBJECT_MAP()
-//
-//LONG CFdmModule::Unlock()
-//{
-//	AfxOleUnlockApp();
-//	return 0;
-//}
-//
-//LONG CFdmModule::Lock()
-//{
-//	AfxOleLockApp();
-//	return 1;
-//}
-//LPCTSTR CFdmModule::FindOneOf(LPCTSTR p1, LPCTSTR p2)
-//{
-//	while (*p1 != NULL)
-//	{
-//		LPCTSTR p = p2;
-//		while (*p != NULL)
-//		{
-//			if (*p1 == *p)
-//				return CharNext(p1);
-//			p = CharNext(p);
-//		}
-//		p1++;
-//	}
-//	return NULL;
-//}
 
 BOOL CFdmApp::InitLanguage()
 {

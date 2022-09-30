@@ -14,12 +14,6 @@
 #include "ToolBarEx.h"
 #include "fsODMenu.h"
 
-#ifdef FLOATING_WIN
-#include "FloatingWnd.h"
-#include "FloatingInfoWnd.h"
-#include "FloatingWndsThread.h"
-#endif
-
 #pragma warning (push, 3)
 #pragma warning (pop)
 
@@ -31,10 +25,6 @@
 
 class CMainFrame : public CFrameWnd
 {
-#ifdef FLOATING_WIN
-	friend class CFloatingWnd;
-	friend class CFloatingInfo_ListCtrlWnd;
-#endif
 	friend class CFdmApp;
 
 public:
@@ -61,12 +51,6 @@ public:
 	//void ApplyShowSmallTipsSetting();
 	static void ShowOnDownloadDoneBalloon (fsDownload* dld);
 	void SetActivePlugin (int nIndex);
-
-#ifdef FLOATING_WIN
-	CFloatingWndsThread* m_pFloatWndsThread;
-	BOOL IsFloatingInfoWindowVisible();
-	void ShowFloatingInfoWindow (BOOL bShow);
-#endif
 
 	void RebuidDownloadsList();
 
@@ -238,7 +222,7 @@ protected:
 	afx_msg void OnUpdateTumLight(CCmdUI* pCmdUI);
 	afx_msg void OnTumMedium();
 	afx_msg void OnUpdateTumMedium(CCmdUI* pCmdUI);
-	afx_msg void OnOptmaster();
+	//afx_msg void OnOptmaster();
 	afx_msg void OnDldCreate();
 	afx_msg void OnTaskCreateNew();
 	afx_msg void OnNeedExit();
@@ -264,13 +248,6 @@ protected:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg BOOL OnQueryEndSession();
 	afx_msg void OnInsert();
-
-#ifdef FLOATING_WIN
-	afx_msg void OnDlinfobox();
-	afx_msg void OnUpdateDlinfobox(CCmdUI* pCmdUI);
-	afx_msg void OnDropBox();
-	afx_msg void OnUpdateDropBox(CCmdUI* pCmdUI);
-#endif
 
 	afx_msg void OnActivateWebinterface();
 	afx_msg void OnUpdateActivateWebinterface(CCmdUI* pCmdUI);

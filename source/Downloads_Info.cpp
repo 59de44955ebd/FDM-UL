@@ -60,8 +60,6 @@ BOOL CDownloads_Info::Create(CWnd *pParent)
 
 	InsertItem (0, LS (L_LOG), 0);
 	InsertItem (1, LS (L_PROGRESS), 1);
-	//InsertItem (2, LS (L_MEDIA_PREVIEW_CONVERT), 2);
-	//InsertItem (3, LS (L_OPINIONS), 3);
 
 	int nCurTab = _App.View_DldInfoCurTab ();
 	set_CurTab (nCurTab);

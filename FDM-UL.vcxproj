@@ -257,7 +257,6 @@
     <ClCompile Include="source\fsEventsMgr.cpp" />
     <ClCompile Include="source\fsFDMCmdLineParser.cpp" />
     <ClCompile Include="source\fsFindDownloadMgr.cpp" />
-    <ClCompile Include="source\fsHistoriesMgr.cpp" />
     <ClCompile Include="source\fsInternetDownloader.cpp" />
     <ClCompile Include="source\fsLangMgr.cpp" />
     <ClCompile Include="source\fsMFCLangMgr.cpp" />
@@ -295,7 +294,6 @@
     <ClCompile Include="source\MyBalloon.cpp" />
     <ClCompile Include="source\MyBalloon_Content.cpp" />
     <ClCompile Include="source\MyMessageBox.cpp" />
-    <ClCompile Include="source\Dlg_NOW.cpp" />
     <ClCompile Include="source\PlugFrame2Tabs.cpp" />
     <ClCompile Include="source\PluginFrame2.cpp" />
     <ClCompile Include="source\Schedule_AdvancedPage.cpp" />
@@ -424,9 +422,6 @@
     <CustomBuild Include="res\tool_dld.bmp" />
     <CustomBuild Include="res\tool_dld_16.bmp" />
     <CustomBuild Include="res\tool_dld_16_d.bmp" />
-    <CustomBuild Include="res\tool_hfe.bmp" />
-    <CustomBuild Include="res\tool_hfe_16.bmp" />
-    <CustomBuild Include="res\tool_hfe_16_d.bmp" />
     <CustomBuild Include="res\tool_sch.bmp" />
     <CustomBuild Include="res\tool_sch_16.bmp" />
     <CustomBuild Include="res\tool_sch_16_d.bmp" />
@@ -434,10 +429,6 @@
     <CustomBuild Include="res\tool_sites_16.bmp" />
     <CustomBuild Include="res\tool_sites_16_d.bmp" />
     <CustomBuild Include="res\tool_sites_d.bmp" />
-    <CustomBuild Include="res\tool_spider.bmp" />
-    <CustomBuild Include="res\tool_spider_16.bmp" />
-    <CustomBuild Include="res\tool_spider_16_d.bmp" />
-    <CustomBuild Include="res\tool_spider_d.bmp" />
     <CustomBuild Include="res\tooldlds_d.bmp" />
     <CustomBuild Include="res\toolhfe_d.bmp" />
     <CustomBuild Include="res\toolschedule_d.bmp" />

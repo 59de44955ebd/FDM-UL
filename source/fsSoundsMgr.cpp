@@ -29,8 +29,6 @@ void fsSoundsMgr::ReadSettings()
 	m_strDownloadComplete = _App.Snd_DownloadComplete ();
 	m_strDownloadAdded = _App.Snd_DownloadAdded ();
 	m_strNoActiveDownloads = _App.Snd_NoActiveDownloads ();
-	m_strDialingOK = _App.Snd_DialingOK ();
-	m_strDialingFailed = _App.Snd_DialingFailed ();
 	m_strDownloadFailed = _App.Snd_DownloadFailed ();
 }
 
@@ -51,14 +49,6 @@ void fsSoundsMgr::Event(fsSoundsMgrEvent ev)
 
 		case SME_NOACTIVEDOWNLOADS:
 			PlaySnd (m_strNoActiveDownloads);
-			break;
-
-		case SME_DIALINGOK:
-			PlaySnd (m_strDialingOK);
-			break;
-
-		case SME_DIALINGFAILED:
-			PlaySnd (m_strDialingFailed);
 			break;
 
 		case SME_DOWNLOADFAILED:

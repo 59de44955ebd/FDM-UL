@@ -428,7 +428,7 @@ BOOL CCreateDownloadDlg::ReadDNP()
 
 		// new
 		if (lstrcmpi(m_strUrl, "https://") == 0 || lstrcmpi(m_strUrl, "http://") == 0 || lstrcmpi(m_strUrl, "ftp://") == 0)
-		{ 
+		{
 			WrongURL();
 			return FALSE;
 		}
@@ -674,10 +674,7 @@ void CCreateDownloadDlg::ApplyLanguage()
 		fsDlgLngInfo (IDCANCEL, L_CANCEL),
 		fsDlgLngInfo (IDC_QSIZE, L_QUERYSIZE),
 		fsDlgLngInfo (IDC_FILEAUTO, L_FILEAUTO),
-		//fsDlgLngInfo (IDC_MIRRORS, L_MIRRORS),
-
 		fsDlgLngInfo (IDC__DLDTYPE, L_DLDTYPE),
-		//fsDlgLngInfo (IDC_MALICIOUS, L_IS_MALICIOUS),
 		fsDlgLngInfo (IDC_PLACEATTOP, L_PLACEDLDATTOP),
 	};
 
@@ -759,8 +756,6 @@ void CCreateDownloadDlg::PrepareCHMgr(CPoint point)
 		fsCtrlContextHelp (IDCANCEL, LS (L_DONTACCEPTCHANGES)),
 		fsCtrlContextHelp (IDC_QSIZE, LS (L_QUERYSIZEHERE)),
 		fsCtrlContextHelp (IDC_FILEAUTO, LS (L_FILEAUTOHERE)),
-		//fsCtrlContextHelp (IDC_MIRRORS, LS (L_MIRRORSHERE)),
-		//fsCtrlContextHelp (IDC_MALICIOUS, LS (L_IS_MALICIOUS_HERE)),
 		fsCtrlContextHelp (IDC_PLACEATTOP, LS (L_PLACEDLDATTOPHERE)),
 	};
 
@@ -993,31 +988,6 @@ int CCreateDownloadDlg::_CheckDownloadAlrExists(
 
 	return 0;
 }
-
-//void CCreateDownloadDlg::OnMirrors()
-//{
-//	DLDS_LIST v;
-//	v.push_back (m_dld);
-//
-//	GetDlgItemText (IDC_URL, m_strUrl);
-//	fsURL url;
-//	if (url.Crack (m_strUrl) != IR_SUCCESS || *url.GetHostName () == 0 || *url.GetPath () == 0)
-//	{
-//		WrongURL ();
-//		return;
-//	}
-//
-//	if (FALSE == ReadDNP ())
-//		return;
-//
-//	m_dld->pMgr->GetDownloadMgr ()->GetDNP ()->enProtocol = fsSchemeToNP (url.GetInternetScheme ());
-//
-//	CDownloadPropertiesSheet sheet (LS (L_MIRRORS), this);
-//	sheet.Init (&v, DPS_SHP_MIRRORS);
-//    _DlgMgr.OnDoModal (&sheet);
-//	sheet.DoModal ();
-//    _DlgMgr.OnEndDialog (&sheet);
-//}
 
 fsSiteInfo* CCreateDownloadDlg::_SavePassword(LPCSTR pszServer, fsNetworkProtocol np, LPCSTR pszUser, LPCSTR pszPwd)
 {

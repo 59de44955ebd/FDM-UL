@@ -32,13 +32,6 @@
 //	AUT_TURNOFF,
 //};
 
-//#define MONITOR_USERSWITCHEDON_IE			(1)
-//#define MONITOR_USERSWITCHEDON_FIREFOX		(1 << 1)
-//#define MONITOR_USERSWITCHEDON_OPERA		(1 << 2)
-//#define MONITOR_USERSWITCHEDON_NETSCAPE		(1 << 3)
-//#define MONITOR_USERSWITCHEDON_SEAMONKEY	(1 << 4)
-//#define MONITOR_USERSWITCHEDON_SAFARI		(1 << 5)
-//#define MONITOR_USERSWITCHEDON_CHROME		(1 << 6)
 
 enum vmsNewGroupSelectWay
 {
@@ -51,22 +44,22 @@ class fsAppSettings
 {
 
 protected:
-	enum fsConnectionType
-	{
-		CT_MODEM_14_4,
-		CT_MODEM_28_8,
-		CT_MODEM_33_6,
-		CT_MODEM_56_ISDN,
-		CT_DUAL_ISDN,
-		CT_CABLE_DSL_256,
-		CT_CABLE_DSL_512,
-		CT_CABLE_DSL_768,
-		CT_CABLE_DSL_1M,
-		CT_CABLE_DSL_1_5M,
-		CT_CABLE_DSL_2M,
-		CT_LAN_10,
-		CT_UNKNOWN,
-	};
+//	enum fsConnectionType
+//	{
+//		CT_MODEM_14_4,
+//		CT_MODEM_28_8,
+//		CT_MODEM_33_6,
+//		CT_MODEM_56_ISDN,
+//		CT_DUAL_ISDN,
+//		CT_CABLE_DSL_256,
+//		CT_CABLE_DSL_512,
+//		CT_CABLE_DSL_768,
+//		CT_CABLE_DSL_1M,
+//		CT_CABLE_DSL_1_5M,
+//		CT_CABLE_DSL_2M,
+//		CT_LAN_10,
+//		CT_UNKNOWN,
+//	};
 	struct fsTrafficUsageModeSettings
 	{
 		UINT uMaxConns;
@@ -83,9 +76,6 @@ public:
 
 	void Notif_UseOnDoneWnds (BOOL b);
 	BOOL Notif_UseOnDoneWnds();
-
-	//void CheckIfDownloadIsMirror (BOOL b);
-	//BOOL CheckIfDownloadIsMirror();
 
 	void ApplySettingsToMutexes();
 	void DldsMgrPDTimeLimit (DWORD dw);
@@ -106,7 +96,7 @@ public:
 	void View_NOMShown (BOOL b);
 	BOOL View_NOMShown();
 
-	void WriteTranslatedStringToRegistry (LPCSTR pszStringId, LPCSTR pszString);
+//	void WriteTranslatedStringToRegistry (LPCSTR pszStringId, LPCSTR pszString);
 
 	void NewGrp_SelectWay (vmsNewGroupSelectWay en);
 	vmsNewGroupSelectWay NewGrp_SelectWay();
@@ -126,9 +116,6 @@ public:
 
 	void Notif_DisableForBatchDownloads (BOOL b);
 	BOOL Notif_DisableForBatchDownloads();
-
-	void View_DropBoxIntro (BOOL b);
-	BOOL View_DropBoxIntro();
 
 	void Scheduler_LastTask_ProgArgs (LPCSTR psz);
 	CString Scheduler_LastTask_ProgArgs();
@@ -173,8 +160,6 @@ public:
 	UINT ConfTimeout_Shutdown();
 	void ConfTimeout_LaunchDld (UINT u);
 	UINT ConfTimeout_LaunchDld();
-	void ConfTimeout_Hangup (UINT u);
-	UINT ConfTimeout_Hangup();
 
 	void OnDlHasBeenCreatedByUser();
 	void NumberOfDlCreatesByUser (int i);
@@ -225,8 +210,7 @@ public:
 	BOOL CheckRecycleBinSize();
 	void RollBackSize (WORD w);
 	WORD RollBackSize();
-//	void NewDL_UseZIPPreview (BOOL b);
-//	BOOL NewDL_UseZIPPreview();
+
 	void NewDL_AutoStart (BOOL b);
 	BOOL NewDL_AutoStart();
 	void DownloadFlags (DWORD dw);
@@ -235,8 +219,7 @@ public:
 	int MP_Volume();
 	void MP_Mute (BOOL b);
 	BOOL MP_Mute();
-//	void UseZipPreview (BOOL b);
-//	BOOL UseZipPreview();
+
 	UINT64 Find_FileSizeTo();
 	void Find_FileSizeTo (UINT64 u);
 	void Find_FileSizeFrom (UINT64 u);
@@ -269,31 +252,18 @@ public:
 	BOOL Export_DontExpCompleted();
 	void Export_WhichDlds (int i);
 	int Export_WhichDlds();
-	void History_FoldersOnly (BOOL b);
-	BOOL History_FoldersOnly();
-	int History_MaxRecords();
-	void History_MaxRecords (int i);
-	void History_KeepDays (int i);
-	int History_KeepDays();
-	BOOL History_Use();
-	void History_Use (BOOL b);
+
 	void Snd_Use (BOOL b);
 	BOOL Snd_Use();
 	void Snd_DownloadFailed (LPCSTR psz);
 	CString Snd_DownloadFailed();
-	void Snd_DialingFailed (LPCSTR psz);
-	CString Snd_DialingFailed();
-	void Snd_DialingOK (LPCSTR psz);
-	CString Snd_DialingOK();
+
 	void Snd_NoActiveDownloads (LPCSTR psz);
 	CString Snd_NoActiveDownloads();
 	void Snd_DownloadAdded (LPCSTR psz);
 	CString Snd_DownloadAdded();
 	void Snd_DownloadComplete (LPCSTR psz);
 	CString Snd_DownloadComplete();
-
-	//void Monitor_Silent (BOOL b);
-	//BOOL Monitor_Silent();
 
 	UINT NewDL_GroupId ();
 	void NewDL_GroupId (UINT n);
@@ -310,14 +280,7 @@ public:
 	BOOL Network_Br_SettingsSaved();
 	void NewVerExists (BOOL b);
 	BOOL NewVerExists();
-	//void Avir_Exts (LPCSTR psz);
-	//CString Avir_Exts();
-	//void Avir_Args (LPCSTR psz);
-	//CString Avir_Args();
-	//void Avir_Name (LPCSTR psz);
-	//CString Avir_Name();
-	//void Avir_Perform (BOOL b);
-	//BOOL Avir_Perform();
+
 	void View_SizesInBytes (BOOL b);
 	BOOL View_SizesInBytes ();
 	void Download_CreateExt (LPCSTR psz);

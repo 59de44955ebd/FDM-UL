@@ -10,7 +10,7 @@
 #include "plugins.h"
 #include "DownloadPropertiesSheet.h"
 #include "DownloaderPropertiesSheet.h"
-#include "Dlg_NOW.h"
+//#include "Dlg_NOW.h"
 #include "ShedulerWnd.h"
 #include "plugincmds.h"
 #include "system.h"
@@ -550,20 +550,20 @@ void CDownloadsWnd::OnDownloaderProperties()
 	_DldsMgr.setNeedProcessDownloads ();
 }
 
-void CDownloadsWnd::OnOptimizationWizard()
-{
-	CNOWDlg dlg;
-
-    _DlgMgr.OnDoModal (&dlg);
-
-	if (IDOK != dlg.DoModal ())
-	{
-	   _DlgMgr.OnEndDialog (&dlg);
-		return;
-	}
-
-	_DlgMgr.OnEndDialog (&dlg);
-}
+//void CDownloadsWnd::OnOptimizationWizard()
+//{
+//	CNOWDlg dlg;
+//
+//    _DlgMgr.OnDoModal (&dlg);
+//
+//	if (IDOK != dlg.DoModal ())
+//	{
+//	   _DlgMgr.OnEndDialog (&dlg);
+//		return;
+//	}
+//
+//	_DlgMgr.OnEndDialog (&dlg);
+//}
 
 void CDownloadsWnd::OnDestroy()
 {
@@ -616,7 +616,6 @@ void CDownloadsWnd::OnDldstop()
 UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, LPCSTR pszComment, LPCSTR pszReferer,
 	BOOL bSilent, DWORD dwForceAutoLaunch, BOOL *pbAutoStart, vmsDWCD_AdditionalParameters* pParams, UINT* pRes)
 {
-	//TRACE1("pszStartUrl_ %s\n", pszStartUrl);
 	UINT res = IDOK;
 
 	std::string strUrlTmp;
@@ -1083,22 +1082,6 @@ void CDownloadsWnd::UpdateTrayIconPlusOthers()
 
 		_DldsMgr.UnlockList (true);
 
-#ifdef FLOATING_WIN
-		if (_App.View_FloatingInfoWindow ())
-		{
-			CMainFrame* pFrm = (CMainFrame*) AfxGetApp ()->m_pMainWnd;
-			if (bRun)
-			{
-				if (pFrm->IsFloatingInfoWindowVisible () == FALSE)
-					pFrm->ShowFloatingInfoWindow (TRUE);
-			}
-			else
-			{
-				if (pFrm->IsFloatingInfoWindowVisible ())
-					pFrm->ShowFloatingInfoWindow (FALSE);
-			}
-		}
-#endif
 		if (bRunOk)
 		{
 			_TrayMgr.ShowIcon (TRAY_ICON_DOWNLOADING);

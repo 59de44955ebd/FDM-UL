@@ -60,14 +60,8 @@ BOOL CDlgSounds::OnInitDialog()
 	m_wndSnds.InsertItem (2, LS (L_DOWNLOADFAILED));
 	m_wndSnds.SetItemText (2, 1, SndFile (_App.Snd_DownloadFailed ()));
 
-	m_wndSnds.InsertItem (3, LS (L_DIALINGSUCCEDED));
-	m_wndSnds.SetItemText (3, 1, SndFile (_App.Snd_DialingOK ()));
-
-	m_wndSnds.InsertItem (4, LS (L_DIALINGFAILED));
-	m_wndSnds.SetItemText (4, 1, SndFile (_App.Snd_DialingFailed ()));
-
-	m_wndSnds.InsertItem (5, LS (L_NOACTIVEDOWNLOADS));
-	m_wndSnds.SetItemText (5, 1, SndFile (_App.Snd_NoActiveDownloads ()));
+	m_wndSnds.InsertItem (3, LS (L_NOACTIVEDOWNLOADS));
+	m_wndSnds.SetItemText (3, 1, SndFile (_App.Snd_NoActiveDownloads ()));
 
 	ApplyLanguage ();
 	UpdateEnabled ();
@@ -140,14 +134,6 @@ void CDlgSounds::PrepareCHMgr(CPoint point)
 			break;
 
 		case 3:
-			pszSoundsHere = LS (L_DIALOKHERE);
-			break;
-
-		case 4:
-			pszSoundsHere = LS (L_DIALFAILEDHERE);
-			break;
-
-		case 5:
 			pszSoundsHere = LS (L_NOACTIVEDOWNLOADSSNDHERE);
 			break;
 	}
@@ -253,9 +239,7 @@ void CDlgSounds::OnOK()
 	_App.Snd_DownloadAdded (GetSndFile (0));
 	_App.Snd_DownloadComplete (GetSndFile (1));
 	_App.Snd_DownloadFailed (GetSndFile (2));
-	_App.Snd_DialingOK (GetSndFile (3));
-	_App.Snd_DialingFailed (GetSndFile (4));
-	_App.Snd_NoActiveDownloads (GetSndFile (5));
+	_App.Snd_NoActiveDownloads (GetSndFile (3));
 
 	_Snds.ReadSettings ();
 

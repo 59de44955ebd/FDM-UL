@@ -972,26 +972,6 @@ void fsAppSettings::Snd_NoActiveDownloads(LPCSTR psz)
 	m_stgs.WriteProfileString (_T ("Sounds"), _T ("NoActiveDownloads"), psz);
 }
 
-CString fsAppSettings::Snd_DialingOK()
-{
-	return m_stgs.GetProfileString (_T ("Sounds"), _T ("DialingOK"), "");
-}
-
-void fsAppSettings::Snd_DialingOK(LPCSTR psz)
-{
-	m_stgs.WriteProfileString (_T ("Sounds"), _T ("DialingOK"), psz);
-}
-
-CString fsAppSettings::Snd_DialingFailed()
-{
-	return m_stgs.GetProfileString (_T ("Sounds"), _T ("DialingFailed"), "");
-}
-
-void fsAppSettings::Snd_DialingFailed(LPCSTR psz)
-{
-	m_stgs.WriteProfileString (_T ("Sounds"), _T ("DialingFailed"), psz);
-}
-
 CString fsAppSettings::Snd_DownloadFailed()
 {
 	return m_stgs.GetProfileString (_T ("Sounds"), _T ("DownloadFailed"), "");
@@ -1012,74 +992,34 @@ void fsAppSettings::Snd_Use(BOOL b)
 	m_stgs.WriteProfileInt (_T ("Sounds"), _T ("Use"), b);
 }
 
-void fsAppSettings::History_Use(BOOL b)
-{
-	m_stgs.WriteProfileInt (_T ("Settings_History"), _T ("Use"), b);
-}
-
-BOOL fsAppSettings::History_Use()
-{
-	return m_stgs.GetProfileInt (_T ("Settings_History"), _T ("Use"), TRUE);
-}
-
-int fsAppSettings::History_KeepDays()
-{
-	return m_stgs.GetProfileInt (_T ("Settings_History"), _T ("KeepDays"), 15);
-}
-
-void fsAppSettings::History_KeepDays(int i)
-{
-	m_stgs.WriteProfileInt (_T ("Settings_History"), _T ("KeepDays"), i);
-}
-
-void fsAppSettings::History_MaxRecords(int i)
-{
-	m_stgs.WriteProfileInt (_T ("Settings_History"), _T ("MaxRecords"), i);
-}
-
-int fsAppSettings::History_MaxRecords()
-{
-	return m_stgs.GetProfileInt (_T ("Settings_History"), _T ("MaxRecords"), 30);
-}
-
-BOOL fsAppSettings::History_FoldersOnly()
-{
-	return m_stgs.GetProfileInt (_T ("Settings_History"), _T ("FoldersOnly"), FALSE);
-}
-
-void fsAppSettings::History_FoldersOnly(BOOL b)
-{
-	m_stgs.WriteProfileInt (_T ("Settings_History"), _T ("FoldersOnly"), b);
-}
-
 int fsAppSettings::Export_WhichDlds()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Export"), _T ("WhichDlds"), 0);
+	return m_stgs.GetProfileInt (_T ("Export"), _T ("WhichDlds"), 0);
 }
 
 void fsAppSettings::Export_WhichDlds(int i)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Export"), _T ("WhichDlds"), i);
+	m_stgs.WriteProfileInt (_T ("Export"), _T ("WhichDlds"), i);
 }
 
 BOOL fsAppSettings::Export_DontExpCompleted()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Export"), _T ("DontComp"), TRUE);
+	return m_stgs.GetProfileInt (_T ("Export"), _T ("DontComp"), TRUE);
 }
 
 void fsAppSettings::Export_DontExpCompleted(BOOL b)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Export"), _T ("DontComp"), b);
+	m_stgs.WriteProfileInt (_T ("Export"), _T ("DontComp"), b);
 }
 
 BOOL fsAppSettings::Export_Append()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Export"), _T ("Append"), TRUE);
+	return m_stgs.GetProfileInt (_T ("Export"), _T ("Append"), TRUE);
 }
 
 void fsAppSettings::Export_Append(BOOL b)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Export"), _T ("Append"), b);
+	m_stgs.WriteProfileInt (_T ("Export"), _T ("Append"), b);
 }
 
 fsDLsWndWhatIsNow fsAppSettings::View_DWWN()
@@ -1094,79 +1034,79 @@ void fsAppSettings::View_DWWN(fsDLsWndWhatIsNow en)
 
 BOOL fsAppSettings::Deleted_Bypass()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Deleted"), _T ("Bypass"), FALSE);
+	return m_stgs.GetProfileInt (_T ("Deleted"), _T ("Bypass"), FALSE);
 }
 
 void fsAppSettings::Deleted_Bypass(BOOL b)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Deleted"), _T ("Bypass"), b);
+	m_stgs.WriteProfileInt (_T ("Deleted"), _T ("Bypass"), b);
 }
 
 UINT fsAppSettings::Deleted_MaxCount()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Deleted"), _T ("MaxCount"), 500);
+	return m_stgs.GetProfileInt (_T ("Deleted"), _T ("MaxCount"), 500);
 }
 
 void fsAppSettings::Deleted_MaxCount(UINT u)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Deleted"), _T ("MaxCount"), u);
+	m_stgs.WriteProfileInt (_T ("Deleted"), _T ("MaxCount"), u);
 }
 
 BOOL fsAppSettings::Deleted_ConfirmDeletion()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Deleted"), _T ("ConfirmDeletion"), TRUE);
+	return m_stgs.GetProfileInt (_T ("Deleted"), _T ("ConfirmDeletion"), TRUE);
 }
 
 void fsAppSettings::Deleted_ConfirmDeletion(BOOL b)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Deleted"), _T ("ConfirmDeletion"), b);
+	m_stgs.WriteProfileInt (_T ("Deleted"), _T ("ConfirmDeletion"), b);
 }
 
 BOOL fsAppSettings::Deleted_BypassCompleted()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Deleted"), _T ("BypassCompleted"), TRUE);
+	return m_stgs.GetProfileInt (_T ("Deleted"), _T ("BypassCompleted"), TRUE);
 }
 
 void fsAppSettings::Deleted_BypassCompleted(BOOL b)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Deleted"), _T ("BypassCompleted"), b);
+	m_stgs.WriteProfileInt (_T ("Deleted"), _T ("BypassCompleted"), b);
 }
 
 void fsAppSettings::Find_What(LPCSTR psz)
 {
-	m_stgs.WriteProfileString (_T ("Settings_Find"), _T ("What"), psz);
+	m_stgs.WriteProfileString (_T ("Find"), _T ("What"), psz);
 }
 
 CString fsAppSettings::Find_What()
 {
-	return m_stgs.GetProfileString (_T ("Settings_Find"), _T ("What"), "");
+	return m_stgs.GetProfileString (_T ("Find"), _T ("What"), "");
 }
 
 DWORD fsAppSettings::Find_Flags()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Find"), _T ("Flags"),
+	return m_stgs.GetProfileInt (_T ("Find"), _T ("Flags"),
 		SEARCHIN_FILENAME | SEARCHIN_URL | SEARCHIN_COMMENT | SEARCHIN_LOCFILENAME |
 		SEARCHWH_LISTOFDLDS);
 }
 
 void fsAppSettings::Find_Flags(DWORD dw)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Find"), _T ("Flags"), dw);
+	m_stgs.WriteProfileInt (_T ("Find"), _T ("Flags"), dw);
 }
 
 UINT fsAppSettings::Find_GroupId()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Find"), _T ("GroupId"), -1);
+	return m_stgs.GetProfileInt (_T ("Find"), _T ("GroupId"), -1);
 }
 
 void fsAppSettings::Find_GroupId(UINT n)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Find"), _T ("GroupId"), n);
+	m_stgs.WriteProfileInt (_T ("Find"), _T ("GroupId"), n);
 }
 
 void fsAppSettings::Find_TimeFrom(FILETIME &t)
 {
-	m_stgs.WriteProfileBinary (_T ("Settings_Find"), _T ("t1"),
+	m_stgs.WriteProfileBinary (_T ("Find"), _T ("t1"),
 		(LPBYTE) &t, sizeof (t));
 }
 
@@ -1177,7 +1117,7 @@ FILETIME fsAppSettings::Find_TimeFrom()
 	FILETIME t;
 	ZeroMemory (&t, sizeof (t));
 
-	if (m_stgs.GetProfileBinary (_T ("Settings_Find"), _T ("t1"), &pb, &sz))
+	if (m_stgs.GetProfileBinary (_T ("Find"), _T ("t1"), &pb, &sz))
 	{
 		if (sz == sizeof (t))
 		{
@@ -1191,7 +1131,7 @@ FILETIME fsAppSettings::Find_TimeFrom()
 
 void fsAppSettings::Find_TimeTo(FILETIME &t)
 {
-	m_stgs.WriteProfileBinary (_T ("Settings_Find"), _T ("t2"),
+	m_stgs.WriteProfileBinary (_T ("Find"), _T ("t2"),
 		(LPBYTE) &t, sizeof (t));
 }
 
@@ -1202,7 +1142,7 @@ FILETIME fsAppSettings::Find_TimeTo()
 	FILETIME t;
 	ZeroMemory (&t, sizeof (t));
 
-	if (m_stgs.GetProfileBinary (_T ("Settings_Find"), _T ("t2"), &pb, &sz))
+	if (m_stgs.GetProfileBinary (_T ("Find"), _T ("t2"), &pb, &sz))
 	{
 		if (sz == sizeof (t))
 		{
@@ -1220,7 +1160,7 @@ UINT64 fsAppSettings::Find_FileSizeFrom()
 	UINT sz;
 	UINT64 u = 0;
 
-	if (m_stgs.GetProfileBinary (_T ("Settings_Find"), _T ("s1"), &pb, &sz))
+	if (m_stgs.GetProfileBinary (_T ("Find"), _T ("s1"), &pb, &sz))
 	{
 		if (sz == sizeof (u))
 		{
@@ -1234,13 +1174,13 @@ UINT64 fsAppSettings::Find_FileSizeFrom()
 
 void fsAppSettings::Find_FileSizeFrom(UINT64 u)
 {
-	m_stgs.WriteProfileBinary (_T ("Settings_Find"), _T ("s1"),
+	m_stgs.WriteProfileBinary (_T ("Find"), _T ("s1"),
 		(LPBYTE) &u, sizeof (u));
 }
 
 void fsAppSettings::Find_FileSizeTo(UINT64 u)
 {
-	m_stgs.WriteProfileBinary (_T ("Settings_Find"), _T ("s2"),
+	m_stgs.WriteProfileBinary (_T ("Find"), _T ("s2"),
 		(LPBYTE) &u, sizeof (u));
 }
 
@@ -1250,7 +1190,7 @@ UINT64 fsAppSettings::Find_FileSizeTo()
 	UINT sz;
 	UINT64 u = 0;
 
-	if (m_stgs.GetProfileBinary (_T ("Settings_Find"), _T ("s2"), &pb, &sz))
+	if (m_stgs.GetProfileBinary (_T ("Find"), _T ("s2"), &pb, &sz))
 	{
 		if (sz == sizeof (u))
 		{
@@ -1274,22 +1214,22 @@ UINT64 fsAppSettings::Find_FileSizeTo()
 
 BOOL fsAppSettings::MP_Mute()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_MP"), _T ("Mute"), FALSE);
+	return m_stgs.GetProfileInt (_T ("MP"), _T ("Mute"), FALSE);
 }
 
 void fsAppSettings::MP_Mute(BOOL b)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_MP"), _T ("Mute"), b);
+	m_stgs.WriteProfileInt (_T ("MP"), _T ("Mute"), b);
 }
 
 int fsAppSettings::MP_Volume()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_MP"), _T ("Volume"), 50);
+	return m_stgs.GetProfileInt (_T ("MP"), _T ("Volume"), 50);
 }
 
 void fsAppSettings::MP_Volume(int i)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_MP"), _T ("Volume"), i);
+	m_stgs.WriteProfileInt (_T ("MP"), _T ("Volume"), i);
 }
 
 DWORD fsAppSettings::DownloadFlags()
@@ -1517,32 +1457,32 @@ void fsAppSettings::DontSaveLogs(BOOL b)
 
 int fsAppSettings::Export_WhichHist()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Export"), _T ("WhichHist"), 0);
+	return m_stgs.GetProfileInt (_T ("Export"), _T ("WhichHist"), 0);
 }
 
 void fsAppSettings::Export_WhichHist(int i)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Export"), _T ("WhichHist"), i);
+	m_stgs.WriteProfileInt (_T ("Export"), _T ("WhichHist"), i);
 }
 
 BOOL fsAppSettings::Export_Hist_CompletedOnly()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Export"), _T ("Hist_CompletedOnly"), TRUE);
+	return m_stgs.GetProfileInt (_T ("Export"), _T ("Hist_CompletedOnly"), TRUE);
 }
 
 void fsAppSettings::Export_Hist_CompletedOnly(BOOL b)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Export"), _T ("Hist_CompletedOnly"), b);
+	m_stgs.WriteProfileInt (_T ("Export"), _T ("Hist_CompletedOnly"), b);
 }
 
 BOOL fsAppSettings::Export_Hist_Append()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Export"), _T ("Hist_Append"), TRUE);
+	return m_stgs.GetProfileInt (_T ("Export"), _T ("Hist_Append"), TRUE);
 }
 
 void fsAppSettings::Export_Hist_Append(BOOL b)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Export"), _T ("Hist_Append"), b);
+	m_stgs.WriteProfileInt (_T ("Export"), _T ("Hist_Append"), b);
 }
 
 BOOL fsAppSettings::DownloadDialog_AutoClose()
@@ -1632,22 +1572,22 @@ void fsAppSettings::ConfTimeout_LaunchDld(UINT u)
 
 CString fsAppSettings::CreateBD_LastNumbers()
 {
-	return m_stgs.GetProfileString (_T ("Settings_Last_CBD"), _T ("Numbers"), "1-100");
+	return m_stgs.GetProfileString (_T ("Last_CBD"), _T ("Numbers"), "1-100");
 }
 
 void fsAppSettings::CreateBD_LastNumbers(LPCSTR psz)
 {
-	m_stgs.WriteProfileString (_T ("Settings_Last_CBD"), _T ("Numbers"), psz);
+	m_stgs.WriteProfileString (_T ("Last_CBD"), _T ("Numbers"), psz);
 }
 
 BOOL fsAppSettings::WD_DisableAfterExec()
 {
-	return m_stgs.GetProfileInt (_T ("Settings_Last"), _T ("WD_DisableAfterExec"), TRUE);
+	return m_stgs.GetProfileInt (_T ("Last"), _T ("WD_DisableAfterExec"), TRUE);
 }
 
 void fsAppSettings::WD_DisableAfterExec(BOOL b)
 {
-	m_stgs.WriteProfileInt (_T ("Settings_Last"), _T ("WD_DisableAfterExec"), b);
+	m_stgs.WriteProfileInt (_T ("Last"), _T ("WD_DisableAfterExec"), b);
 }
 
 BOOL fsAppSettings::IsArchivePackInstalled()
@@ -1667,12 +1607,12 @@ void fsAppSettings::DontShowInstallAP(BOOL b)
 
 CString fsAppSettings::Hash_LastAlgorithm()
 {
-	return m_stgs.GetProfileString ("Settings_Hash", "LastAlgorithm", "MD5");
+	return m_stgs.GetProfileString ("Hash", "LastAlgorithm", "MD5");
 }
 
 void fsAppSettings::Hash_LastAlgorithm(LPCSTR psz)
 {
-	m_stgs.WriteProfileString ("Settings_Hash", "LastAlgorithm", psz);
+	m_stgs.WriteProfileString ("Hash", "LastAlgorithm", psz);
 }
 
 BOOL fsAppSettings::View_DontShowHashCheckResultIfOK()
@@ -1687,22 +1627,22 @@ void fsAppSettings::View_DontShowHashCheckResultIfOK(BOOL b)
 
 CString fsAppSettings::CreateBD_SaveAs_Template()
 {
-	return m_stgs.GetProfileString (_T ("Settings_Last_CBD"), _T ("SaveAsTemplate"), "");
+	return m_stgs.GetProfileString (_T ("Last_CBD"), _T ("SaveAsTemplate"), "");
 }
 
 void fsAppSettings::CreateBD_SaveAs_Template(LPCSTR psz)
 {
-	m_stgs.WriteProfileString (_T ("Settings_Last_CBD"), _T ("SaveAsTemplate"), psz);
+	m_stgs.WriteProfileString (_T ("Last_CBD"), _T ("SaveAsTemplate"), psz);
 }
 
 BOOL fsAppSettings::App_2_0_SchedulerFixPerformed()
 {
-	return m_stgs.GetProfileInt ("", "sfp_2.0", FALSE);
+	return m_stgs.GetProfileInt ("Scheduler", "sfp_2.0", FALSE);
 }
 
 void fsAppSettings::App_2_0_SchedulerFixPerformed(BOOL b)
 {
-	m_stgs.WriteProfileInt ("", "sfp_2.0", b);
+	m_stgs.WriteProfileInt ("Scheduler", "sfp_2.0", b);
 }
 
 DWORD fsAppSettings::FileWriteCacheSize()
@@ -1869,15 +1809,15 @@ vmsAppSettingsStore* fsAppSettings::get_SettingsStore()
 	return &m_stgs;
 }
 
-BOOL fsAppSettings::View_DropBoxIntro()
-{
-	return m_stgs.GetProfileInt ("View", "DropBoxIntro", TRUE);
-}
-
-void fsAppSettings::View_DropBoxIntro(BOOL b)
-{
-	m_stgs.WriteProfileInt ("View", "DropBoxIntro", b);
-}
+//BOOL fsAppSettings::View_DropBoxIntro()
+//{
+//	return m_stgs.GetProfileInt ("View", "DropBoxIntro", TRUE);
+//}
+//
+//void fsAppSettings::View_DropBoxIntro(BOOL b)
+//{
+//	m_stgs.WriteProfileInt ("View", "DropBoxIntro", b);
+//}
 
 BOOL fsAppSettings::Notif_DisableForBatchDownloads()
 {
@@ -1951,10 +1891,10 @@ void fsAppSettings::NewGrp_SelectWay(vmsNewGroupSelectWay en)
 		en);
 }
 
-void fsAppSettings::WriteTranslatedStringToRegistry(LPCSTR pszStringId, LPCSTR pszString)
-{
-	AfxGetApp ()->WriteProfileString ("View_Loc", pszStringId, pszString);
-}
+//void fsAppSettings::WriteTranslatedStringToRegistry(LPCSTR pszStringId, LPCSTR pszString)
+//{
+//	AfxGetApp ()->WriteProfileString ("View_Loc", pszStringId, pszString);
+//}
 
 BOOL fsAppSettings::View_NOMShown()
 {

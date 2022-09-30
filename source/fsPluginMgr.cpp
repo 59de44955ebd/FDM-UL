@@ -63,16 +63,13 @@ BOOL fsPluginMgr::LoadBuiltIn()
 	fntGetMainMenu afnGMM [] = {
 		CDownloadsWnd::Plugin_GetMainMenu,
 		CShedulerWnd::Plugin_GetMainMenu,
-		//CHFEWnd::Plugin_GetMainMenu, // = site explorer
 		CSitesWnd::Plugin_GetMainMenu,
-//		CSpiderWnd::Plugin_GetMainMenu,
 	};
+
 	fntGetViewMenu afnGVM [] = {
 		CDownloadsWnd::Plugin_GetViewMenu,
 		CShedulerWnd::Plugin_GetViewMenu,
-		//CHFEWnd::Plugin_GetViewMenu,
 		CSitesWnd::Plugin_GetViewMenu,
-//		CSpiderWnd::Plugin_GetViewMenu,
 	};
 
 	const int cPlugins = sizeof (afnGMM) / sizeof (fntGetMainMenu);
@@ -80,64 +77,48 @@ BOOL fsPluginMgr::LoadBuiltIn()
 	fntCreateMainWindow afnCMW [] = {
 		CDownloadsWnd::Plugin_CreateMainWindow,
 		CShedulerWnd::Plugin_CreateMainWindow,
-		//CHFEWnd::Plugin_CreateMainWindow,
 		CSitesWnd::Plugin_CreateMainWindow,
-//		CSpiderWnd::Plugin_CreateMainWindow
 	};
 
 	fntGetPluginNames afnGPN [] = {
 		CDownloadsWnd::Plugin_GetPluginNames,
 		CShedulerWnd::Plugin_GetPluginNames,
-		//CHFEWnd::Plugin_GetPluginNames,
 		CSitesWnd::Plugin_GetPluginNames,
-//		CSpiderWnd::Plugin_GetPluginNames
 	};
 
 	fntSetLanguage afnSL [] = {
 		CDownloadsWnd::Plugin_SetLanguage,
 		CShedulerWnd::Plugin_SetLanguage,
-		//CHFEWnd::Plugin_SetLanguage,
 		CSitesWnd::Plugin_SetLanguage,
-//		CSpiderWnd::Plugin_SetLanguage
 	};
 
 	UINT aIDBmps [] = {
 		IDB_TOOL_DLDS,
 		IDB_TOOL_SCHEDULE,
-		IDB_TOOL_HFE,
 		IDB_TOOL_SITES,
-//		IDB_TOOL_SPIDER
 	};
 	UINT aIDBmpsD [] = {
 		IDB_TOOL_DLDS_D,
 		IDB_TOOL_SCHEDULE_D,
-		IDB_TOOL_HFE_D,
 		IDB_TOOL_SITES_D,
-//		IDB_TOOL_SPIDER_D
 	};
 
 	fntGetMenuImages afnGMI [] = {
 		CDownloadsWnd::Plugin_GetMenuImages,
 		CShedulerWnd::Plugin_GetMenuImages,
-		//CHFEWnd::Plugin_GetMenuImages,
 		CSitesWnd::Plugin_GetMenuImages,
-//		CSpiderWnd::Plugin_GetMenuImages
 	};
 
 	fntGetTBInfo afnGTBI [] = {
 		CDownloadsWnd::Plugin_GetToolBarInfo,
 		CShedulerWnd::Plugin_GetToolBarInfo,
-		//CHFEWnd::Plugin_GetToolBarInfo,
 		CSitesWnd::Plugin_GetToolBarInfo,
-//		CSpiderWnd::Plugin_GetToolBarInfo
 	};
 
 	fntGetMenuViewItems afnGMVI [] = {
 		CDownloadsWnd::Plugin_GetMenuViewItems,
 		CShedulerWnd::Plugin_GetMenuViewItems,
-		//CHFEWnd::Plugin_GetMenuViewItems,
 		CSitesWnd::Plugin_GetMenuViewItems,
-//		CSpiderWnd::Plugin_GetMenuViewItems
 	};
 
 	for (int i = 0; i < cPlugins; i++)

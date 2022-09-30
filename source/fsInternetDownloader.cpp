@@ -1335,7 +1335,7 @@ fsInternetResult fsInternetDownloader::OpenUrl_imp(UINT64 uStartPos, fsInternetU
 			if (ir == IR_EXTERROR)
 				Event (DE_ERRFROMSERVER, (UINT) m_pOpeningFile->GetLastError ());
 
-			UINT nMirr = nMirror;
+	/*		UINT nMirr = nMirror;
 			if (nMirr == UINT_MAX && iSectIndex != -1)
 				nMirr = m_vSections [iSectIndex].nMirrorURL;
 
@@ -1368,7 +1368,7 @@ fsInternetResult fsInternetDownloader::OpenUrl_imp(UINT64 uStartPos, fsInternetU
 						return OpenUrl_imp (uStartPos, ppFile, iSectIndex, nMirror, bCheckFileSize, ++iAttempt);
 					}
 				}
-			}
+			}*/
 		}
 
 		if (ir == IR_RANGESNOTAVAIL || ir == IR_DOUBTFUL_RANGESRESPONSE)

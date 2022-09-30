@@ -649,14 +649,6 @@ CString fsScheduleMgr::HTSToStr(fsSchedule *task)
 			str = LS (L_ATSTARTUP);
 		break;
 
-		case HTS_WHENDIALINGSUCCESS:
-			str = LS (L_AFTERDIALOK);
-		break;
-
-		case HTS_WHENDIALINGFAILED:
-			str = LS (L_DIALWASFAILED);
-		break;
-
 		case HTS_WHENNODOWNLOADS:
 			str = LS (L_WHENNOACTIVEDLDS);
 		break;

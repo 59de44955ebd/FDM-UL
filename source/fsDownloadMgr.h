@@ -76,9 +76,6 @@ public:
 
 	void RemoveHiddenAttribute();
 
-	//void MeasureMirrorsSpeed();
-	//void Set_MirrRecalcSpeedTime(UINT u);
-
 	fsInternetResult SetToRestartState ();
 
 	fsInternetResult StartDownloading();
@@ -175,9 +172,6 @@ protected:
 
 	BOOL OnNeedFile_FinalInit();
 
-	//static DWORD WINAPI _threadCalcMirrSpeed (LPVOID lp);
-	//void CheckMirrSpeedRecalcRequired();
-
 	fsTicksMgr m_tikLastMirrMeasureTime;
 
 	UINT m_uMirrRecalcSpeedTime;
@@ -238,7 +232,6 @@ protected:
 	static DWORD WINAPI _threadDownloadMgr (LPVOID lp);
 
 	fsInternetResult CreateInternetSession();
-	//BOOL InternetAutodial(DWORD dwFlags, HWND hwndParent);
 	fsDownload_Properties m_dp;
 	fsInternetDownloader m_dldr;
 	fntDownloadMgrEventFunc m_pfnEvents;

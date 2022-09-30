@@ -13,12 +13,10 @@ static char THIS_FILE[]=__FILE__;
 
 vmsTreeCtrlHelper::vmsTreeCtrlHelper()
 {
-
 }
 
 vmsTreeCtrlHelper::~vmsTreeCtrlHelper()
 {
-
 }
 
 BOOL vmsTreeCtrlHelper::isAtLeast1ChildChecked(CTreeCtrl *pTreeCtrl, HTREEITEM hRoot)

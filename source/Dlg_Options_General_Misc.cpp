@@ -19,10 +19,8 @@ CDlg_Options_General_Misc::CDlg_Options_General_Misc(CWnd* pParent )
 	: CDlg_Options_Page(CDlg_Options_General_Misc::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CDlg_Options_General_Misc)
-
 	//}}AFX_DATA_INIT
 
-	//m_bHangupToutChanged =
 	m_bExitToutChanged = m_bShutdownToutChanged = false;
 	m_bDTAEChanged = false;
 }
@@ -31,8 +29,6 @@ void CDlg_Options_General_Misc::DoDataExchange(CDataExchange* pDX)
 {
 	CDlg_Options_Page::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CDlg_Options_General_Misc)
-//	DDX_Control(pDX, IDC_TRANCPARENCY2, m_wndBlend2);
-//	DDX_Control(pDX, IDC_TRANCPARENCY1, m_wndBlend1);
 	DDX_Control(pDX, IDC_SHUTDOWN_TOUT, m_wndShutdownTout);
 	DDX_Control(pDX, IDC_LAUNCHDLD_TOUT, m_wndLaunchDldTout);
 	DDX_Control(pDX, IDC_EXIT_TOUT, m_wndExitTout);
@@ -45,10 +41,6 @@ BEGIN_MESSAGE_MAP(CDlg_Options_General_Misc, CDlg_Options_Page)
 	ON_CBN_SELCHANGE(IDC_SHUTDOWN_TOUT, OnSelchangeShutdownTout)
 	ON_CBN_SELCHANGE(IDC_LAUNCHDLD_TOUT, OnSelchangeLaunchdldTout)
 	ON_BN_CLICKED(IDC_DISABLEWDTASKAFTEREXEC, OnDisablewdtaskafterexec)
-//	ON_BN_CLICKED(IDC_DROPBOX, OnDropbox)
-//	ON_BN_CLICKED(IDC_DLINFO, OnDlinfo)
-//	ON_NOTIFY(NM_CUSTOMDRAW, IDC_TRANCPARENCY1, OnCustomdrawTrancparency1)
-//	ON_NOTIFY(NM_CUSTOMDRAW, IDC_TRANCPARENCY2, OnCustomdrawTrancparency2)
 	ON_WM_DESTROY()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -92,20 +84,6 @@ BOOL CDlg_Options_General_Misc::OnInitDialog()
 	CheckDlgButton (IDC_ASKFORST, _App.WD_LastShutdownType_DontAsk () ? BST_UNCHECKED : BST_CHECKED);
 	CheckDlgButton (IDC_DISABLEWDTASKAFTEREXEC, _App.WD_DisableAfterExec () ? BST_CHECKED : BST_UNCHECKED);
 
-//	m_wndBlend1.SetRange (0, 255);
-//	m_wndBlend2.SetRange (0, 255);
-//
-//	m_blend1 = _App.DropBoxWndBlend ();
-//	m_blend2 = _App.DownloadsInfoWndBlend ();
-//
-//	m_wndBlend1.SetPos (255 - m_blend1);
-//	m_wndBlend2.SetPos (255 - m_blend2);
-//	UpdateBlendsVals ();
-
-//	CheckDlgButton (IDC_DROPBOX, _App.View_FloatingWindow () ? BST_CHECKED : BST_UNCHECKED);
-//	CheckDlgButton (IDC_DLINFO, _App.View_FloatingInfoWindow () ? BST_CHECKED : BST_UNCHECKED);
-//	CheckDlgButton (IDC_HIDEFWWFS, _App.FloatingWndsHideInFSMode () ? BST_CHECKED : BST_UNCHECKED);
-
 	CSpinButtonCtrl *pSpin = (CSpinButtonCtrl*) GetDlgItem (IDC_AUTOSAVESPIN);
 	pSpin->SetRange (1, UD_MAXVAL);
 	SetDlgItemInt (IDC_AUTOSAVE, _App.AutosaveInterval () / 60 / 1000, FALSE);
@@ -129,24 +107,11 @@ CString CDlg_Options_General_Misc::get_PageShortTitle()
 BOOL CDlg_Options_General_Misc::Apply()
 {
 	_App.WD_LastShutdownType_DontAsk (IsDlgButtonChecked (IDC_ASKFORST) == BST_UNCHECKED);
-
-	//_App.ConfTimeout_Hangup (GetTimeoutForToutItem (&m_wndHangupTout));
 	_App.ConfTimeout_Exit (GetTimeoutForToutItem (&m_wndExitTout));
 	_App.ConfTimeout_Shutdown (GetTimeoutForToutItem (&m_wndShutdownTout));
 	_App.ConfTimeout_LaunchDld (GetTimeoutForToutItem (&m_wndLaunchDldTout));
 
 	int pos = -1;
-	//if (m_bHangupToutChanged)
-	//{
-	//	pos = -1;
-	//	_pwndScheduler->HangupWhenDone (&pos);
-	//	if (pos != -1)
-	//	{
-	//		m_bHangupToutChanged = false;
-	//		_pwndScheduler->GetMgr ()->GetTask (pos)->uWaitForConfirmation = _App.ConfTimeout_Hangup ();
-	//		_pwndScheduler->GetMgr ()->setDirtyFlagForTask(pos);
-	//	}
-	//}
 
 	if (m_bExitToutChanged)
 	{
@@ -180,15 +145,6 @@ BOOL CDlg_Options_General_Misc::Apply()
 
 		_App.WD_DisableAfterExec (bDis);
 
-		//_pwndScheduler->HangupWhenDone (&pos);
-		//if (pos != -1) {
-		//	if (bDis)
-		//		_pwndScheduler->GetMgr ()->GetTask (pos)->dwFlags |= SCHEDULE_AUTODIS;
-		//	else
-		//		_pwndScheduler->GetMgr ()->GetTask (pos)->dwFlags &= ~SCHEDULE_AUTODIS;
-		//	_pwndScheduler->GetMgr ()->setDirtyFlagForTask(pos);
-		//}
-
 		_pwndScheduler->ExitWhenDone (&pos);
 		if (pos != -1)
 		{
@@ -209,32 +165,6 @@ BOOL CDlg_Options_General_Misc::Apply()
 			_pwndScheduler->GetMgr ()->setDirtyFlagForTask(pos);
 		}
 	}
-
-#ifdef FLOATING_WIN
-	CMainFrame *pFrame = (CMainFrame*) AfxGetApp ()->m_pMainWnd;
-
-	_App.FloatingWndsHideInFSMode (IsDlgButtonChecked (IDC_HIDEFWWFS) == BST_CHECKED);
-	pFrame->m_pFloatWndsThread->m_wndFloating.UpdateTimer ();
-
-//	_App.View_FloatingWindow (IsDlgButtonChecked (IDC_DROPBOX) == BST_CHECKED);
-	_App.View_FloatingInfoWindow (IsDlgButtonChecked (IDC_DLINFO) == BST_CHECKED);
-
-//	if (IsDlgButtonChecked (IDC_DROPBOX) == BST_CHECKED)
-//		_App.DropBoxWndBlend (m_blend1 = (BYTE) (255 - m_wndBlend1.GetPos ()));
-	if (IsDlgButtonChecked (IDC_DLINFO) == BST_CHECKED)
-		_App.DownloadsInfoWndBlend (m_blend2 = (BYTE) (255 - m_wndBlend2.GetPos ()));
-
-	pFrame->m_pFloatWndsThread->m_wndFloating.Show (IsDlgButtonChecked (IDC_DROPBOX) == BST_CHECKED);
-	if (IsDlgButtonChecked (IDC_DLINFO) == BST_CHECKED)
-	{
-		_App.View_FloatingInfoWindow (TRUE);
-		_pwndDownloads->UpdateTrayIconPlusOthers ();
-	}
-	else
-	{
-		pFrame->m_pFloatWndsThread->m_wndFloatingInfo.TurnOffWindow ();
-	}
-#endif
 
 	UINT nVal;
 
@@ -263,14 +193,6 @@ void CDlg_Options_General_Misc::ApplyLanguage()
 		fsDlgLngInfo (IDC__LAUNCHDLD, L_LAUNCHDLD),
 		fsDlgLngInfo (IDC_ASKFORST, L_ASKFORST),
 		fsDlgLngInfo (IDC_DISABLEWDTASKAFTEREXEC, L_DISABLEWHENDONEAFTEREXEC),
-
-//		fsDlgLngInfo (IDC__FLOATING_WINDOWS, L_FLOATING_WINDOWS),
-//		fsDlgLngInfo (IDC_HIDEFWWFS, L_FLTWNDSHIDEINFSMODE),
-//		fsDlgLngInfo (IDC_DROPBOX, L_DROPBOX),
-//		fsDlgLngInfo (IDC_DLINFO, L_SHOWDLDSINFOWHILEDOWNLOADING),
-//		fsDlgLngInfo (IDC__TRANCPARENCY1, L_TRANCPARENCY, TRUE),
-//		fsDlgLngInfo (IDC__TRANCPARENCY2, L_TRANCPARENCY, TRUE),
-
 		fsDlgLngInfo (IDC__AUTOSAVE, L_AUTOSAVE),
 	};
 
@@ -304,11 +226,6 @@ UINT CDlg_Options_General_Misc::GetTimeoutForToutItem(CComboBox *pbox)
 	}
 }
 
-//void CDlg_Options_General_Misc::OnSelchangeHangupTout()
-//{
-//	m_bHangupToutChanged = true;
-//}
-
 void CDlg_Options_General_Misc::OnSelchangeExitTout()
 {
 	m_bExitToutChanged = true;
@@ -328,73 +245,7 @@ void CDlg_Options_General_Misc::OnDisablewdtaskafterexec()
 	m_bDTAEChanged = true;
 }
 
-#ifdef FLOATING_WIN
-void CDlg_Options_General_Misc::UpdateEnabled()
-{
-	BOOL b = IsDlgButtonChecked (IDC_DROPBOX) == BST_CHECKED;
-	if (b)
-		b = fsSysGetOsMajorVersion () >= 5;
-	GetDlgItem (IDC__TRANCPARENCY1)->EnableWindow (b);
-	GetDlgItem (IDC_TRANCPARENCY1)->EnableWindow (b);
-	GetDlgItem (IDC__TRANCPARENCY1_VAL)->EnableWindow (b);
-
-	BOOL b1 = IsDlgButtonChecked (IDC_DLINFO) == BST_CHECKED;
-	if (b1)
-		b1 = fsSysGetOsMajorVersion () >= 5;
-	GetDlgItem (IDC__TRANCPARENCY2)->EnableWindow (b1);
-	GetDlgItem (IDC_TRANCPARENCY2)->EnableWindow (b1);
-	GetDlgItem (IDC__TRANCPARENCY2_VAL)->EnableWindow (b1);
-
-	GetDlgItem (IDC_HIDEFWWFS)->EnableWindow (b1); // (b || b1);
-}
-
-void CDlg_Options_General_Misc::OnDropbox()
-{
-	UpdateEnabled ();
-}
-
-void CDlg_Options_General_Misc::OnDlinfo()
-{
-	UpdateEnabled ();
-}
-
-void CDlg_Options_General_Misc::UpdateBlendsVals()
-{
-	CString str; str.Format ("%d%%", m_wndBlend1.GetPos () * 100 / 255);
-	CString str2; GetDlgItemText (IDC__TRANCPARENCY1_VAL, str2);
-	if (str != str2)
-		SetDlgItemText (IDC__TRANCPARENCY1_VAL, str);
-
-	str.Format ("%d%%", m_wndBlend2.GetPos () * 100 / 255);
-	GetDlgItemText (IDC__TRANCPARENCY2_VAL, str2);
-	if (str != str2)
-		SetDlgItemText (IDC__TRANCPARENCY2_VAL, str);
-}
-
-void CDlg_Options_General_Misc::OnCustomdrawTrancparency1(NMHDR* pNMHDR, LRESULT* pResult)
-{
-	UpdateBlendsVals ();
-
-	CMainFrame *pFrame = (CMainFrame*) AfxGetApp ()->m_pMainWnd;
-	pFrame->m_pFloatWndsThread->m_wndFloating.SetBlend ((BYTE)(255 - m_wndBlend1.GetPos ()));
-	*pResult = 0;
-}
-
-void CDlg_Options_General_Misc::OnCustomdrawTrancparency2(NMHDR* pNMHDR, LRESULT* pResult)
-{
-	UpdateBlendsVals ();
-	CMainFrame *pFrame = (CMainFrame*) AfxGetApp ()->m_pMainWnd;
-	pFrame->m_pFloatWndsThread->m_wndFloatingInfo.SetBlend ((BYTE)(255 - m_wndBlend2.GetPos ()));
-	*pResult = 0;
-}
-#endif
-
 void CDlg_Options_General_Misc::OnDestroy()
 {
 	CDlg_Options_Page::OnDestroy();
-#ifdef FLOATING_WIN
-	CMainFrame *pFrame = (CMainFrame*) AfxGetApp ()->m_pMainWnd;
-	pFrame->m_pFloatWndsThread->m_wndFloating.SetBlend (m_blend1);
-	pFrame->m_pFloatWndsThread->m_wndFloatingInfo.SetBlend (m_blend2);
-#endif
 }
