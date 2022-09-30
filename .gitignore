@@ -53,6 +53,7 @@
 # Visual Studio 6 workspace options file
 *.opt
 
+bin/Win32/Debug/
 hash/Win32/
 inetfile/Win32/
 lib/
