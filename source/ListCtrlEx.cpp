@@ -25,9 +25,9 @@ CListCtrlEx::CListCtrlEx()
 	m_cTotalCols = 0;
 }
 
-CListCtrlEx::~CListCtrlEx()
-{
-}
+//CListCtrlEx::~CListCtrlEx()
+//{
+//}
 
 BEGIN_MESSAGE_MAP(CListCtrlEx, CListCtrl)
 	//{{AFX_MSG_MAP(CListCtrlEx)

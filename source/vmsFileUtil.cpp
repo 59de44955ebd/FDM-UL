@@ -125,3 +125,12 @@ BOOL vmsFileUtil::DirectoryExists(const char* dirName)
 
 	return (attribs & FILE_ATTRIBUTE_DIRECTORY);
 }
+
+BOOL vmsFileUtil::FileExists(const char* fileName)
+{
+	DWORD attribs = ::GetFileAttributesA(fileName);
+	if (attribs == INVALID_FILE_ATTRIBUTES)
+		return false;
+
+	return !(attribs & FILE_ATTRIBUTE_DIRECTORY);
+}

@@ -210,10 +210,7 @@
     <ClCompile Include="source\Dlg_ProgramOptions.cpp" />
     <ClCompile Include="source\Dlg_Sounds.cpp" />
     <ClCompile Include="source\Dlg_DownloadAlrExists.cpp" />
-    <ClCompile Include="source\DownloaderProperties_ListPage.cpp" />
-    <ClCompile Include="source\DownloaderProperties_NewDownloadPage.cpp" />
-    <ClCompile Include="source\DownloaderProperties_NotificationsPage.cpp" />
-    <ClCompile Include="source\DownloaderPropertiesSheet.cpp" />
+    <ClCompile Include="source\Dlg_YtDlp.cpp" />
     <ClCompile Include="source\DownloadProperties.cpp" />
     <ClCompile Include="source\DownloadProperties_ConnectionPage.cpp" />
     <ClCompile Include="source\DownloadProperties_GeneralPage.cpp" />
@@ -331,7 +328,6 @@
     <ClCompile Include="source\vmsFile.cpp" />
     <ClCompile Include="source\vmsFileExtensionInOs.cpp" />
     <ClCompile Include="source\vmsFileRecentList.cpp" />
-    <ClCompile Include="source\vmsFilesToDelete.cpp" />
     <ClCompile Include="source\vmsFileUtil.cpp" />
     <ClCompile Include="source\vmsInternetSession.cpp" />
     <ClCompile Include="source\vmsIpHelper.cpp" />

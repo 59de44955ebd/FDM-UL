@@ -13,7 +13,7 @@
 class fsFDMCmdLineParser
 {
 public:
-	bool isNeedExit () const {return m_bNeedExit;}
+	//bool isNeedExit () const {return m_bNeedExit;}
 	BOOL is_ForceSilentSpecified();
 
 	enum PerformTasksOfType {Elevated, Normal};
@@ -22,20 +22,19 @@ public:
 	virtual ~fsFDMCmdLineParser();
 
 protected:
-	//void AddTorrent (LPCSTR pszTorrent);
 	BOOL m_bAnotherFDMStarted;
 	fsCommandLineParser m_parser;
 	BOOL m_bForceSilent;
-	bool m_bNeedExit;
-	bool m_bNeedRegisterServer, m_bNeedUnregisterServer;
-	bool m_bRunAsElevatedTasksProcessor;
-	bool m_bInstallIeIntegration;
+	//bool m_bNeedExit;
+	//bool m_bNeedRegisterServer, m_bNeedUnregisterServer;
+	//bool m_bRunAsElevatedTasksProcessor;
+	//bool m_bInstallIeIntegration;
 //	std::vector <vmsKnownBrowsers::Browser> m_vBrowsersToInstallIntegration, m_vBrowsersToDeinstallIntegration;
-public:
-	bool isNeedRegisterServer(void);
-	bool isNeedUnregisterServer(void);
-	bool isRunAsElevatedTasksProcessor () const {return m_bRunAsElevatedTasksProcessor;}
-	bool isNeedInstallIeIntegration () const {return m_bInstallIeIntegration;}
+//public:
+//	bool isNeedRegisterServer(void);
+//	bool isNeedUnregisterServer(void);
+//	bool isRunAsElevatedTasksProcessor () const {return m_bRunAsElevatedTasksProcessor;}
+//	bool isNeedInstallIeIntegration () const {return m_bInstallIeIntegration;}
 //	const std::vector <vmsKnownBrowsers::Browser>& getBrowsersToInstallIntegration (bool bInstall) const {return bInstall ? m_vBrowsersToInstallIntegration : m_vBrowsersToDeinstallIntegration;}
 
 protected:

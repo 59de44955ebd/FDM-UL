@@ -98,6 +98,7 @@ _COM_SMARTPTR_TYPEDEF(IXMLDOMNodeList, __uuidof(IXMLDOMNodeList));
 #endif
 
 #define MY_MAX_PATH		10000
+#define MY_CLASSNAME "FDM-UL Main Window"
 
 #include <assert.h>
 

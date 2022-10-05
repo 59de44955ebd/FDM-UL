@@ -114,7 +114,7 @@ class CDownloadsWnd : public CWnd
 {
 	friend class CDownloads_Groups;
 	friend class CDownloads_Tasks;
-	friend class CDownloaderProperties_ListPage;
+//	friend class CDownloaderProperties_ListPage;
 	friend class CDlg_Options_Downloads;
 	friend class CDlgExportDownloads;
 	friend class CMainFrame;
@@ -219,13 +219,15 @@ public:
 
 	void UpdateTrayIconPlusOthers();
 
-	UINT CreateDownload (LPCSTR pszStartUrl, BOOL bReqTopMostDialog = FALSE, LPCSTR pszComment = NULL, LPCSTR pszReferer = NULL, BOOL bSilent = FALSE, DWORD dwForceAutoLaunch = DWCD_NOFORCEAUTOLAUNCH, BOOL* pbAutoStart = NULL, vmsDWCD_AdditionalParameters* pParams = NULL, UINT* pRes = NULL);
+	UINT CreateDownload (LPCSTR pszStartUrl, BOOL bReqTopMostDialog = FALSE, LPCSTR pszComment = NULL,
+		LPCSTR pszReferer = NULL,
+		BOOL bSilent = FALSE, DWORD dwForceAutoLaunch = DWCD_NOFORCEAUTOLAUNCH, BOOL* pbAutoStart = NULL,
+		vmsDWCD_AdditionalParameters* pParams = NULL, UINT* pRes = NULL
+	);
 
 	afx_msg void OnDownloadCreate();
 
-//	void OnOptimizationWizard();
-
-	void OnDownloaderProperties();
+//	void OnDownloaderProperties();
 
 	void OnDownloadDefProperties();
 
@@ -238,7 +240,7 @@ public:
 	BOOL Create (CWnd *pParent);
 	CDownloads_Groups m_wndGroups;
 
-	virtual ~CDownloadsWnd();
+//	virtual ~CDownloadsWnd();
 
 protected:
 	struct WmDwDldsAdded

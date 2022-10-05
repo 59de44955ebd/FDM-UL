@@ -26,7 +26,7 @@ public:
 	//}}AFX_DATA
 
 protected:
-	void ApplyLanguage();
+//	void ApplyLanguage();
 
 	//{{AFX_MSG(CDlg_Options_Webinterface)
 	virtual BOOL OnInitDialog();

@@ -45,8 +45,6 @@ void fsFindDownloadMgr::PrepareFind()
 
 	if (m_dwFlags & SEARCHWH_LISTOFDLDS)
 		m_enWI = WII_LISTOFDLDS;
-	//else if (m_dwFlags & SEARCHWH_HISTOFDLDS)
-	//	m_enWI = WII_HISTOFDLDS;
 	else if (m_dwFlags & SEARCHWH_DELETED)
 		m_enWI = WII_DELETED;
 	else
@@ -131,10 +129,6 @@ void fsFindDownloadMgr::FindNext_imp(BOOL* pbCancel, int* piProgress)
 				FindNext_InListOfDlds (pbCancel, piProgress);
 				break;
 
-			//case WII_HISTOFDLDS:
-			//	FindNext_InHistoryOfDlds (pbCancel, piProgress);
-			//	break;
-
 			case WII_DELETED:
 				FindNext_InDeleted (pbCancel, piProgress);
 				break;
@@ -160,20 +154,11 @@ BOOL fsFindDownloadMgr::NextFindSource(fsFDM_WhereIsIndex &wi)
 	switch (wi)
 	{
 		case WII_LISTOFDLDS:
-			//if (m_dwFlags & SEARCHWH_HISTOFDLDS)
-			//	wi = WII_HISTOFDLDS;
-			//else
 			if (m_dwFlags & SEARCHWH_DELETED)
 				wi = WII_DELETED;
 			else
 				return FALSE;
 			break;
-
-		//case WII_HISTOFDLDS:
-		//	if (m_dwFlags & SEARCHWH_DELETED)
-		//		wi = WII_DELETED;
-		//	else
-		//		return FALSE;
 
 		default:
 			return FALSE;

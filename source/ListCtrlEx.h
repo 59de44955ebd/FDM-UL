@@ -82,7 +82,7 @@ public:
 
 	int AddItem (LPCSTR pszItem, COLORREF clrBg = GetSysColor (COLOR_WINDOW), COLORREF clrText = GetSysColor (COLOR_WINDOWTEXT), int iImage = 0, BOOL bAddToBeginning = FALSE);
 	int GetItemImage(int iItem);
-	virtual ~CListCtrlEx();
+	//virtual ~CListCtrlEx();
 
 protected:
 	virtual void OnItemChanged (NM_LISTVIEW* pLV);

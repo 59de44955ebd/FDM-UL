@@ -133,7 +133,7 @@ struct fsStateInfoFileHdr
 
 class fsDownloadsMgr
 {
-	friend class CDownloaderProperties_ListPage;
+//	friend class CDownloaderProperties_ListPage;
 	friend class CDlg_Options_Downloads;
 	friend class CPrg_Data;
 public:

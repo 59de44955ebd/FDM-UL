@@ -6,6 +6,7 @@
 #include "Dlg_Options_General_Misc.h"
 #include "ShedulerWnd.h"
 #include "MainFrm.h"
+#include "vmsFileUtil.h"
 
 extern CShedulerWnd *_pwndScheduler;
 
@@ -41,6 +42,7 @@ BEGIN_MESSAGE_MAP(CDlg_Options_General_Misc, CDlg_Options_Page)
 	ON_CBN_SELCHANGE(IDC_SHUTDOWN_TOUT, OnSelchangeShutdownTout)
 	ON_CBN_SELCHANGE(IDC_LAUNCHDLD_TOUT, OnSelchangeLaunchdldTout)
 	ON_BN_CLICKED(IDC_DISABLEWDTASKAFTEREXEC, OnDisablewdtaskafterexec)
+	ON_BN_CLICKED(IDC_CHOOSEYTDLPPATH, OnChooseYtDlp)
 	ON_WM_DESTROY()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -88,8 +90,9 @@ BOOL CDlg_Options_General_Misc::OnInitDialog()
 	pSpin->SetRange (1, UD_MAXVAL);
 	SetDlgItemInt (IDC_AUTOSAVE, _App.AutosaveInterval () / 60 / 1000, FALSE);
 
+	GetDlgItem(IDC_YTDLPPATH)->SetWindowText(_App.YtDlp_Path());
+
 	ApplyLanguage ();
-//	UpdateEnabled ();
 
 	return TRUE;
 }
@@ -181,6 +184,23 @@ BOOL CDlg_Options_General_Misc::Apply()
 
 	_App.AutosaveInterval (nVal * 60 * 1000);
 
+	CString strYtDlpPath;
+	GetDlgItemText(IDC_YTDLPPATH, strYtDlpPath);
+
+	_App.YtDlp_Path(strYtDlpPath);
+	if (!strYtDlpPath.IsEmpty() && vmsFileUtil::FileExists(strYtDlpPath))
+	{
+		strcpy_s(_App.m_szYtDlpPath, sizeof _App.m_szYtDlpPath, strYtDlpPath);
+		_App.m_bHasYtDlp = TRUE;
+	}
+	else
+	{
+		const char *other_dirs[] = { ".", NULL };
+		_App.m_bHasYtDlp = PathFindOnPath(_App.m_szYtDlpPath, other_dirs);
+		if (_App.m_bHasYtDlp)
+			_App.YtDlp_Path(_App.m_szYtDlpPath);
+	}
+
 	return TRUE;
 }
 
@@ -248,4 +268,12 @@ void CDlg_Options_General_Misc::OnDisablewdtaskafterexec()
 void CDlg_Options_General_Misc::OnDestroy()
 {
 	CDlg_Options_Page::OnDestroy();
+}
+
+void CDlg_Options_General_Misc::OnChooseYtDlp()
+{
+	CFileDialog dlg(TRUE, "exe", NULL, OFN_HIDEREADONLY | OFN_FILEMUSTEXIST, "yt-dlp.exe|*.exe", this); // OFN_NOCHANGEDIR
+	if (_DlgMgr.DoModal(&dlg) != IDOK)
+		return;
+	GetDlgItem(IDC_YTDLPPATH)->SetWindowText(dlg.GetPathName());
 }

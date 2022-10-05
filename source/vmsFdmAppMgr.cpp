@@ -58,7 +58,7 @@ LPCSTR vmsFdmAppMgr::getAppAgentName()
 	static std::string str;
 	if (str.empty ())
 	{
-		str = "FDM ";
+		str = "FDM-UL ";
 		char sz [100];
 		str += itoa (getVersion ()->m_appVersion [0].dwVal, sz, 10);
 		str += ".x";
@@ -76,27 +76,10 @@ LPCSTR vmsFdmAppMgr::getAppAgentNameUf()
 	static std::string str;
 	if (str.empty ())
 	{
-		str = "Free Download Manager ";
+		str = "FDM-UL ";
 		char sz [100];
 		str += itoa (getVersion ()->m_appVersion [0].dwVal, sz, 10);
 		str += ".x";
 	}
 	return str.c_str ();
 }
-
-//LPCSTR vmsFdmAppMgr::getAppBtAgentName()
-//{
-//	static std::string str;
-//	if (str.empty ())
-//	{
-//		str = "FDM/";
-//		char sz [100];
-//		str += itoa (getVersion ()->m_appVersion [0].dwVal, sz, 10);
-//		str += '.';
-//		str += itoa (getVersion ()->m_appVersion [1].dwVal, sz, 10);
-//		str += '(';
-//		str += itoa (getVersion ()->m_appVersion [2].dwVal, sz, 10);
-//		str += ')';
-//	}
-//	return str.c_str ();
-//}

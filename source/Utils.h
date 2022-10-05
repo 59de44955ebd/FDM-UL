@@ -159,4 +159,7 @@ bool getListFromBuffer(fs::list<T>* pvList, LPBYTE& pbtCurrentPos, LPBYTE pbtBuf
 	return true;
 }
 
+WCHAR *utf8ToUtf16(const char *utf8);
+CString execCmd(const CHAR* cmd, LPDWORD lpExitCode);
+
 #endif

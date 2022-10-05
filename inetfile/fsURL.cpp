@@ -8,12 +8,10 @@
 
 fsURL::fsURL()
 {
-
 }
 
 fsURL::~fsURL()
 {
-
 }
 
 fsInternetResult fsURL::Crack(LPCSTR pszUrl, BOOL bCheckScheme)
@@ -42,9 +40,7 @@ fsInternetResult fsURL::Crack(LPCSTR pszUrl, BOOL bCheckScheme)
 	}
 		
 	fsnew (pszCanUrl, CHAR, urlLen);
-	//bool isMagnet = false;
-	//const char* magnetStart = _tcsstr (pszUrl, _T("magnet:"));
-	//isMagnet = (magnetStart != 0 && pszUrl == magnetStart);	
+
 	if ((pszUrl [0] == '\\' && pszUrl [1] == '\\'))
 	{
 		m_url.nScheme = INTERNET_SCHEME_FILE; 

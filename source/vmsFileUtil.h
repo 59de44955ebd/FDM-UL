@@ -15,24 +15,17 @@ using namespace vmsFDM;
 class vmsFileUtil
 {
 public:
-
 	static void BuildPath (LPCSTR pszPath);
-
 	static fsString GetPathFromPathName (LPCSTR pszPathName);
-
 	static void BuildPathToFile (LPCSTR pszFileName);
-
 	static void GetAppDataPath (LPCSTR pszAppName, LPSTR szPath);
-
 	static void MakePathOK (LPSTR szPath, bool bNeedBackslashAtEnd = true);
-
 	static void ReadHeader (vmsFile& file, fsString& strDesc, WORD& wVersion);
-
 	static void WriteHeader (vmsFile& file, LPCSTR pszDesc, WORD wVersion);
-
 	static void ReadString (vmsFile& file, fsString &str);
 	static void WriteString (vmsFile& file, LPCSTR psz);
 	static BOOL DirectoryExists(const char* dirName);
+	static BOOL FileExists(const char* fileName);
 };
 
 inline void vmsFILE_SAVE(vmsFile& file, LPCSTR psz) {vmsFileUtil::WriteString (file, psz);}

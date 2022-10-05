@@ -33,10 +33,9 @@ CShedulerWnd::CShedulerWnd()
 	m_bIsEventsMgrLoadedSuccessfully = false;
 }
 
-CShedulerWnd::~CShedulerWnd()
-{
-
-}
+//CShedulerWnd::~CShedulerWnd()
+//{
+//}
 
 BEGIN_MESSAGE_MAP(CShedulerWnd, CWnd)
 	//{{AFX_MSG_MAP(CShedulerWnd)
@@ -88,7 +87,8 @@ BOOL CShedulerWnd::Create(CWnd *pParent)
 void CShedulerWnd::OnDestroy()
 {
 	CWnd::OnDestroy();
-	SAFE_DELETE (_pwndScheduler);
+	//SAFE_DELETE (_pwndScheduler);
+	_pwndScheduler = NULL; //TEST
 }
 
 LRESULT CShedulerWnd::OnAppExit(WPARAM, LPARAM)

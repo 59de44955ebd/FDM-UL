@@ -8,14 +8,12 @@
 #include "Downloads_InfoFrame.h"
 #include "Downloads_Log.h"
 #include "Downloads_Progress.h"
-//#include "Downloads_VideoPreview.h"
-//#include "Downloads_Opinions.h"
+
 #if _MSC_VER > 1000
 #pragma once
 #endif
 
 #include "fsDownload.h"
-//#include "Downloads_Bittorrent.h"
 
 enum CDownloads_Info_Tab
 {
@@ -32,17 +30,8 @@ class CDownloads_Info : public CTabCtrl
 
 public:
 	CDownloads_Info();
+	//virtual ~CDownloads_Info();
 
-public:
-
-public:
-
-	//{{AFX_VIRTUAL(CDownloads_Info)
-	//}}AFX_VIRTUAL
-
-public:
-	//void UpdateBtStat();
-	//CDownloads_Bittorrent m_bt;
 	int get_CurTab();
 	void set_CurTab (int nIndex);
 	CDownloads_Progress* Get_ProgressWindow();
@@ -59,17 +48,10 @@ public:
 
 	void ApplyLanguage();
 	BOOL Create (CWnd *pParent);
-	virtual ~CDownloads_Info();
 
-	//CDownloads_Opinions m_opinions;
-	//CDownloads_VideoPreview m_video;
 	CDownloads_Progress m_progress;
 
 protected:
-	//void ApplyBtTab();
-	//bool m_bBtTabShowing;
-	//bool m_bBtTabWasActive;
-	//BOOL IsBtDownloadActive();
 	vmsDownloadSmartPtr m_activeDld;
 	int m_cy;
 

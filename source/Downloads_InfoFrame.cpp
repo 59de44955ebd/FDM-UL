@@ -20,9 +20,9 @@ CDownloads_InfoFrame::CDownloads_InfoFrame()
 	m_pChild = NULL;
 }
 
-CDownloads_InfoFrame::~CDownloads_InfoFrame()
-{
-}
+//CDownloads_InfoFrame::~CDownloads_InfoFrame()
+//{
+//}
 
 BEGIN_MESSAGE_MAP(CDownloads_InfoFrame, CWnd)
 	//{{AFX_MSG_MAP(CDownloads_InfoFrame)
@@ -81,13 +81,5 @@ void CDownloads_InfoFrame::ResizeChild(int cx, int cy)
 
 BOOL CDownloads_InfoFrame::OnEraseBkgnd(CDC* pDC)
 {
-	//if (_pwndDownloads->m_wndDownloads.m_info.m_video.m_wndVideo.m_player.Get_State () != VFPS_CLOSED)
-	//{
- //   	CRect rc;
-	//	_pwndDownloads->m_wndDownloads.m_info.m_video.GetWindowRect(&rc);
-	//	ScreenToClient(&rc);
-	//	pDC->ExcludeClipRect(&rc);
-	//}
-
 	return CWnd::OnEraseBkgnd(pDC);
 }

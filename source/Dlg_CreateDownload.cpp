@@ -19,10 +19,13 @@
 #include "DownloadAlrExistsDlg.h"
 #include "Dlg_SavePassword.h"
 #include "MyMessageBox.h"
-#include "MyMessageBox.h"
 #include "mfchelp.h"
-//#include "FdmUiWindow.h"
 #include "vmsLogger.h"
+
+#include "Dlg_YtDlp.h"
+#include "utils.h"
+#include "json.hpp"
+using json = nlohmann::json;
 
 extern CDownloadsWnd *_pwndDownloads;
 
@@ -48,7 +51,10 @@ CCreateDownloadDlg::CCreateDownloadDlg(vmsDownloadSmartPtr dld, CWnd* pParent )
 	m_bSetFocusToOKBtn = false;
 	m_bPlaceAtTop = false;
 	m_pszCookies = m_pszPostData = NULL;
-	//m_pUiWindow = NULL;
+
+	//TEST
+	m_strFileName = CString("");
+	m_strOutFolder = CString("");
 }
 
 void CCreateDownloadDlg::DoDataExchange(CDataExchange* pDX)
@@ -87,6 +93,7 @@ BEGIN_MESSAGE_MAP(CCreateDownloadDlg, CDialog)
 	ON_BN_CLICKED(IDC_FILEAUTO, OnFileauto)
 	ON_CBN_SELCHANGE(IDC_DLDTYPE, OnSelchangeDldtype)
 	ON_BN_CLICKED(IDC_OUTFOLDER_SETDEFAULT, OnOutfolderSetdefault)
+	ON_BN_CLICKED(IDC_YTDLP, OnYtDlp)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -165,16 +172,12 @@ void CCreateDownloadDlg::OnOK()
 		}
 	}
 
+	//TEST
+	m_strOutFolder = strOutFolder;
+
 	m_dld->pGroup = m_wndGroups.GetSelectedGroup ();
 
 	GetDlgItemText (IDC_COMMENT, m_dld->strComment);
-
-	//BOOL bUseZipPreview = _App.NewDL_UseZIPPreview ();
-	//_App.UseZipPreview (bUseZipPreview);
-	//if (bUseZipPreview)
-	//	m_dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags |= DPF_USEZIPPREVIEW;
-	//else
-//		m_dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
 
 	if (nDldType == 1)
 	{
@@ -206,9 +209,6 @@ void CCreateDownloadDlg::OnOK()
 BOOL CCreateDownloadDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-
-	//if (m_pUiWindow)
-	//	m_pUiWindow->setWindow (m_hWnd);
 
 	m_schScheduleParam.schTask.hts.enType = HTS_ONCE;
 	m_schScheduleParam.schTask.hts.last.dwHighDateTime = m_schScheduleParam.schTask.hts.last.dwLowDateTime = UINT_MAX;
@@ -268,7 +268,7 @@ BOOL CCreateDownloadDlg::OnInitDialog()
 
 	Update_User_Password ();
 
-	SetDlgItemText (IDC_URL, m_strUrl == "http://url/" ? "http://" : m_strUrl);
+	SetDlgItemText (IDC_URL, m_strUrl == "https://url/" ? "https://" : m_strUrl);
 	((CEdit*) GetDlgItem (IDC_URL))->SetSel (0, -1);
 
 	GetDlgItem (IDC_URL)->SetFocus ();
@@ -295,17 +295,22 @@ BOOL CCreateDownloadDlg::OnInitDialog()
 		OnChangeGroups ();
 	}
 
-	//_DldsMgr.Apply_MirrParameters (m_dld);
-
 	m_wndDldType.AddString (LS (L_SAVEFILE));
 	m_wndDldType.AddString (LS (L_OPENFILE));
 	m_wndDldType.AddString (LS (L_SAVEFILEANDOPENIT));
 	m_wndDldType.SetCurSel (0);
 
 	CheckDlgButton (IDC_FILEAUTO, _App.NewDL_GenerateNameAutomatically () ? BST_CHECKED : BST_UNCHECKED);
-	OnFileauto ();
+
+	//TEST
+	if (!m_strFileName.IsEmpty())
+		SetDlgItemText(IDC_SAVEAS, m_strFileName);
+	else
+		OnFileauto ();
 
 	UpdateEnabled ();
+
+	GetDlgItem(IDC_YTDLP)->ShowWindow(_App.m_bHasYtDlp);
 
 	if (m_bSetFocusToOKBtn)
 	{
@@ -609,25 +614,25 @@ void CCreateDownloadDlg::UrlChanged()
 		}
 	}
 
-	fsSiteInfo *site = _SitesMgr.FindSite (url.GetHostName (), fsNPToSiteValidFor (fsSchemeToNP (url.GetInternetScheme ())));
-	if (site)
-	{
-		if (site->strUser != NULL && m_bAuthChanged == FALSE && *url.GetUserName () == 0)
-		{
-			CheckDlgButton (IDC_USELOGIN, BST_CHECKED);
-			SetDlgItemText (IDC_USER, site->strUser);
-			if (site->strPassword)
-				SetDlgItemText (IDC_PASSWORD, site->strPassword);
-			m_bAuthorization = TRUE;
-			UpdateEnabled ();
-		}
-
-		if (site->pGroup && m_bGroupChanged == FALSE)
-		{
-			m_wndGroups.SelectGroup (site->pGroup);
-			OnChangeGroups();
-		}
-	}
+//	fsSiteInfo *site = _SitesMgr.FindSite (url.GetHostName (), fsNPToSiteValidFor (fsSchemeToNP (url.GetInternetScheme ())));
+//	if (site)
+//	{
+//		if (site->strUser != NULL && m_bAuthChanged == FALSE && *url.GetUserName () == 0)
+//		{
+//			CheckDlgButton (IDC_USELOGIN, BST_CHECKED);
+//			SetDlgItemText (IDC_USER, site->strUser);
+//			if (site->strPassword)
+//				SetDlgItemText (IDC_PASSWORD, site->strPassword);
+//			m_bAuthorization = TRUE;
+//			UpdateEnabled ();
+//		}
+//
+//		if (site->pGroup && m_bGroupChanged == FALSE)
+//		{
+//			m_wndGroups.SelectGroup (site->pGroup);
+//			OnChangeGroups();
+//		}
+//	}
 }
 
 void CCreateDownloadDlg::OnContextMenu(CWnd* , CPoint point)
@@ -1060,6 +1065,111 @@ void CCreateDownloadDlg::OnOutfolderSetdefault()
 	GetDlgItemText (IDC_OUTFOLDER, strOutFolder);
 
 	_SetDownloadOutputFolderAsDefault (this, strOutFolder, m_wndGroups.GetSelectedGroup ());
+}
+
+void CCreateDownloadDlg::OnYtDlp()
+{
+	CString strURL;
+	GetDlgItemText(IDC_URL, strURL);
+
+	// check if valid URL (TODO: check if actually supported domain?)
+	fsURL url;
+	if (IR_SUCCESS != url.Crack (strURL) || strcmp("url", url.GetHostName ()) == 0)
+	{
+		WrongURL ();
+		return;
+	}
+
+	DWORD dwExitCode;
+	CString sCmd;
+	sCmd.Format("%s -q --dump-json %s", _App.m_szYtDlpPath, strURL.GetString());
+	CString sJson = execCmd(sCmd, &dwExitCode);
+	if (dwExitCode == 0)
+	{
+		json j = json::parse(sJson.GetString());
+
+		CString sFormat;
+		if (j.contains("formats"))
+		{
+			CDlg_YtDlp dlgYtDlp(this);
+
+			dlgYtDlp.m_formats.RemoveAll();
+			CStringArray urls;
+			CStringArray exts;
+
+			auto &formats = j["formats"];
+			for (auto &format : formats)
+			{
+				if (
+					!format.contains("ext") || format["ext"].type() != json::value_t::string
+					|| !format.contains("format") || format["format"].type() != json::value_t::string
+					|| !format.contains("url") || format["url"].type() != json::value_t::string
+				)
+					continue;
+
+				// vimeo
+				std::string format_name = format["format"].get<std::string>();
+				if (format_name.find("dash") != std::string::npos || format_name.find("hls") != std::string::npos)
+					continue;
+
+				// youtube
+				if (format.contains("container") && format["container"].type() == json::value_t::string && (format["container"].get<std::string>().find("dash") != std::string::npos || format["container"].get<std::string>().find("hls") != std::string::npos))
+					continue;
+				if (format.contains("acodec") && format["acodec"].type() == json::value_t::string && stricmp(format["acodec"].get<std::string>().c_str(), "none") == 0)
+					continue;
+				if (format.contains("vcodec") && format["vcodec"].type() == json::value_t::string && stricmp(format["vcodec"].get<std::string>().c_str(), "none") == 0)
+					continue;
+
+				std::string ext = format["ext"].get<std::string>();
+				for (auto & c : ext) c = (char)toupper(c);
+
+				sFormat.Format(
+					"%s [%s]\n",
+					ext.c_str(),
+					format_name.c_str()
+				);
+
+				dlgYtDlp.m_formats.Add(sFormat);
+
+				urls.Add(format["url"].get<std::string>().c_str());
+				exts.Add(format["ext"].get<std::string>().c_str());
+			}
+
+			if (IDOK == _DlgMgr.DoModal(&dlgYtDlp))
+			{
+				CString strExt = exts.GetAt(dlgYtDlp.m_selectedFormat);
+
+				CString strFileName;
+				strFileName += utf8ToUtf16(j["title"].get<std::string>().c_str());
+
+				// replace invalid chars ( /, \, :, *, ?, ", <, > and | )
+				std::string sInvChars("\\/:*?\"<>|");
+				for (std::string::size_type i = 0; i < sInvChars.size(); i++)
+					strFileName.Replace(sInvChars[i], '_');
+
+				CString strOutFolder;
+				GetDlgItemText (IDC_OUTFOLDER, strOutFolder);
+				if (strOutFolder.Find ("%sdrive%") != -1)
+					strOutFolder.Replace ("%sdrive%", CString (vmsGetExeDriveLetter ()) + ":");
+
+				if (strOutFolder.GetLength() + strFileName.GetLength() + strExt.GetLength() > 253)
+					strFileName = strFileName.Left(253 - strOutFolder.GetLength() - strExt.GetLength());
+
+				strFileName += ".";
+				strFileName += strExt;
+
+				SetDlgItemText(IDC_URL, urls.GetAt(dlgYtDlp.m_selectedFormat).GetString());
+
+				m_strFileName = strFileName;
+				SetDlgItemText(IDC_SAVEAS, strFileName);
+
+				//UrlChanged(); // ???
+				m_bUrlChanged = TRUE; //???
+			}
+		}
+	}
+	else
+		this->MessageBox ("yt-dlp couldn't find any media URL.", "yt-dlp", MB_ICONEXCLAMATION); // yt-dlp failed to detect media URLs.
 }
 
 BOOL CCreateDownloadDlg::_SetDownloadOutputFolderAsDefault(CWnd *pwndParent, LPCSTR pszFolder, vmsDownloadsGroupSmartPtr pGroup)

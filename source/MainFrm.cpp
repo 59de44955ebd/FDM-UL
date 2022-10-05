@@ -63,6 +63,7 @@ IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	//{{AFX_MSG_MAP(CMainFrame)
+	ON_WM_COPYDATA()
 	ON_WM_CREATE()
 	ON_WM_SETFOCUS()
 	ON_WM_CLOSE()
@@ -150,7 +151,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 static UINT indicators[] =
 {
 	ID_SEPARATOR,
-//	ID_SB_TRAFFIC_THISMONTH,
 	ID_SB_TOTALSPEED,
 };
 
@@ -184,6 +184,26 @@ CMainFrame::~CMainFrame()
 	SetEvent (m_hevShuttingDown);
 	while (m_cThreadsRunning)
 		Sleep (10);
+}
+
+// Allows to add download URL via WM_COPYDATA message to main window
+// lpData: the URL
+// dwData: silent (1) or not (0)
+BOOL CMainFrame::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
+{
+	char * data = (char*)malloc(pCopyDataStruct->cbData + 1);
+	if (data)
+	{
+		memcpy(data, (LPCSTR)pCopyDataStruct->lpData, pCopyDataStruct->cbData);
+		data[pCopyDataStruct->cbData] = 0;
+		BOOL bSilent = pCopyDataStruct->dwData;
+		BOOL bAdded = UINT_MAX != _pwndDownloads->CreateDownload(data, FALSE, NULL, NULL, bSilent);
+		if (bAdded && bSilent)
+			ShowTimeoutBalloon(data, LS(L_DOWNLOADADDED), NIIF_INFO, TRUE);
+		free(data);
+	}
+
+	return TRUE;
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -288,11 +308,26 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	PostMessage (WM_COMMAND, ID_PROCCEEDFURTHERINIT);
 
-	UINT port = AfxGetApp()->GetProfileInt("Webinterface", "Port", 0);
-	_httpServer.set_Port((unsigned short)port);
-	if (AfxGetApp()->GetProfileInt("Webinterface", "AutoStart", 0) == 1)
+	_httpServer.set_Port((unsigned short)_App.Webinterface_Port());
+
+	if (_App.Webinterface_AutoStart())
 	{
 		_httpServer.Start();
+	}
+
+	// check if yt-dlp is available
+	CString path = _App.YtDlp_Path();
+	if (!path.IsEmpty() && vmsFileUtil::FileExists(path))
+	{
+		strcpy_s(_App.m_szYtDlpPath, sizeof _App.m_szYtDlpPath, path);
+		_App.m_bHasYtDlp = TRUE;
+	}
+	else
+	{
+		const char *other_dirs[] = { ".", NULL };
+		_App.m_bHasYtDlp = PathFindOnPath(_App.m_szYtDlpPath, other_dirs);
+		if (_App.m_bHasYtDlp)
+			_App.YtDlp_Path(_App.m_szYtDlpPath);
 	}
 
 	return 0;
@@ -311,7 +346,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	wc.hIcon = LoadIcon (AfxGetInstanceHandle (), MAKEINTRESOURCE (IDR_MAINFRAME));
 	wc.hInstance = AfxGetInstanceHandle ();
 	wc.lpfnWndProc = ::DefWindowProc;
-	wc.lpszClassName = "Free Download Manager Main Window";
+	wc.lpszClassName = MY_CLASSNAME;
 	cs.lpszClass = wc.lpszClassName;
 
 	return AfxRegisterClass (&wc);
@@ -714,16 +749,6 @@ void CMainFrame::OnStartall()
 void CMainFrame::OnStopall()
 {
 	_DldsMgr.StopAllDownloads (TRUE);
-}
-
-void CMainFrame::OnHelp()
-{
-	::HtmlHelp (m_hWnd, "Help\\Free Download Manager.chm", HH_DISPLAY_TOC, NULL);
-}
-
-void CMainFrame::OnHomepage()
-{
-	fsOpenUrlInBrowser ("http://www.freedownloadmanager.org/");
 }
 
 void CMainFrame::ReadSettings()
@@ -1480,25 +1505,6 @@ void CMainFrame::OnImportlistofdownloads()
 		ImportListOfDownloads_FromDLInfoListFile (dlg.GetPathName ());
 }
 
-void CMainFrame::appendDiagnostics(CString&sMsg, const CString& sDiagnostics) const
-{
-	CString sTmp;
-	sMsg = LS (L_CANT_DETECT_PATH_TO_ORBIT_APPDATA);
-	CString sFmt = LS (L_SYS_DIAGNOSTICS_FMT);
-	sTmp.Format((LPCTSTR)sFmt, (LPCTSTR)sDiagnostics);
-	sMsg += " ";
-	sMsg += sTmp;
-}
-
-void CMainFrame::appendErrorCode(CString& sMsg, HRESULT hr) const
-{
-	CString sTmp;
-	CString sFmt = LS (L_ERROR_CODE_FMT);
-	sTmp.Format((LPCTSTR)sFmt, hr, hr);
-	sMsg += " ";
-	sMsg += sTmp;
-}
-
 void CMainFrame::OnExitwhendone()
 {
 	_pwndScheduler->ExitWhenDone (_pwndScheduler->ExitWhenDone () == FALSE);
@@ -2035,7 +2041,7 @@ void CMainFrame::SaveAllData (DWORD dwWhat)
 	_pwndScheduler->SaveAll (dwWhat);
 	_pwndSites->SaveAll (dwWhat);
 	SaveState (dwWhat);
-	((CFdmApp*)AfxGetApp ())->SaveSettings ();
+	//((CFdmApp*)AfxGetApp ())->SaveSettings ();
 }
 
 LRESULT CMainFrame::OnSaveAllData (WPARAM wp, LPARAM)
@@ -2070,7 +2076,7 @@ bool CMainFrame::onExit(bool bQueryExit)
 	_PluginMgr.OnAppExit (FALSE);
 	vmsAUTOLOCKSECTION_UNLOCK (m_csSaveAllData);
 
-	((CFdmApp*)AfxGetApp ())->SaveSettings ();
+	//((CFdmApp*)AfxGetApp ())->SaveSettings ();
 
 	CFdmApp::ScheduleExitProcess (30);
 

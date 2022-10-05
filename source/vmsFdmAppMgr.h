@@ -14,7 +14,6 @@
 class vmsFdmAppMgr
 {
 public:
-	//static LPCSTR getAppBtAgentName ();
 	static LPCSTR getAppAgentNameUf();
 
 	static LPCSTR getAppName();
@@ -23,9 +22,6 @@ public:
 	static const vmsBinaryFileVersionInfo* getVersion();
 	static LPCSTR getBuildNumberAsString ();
 	static int getBuildNumber ();
-
-	//static void ShowInstallMediaFeaturesMessage();
-	//static BOOL IsMediaFeaturesInstalled();
 
 	vmsFdmAppMgr();
 	virtual ~vmsFdmAppMgr();

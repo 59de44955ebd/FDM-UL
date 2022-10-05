@@ -16,9 +16,9 @@ CDownloads_Downloads::CDownloads_Downloads()
 {
 }
 
-CDownloads_Downloads::~CDownloads_Downloads()
-{
-}
+//CDownloads_Downloads::~CDownloads_Downloads()
+//{
+//}
 
 BEGIN_MESSAGE_MAP(CDownloads_Downloads, CWnd)
 	//{{AFX_MSG_MAP(CDownloads_Downloads)

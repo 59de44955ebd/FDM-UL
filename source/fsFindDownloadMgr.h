@@ -12,13 +12,10 @@
 #define SEARCHIN_FILENAME		1
 #define SEARCHIN_URL			2
 #define SEARCHIN_COMMENT		4
-
 #define SEARCHIN_LOCFILENAME	8
-
 #define SEARCHWH_LISTOFDLDS		16
 //#define SEARCHWH_HISTOFDLDS		32
 #define SEARCHWH_DELETED		64
-
 #define SEARCHU_FILESIZE		128
 #define SEARCHU_DLDGROUP		256
 #define SEARCHU_TIME			512
@@ -53,7 +50,6 @@ protected:
 	enum fsFDM_WhereIsIndex
 	{
 		WII_LISTOFDLDS,
-		//WII_HISTOFDLDS,
 		WII_DELETED
 	};
 	fsFDM_WhereIsIndex m_enWI;

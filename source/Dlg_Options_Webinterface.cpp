@@ -30,23 +30,11 @@ BOOL CDlg_Options_Webinterface::OnInitDialog()
 {
 	CDlg_Options_Page::OnInitDialog();
 
-	BOOL b;
-	CString str;
-
-	b = AfxGetApp()->GetProfileInt("Webinterface", "AutoStart", 0) == 1;
-	CheckDlgButton(IDC_SERV_AUTORUN, b ? BST_CHECKED: BST_UNCHECKED);
-
-	UINT port = AfxGetApp()->GetProfileInt("Webinterface", "Port", 0);
-	SetDlgItemInt(IDC_SERV_PORT, port, FALSE);
-
-	b = AfxGetApp()->GetProfileInt("Webinterface", "UsePwd", 0) == 1;
-	CheckDlgButton(IDC_SERV_USEPWD, b ? BST_CHECKED : BST_UNCHECKED);
-
-	str = AfxGetApp()->GetProfileString("Webinterface", "Login");
-	SetDlgItemText(IDC_SERV_USER, str);
-
-	str = AfxGetApp()->GetProfileString("Webinterface", "Password");
-	SetDlgItemText(IDC_SERV_PWD, str);
+	CheckDlgButton(IDC_SERV_AUTORUN, _App.Webinterface_AutoStart() ? BST_CHECKED: BST_UNCHECKED);
+	SetDlgItemInt(IDC_SERV_PORT, _App.Webinterface_Port(), FALSE);
+	CheckDlgButton(IDC_SERV_USEPWD, _App.Webinterface_UsePwd() ? BST_CHECKED : BST_UNCHECKED);
+	SetDlgItemText(IDC_SERV_USER, _App.Webinterface_Login());
+	SetDlgItemText(IDC_SERV_PWD, _App.Webinterface_Password());
 
 	//ApplyLanguage ();
 
@@ -65,23 +53,17 @@ CString CDlg_Options_Webinterface::get_PageShortTitle()
 
 BOOL CDlg_Options_Webinterface::Apply()
 {
-	BOOL b;
-
-	b = IsDlgButtonChecked(IDC_SERV_AUTORUN) == BST_CHECKED;
-	AfxGetApp()->WriteProfileInt("Webinterface", "AutoStart", b ? 1 : 0);
-
-	b = IsDlgButtonChecked(IDC_SERV_USEPWD) == BST_CHECKED;
-	AfxGetApp()->WriteProfileInt("Webinterface", "UsePwd", b ? 1 : 0);
+	_App.Webinterface_AutoStart(IsDlgButtonChecked(IDC_SERV_AUTORUN) == BST_CHECKED);
+	_App.Webinterface_UsePwd(IsDlgButtonChecked(IDC_SERV_USEPWD) == BST_CHECKED);
 
 	UINT port = GetDlgItemInt(IDC_SERV_PORT, NULL, FALSE);
-	AfxGetApp()->WriteProfileInt("Webinterface", "Port", port);
+	_App.Webinterface_Port(port);
 
 	CString str;
 	GetDlgItemText(IDC_SERV_USER, str);
-	AfxGetApp()->WriteProfileString("Webinterface", "Login", str);
-
+	_App.Webinterface_Login(str);
 	GetDlgItemText(IDC_SERV_PWD, str);
-	AfxGetApp()->WriteProfileString("Webinterface", "Password", str);
+	_App.Webinterface_Password(str);
 
 	if (_httpServer.is_Running() && _httpServer.get_Port() != (unsigned short)port)
 	{
@@ -93,20 +75,17 @@ BOOL CDlg_Options_Webinterface::Apply()
 	return TRUE;
 }
 
-void CDlg_Options_Webinterface::ApplyLanguage()
-{
+//TODO
+//IDC_SERV_AUTORUN
+//IDC_SERV_USEPWD
+//...
+//void CDlg_Options_Webinterface::ApplyLanguage()
+//{
 	//fsDlgLngInfo lnginfo [] =  {
-	//	fsDlgLngInfo (IDC__TOUTSFORCONFS, L_TOUTSFORCONFS),
-	//	fsDlgLngInfo (IDC__EXIT, L_EXIT),
-	//	fsDlgLngInfo (IDC__SHUTDOWN, L_SHUTDOWN),
-	//	fsDlgLngInfo (IDC__LAUNCHDLD, L_LAUNCHDLD),
-	//	fsDlgLngInfo (IDC_ASKFORST, L_ASKFORST),
-	//	fsDlgLngInfo (IDC_DISABLEWDTASKAFTEREXEC, L_DISABLEWHENDONEAFTEREXEC),
-	//	fsDlgLngInfo (IDC__AUTOSAVE, L_AUTOSAVE),
+	//	fsDlgLngInfo (IDC_SERV_AUTORUN, L_SERV_AUTORUN),
 	//};
-
 	//_LngMgr.ApplyLanguage (this, lnginfo, sizeof (lnginfo) / sizeof (fsDlgLngInfo), 0);
-}
+//}
 
 //void CDlg_Options_Webinterface::OnDestroy()
 //{

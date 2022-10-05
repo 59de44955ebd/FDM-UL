@@ -43,7 +43,6 @@
 #define IDD_DOWNLOAD_CONNECTION         149
 #define IDD_DOWNLOAD_MISC               152
 #define IDM_LOG                         153
-#define IDD_DLDR_LIST                   155
 #define IDM_TASKS                       157
 #define IDB_SHEDULER                    158
 #define IDD_SCHEDULE_WHATTOSTART        159
@@ -112,10 +111,8 @@
 #define IDD_DLDALREXISTS                243
 #define IDD_ADDURLLIST                  244
 #define IDD_CREATEURLLIST               244
-#define IDD_DLDR_NOTIFICATIONS          245
 #define IDD_URLWITHLOGIN                248
 #define IDD_DLDR_DEFDLD                 249
-#define IDD_DLDR_NEWDLD                 249
 #define IDD_SOUNDS                      251
 #define IDD_EXPDLDS                     253
 #define IDD_DELETED_PROPS               254
@@ -156,7 +153,7 @@
 #define IDI_SETFOLDERDEFAULT            322
 #define IDM_UPLOADS                     324
 #define IDD_FVDOWNLOADS_CONVERT         340
-#define IDD_CONVERT                     344
+#define IDD_YTDLP                       344
 #define IDB_DLDSINFO                    345
 #define IDB_DLDSINFO_SEL                346
 #define IDD_OPTIONS                     358
@@ -165,7 +162,6 @@
 #define IDD_OPTIONS_DOWNLOADS           363
 #define IDD_OPTIONS_DOWNLOADS_NEWDLD    364
 #define IDD_OPTIONS_DOWNLOADS_NETWORK   365
-#define IDD_OPTIONS_DOWNLOADS_MIRRORS   367
 #define IDD_OPTIONS_NOTIFICATIONS       369
 #define IDD_OPTIONS_SITEMGR             370
 #define IDD_OPTIONS_DOWNLOADS_TIMELIMIT 372
@@ -189,6 +185,7 @@
 #define IDC_RAD_ENABLE                  1004
 #define IDC_BT_DEFDLDSTGS               1004
 #define IDC_IGNOREALL                   1004
+#define IDC_YTDLP                       1004
 #define IDC_BUTTON4                     1005
 #define IDC_RAD_DISABLE                 1005
 #define IDC_BUTTON5                     1006
@@ -262,7 +259,6 @@
 #define IDC_PROGNAME                    1029
 #define IDC_NAME                        1029
 #define IDC_STEPSPIN                    1029
-#define IDC_ARGS                        1029
 #define IDC_ADDR                        1029
 #define IDC_HTMLCODE                    1029
 #define IDC_NUMBERS                     1029
@@ -272,7 +268,6 @@
 #define IDC_PROTOCOLS                   1030
 #define IDC_ARGUMENTS                   1030
 #define IDC_CREATEEXT                   1030
-#define IDC_VIREXTS                     1030
 #define IDC_EDIT2                       1031
 #define IDC_PORT                        1031
 #define IDC__VER                        1031
@@ -286,7 +281,6 @@
 #define IDC_VALIDSUBDOMAINS             1032
 #define IDC_DISABLE                     1032
 #define IDC_FILEAUTO                    1032
-#define IDC_MAXMIRRORS                  1032
 #define IDC_SAVEDLTOGRPFOLDER           1032
 #define IDC_USESOUNDS                   1032
 #define IDC_USEMAX                      1032
@@ -310,13 +304,13 @@
 #define IDC_FINDWHAT                    1033
 #define IDC_KEEP2                       1033
 #define IDC_A                           1033
-#define IDC_MIRRSERVERS                 1033
 #define IDC_TYPE                        1033
 #define IDC_HANGUP_TOUT                 1033
 #define IDC_ALGORITHM                   1033
 #define IDC_PLACEATTOP                  1033
 #define IDC_CONNECTIONSPEED             1033
 #define IDC_SOCKSPROXYPORT              1033
+#define IDC_YTDLPPATH                   1033
 #define IDC_CHECK1                      1034
 #define IDC_USEHTTP11                   1034
 #define IDC_LIMITTRAFFIC                1034
@@ -327,7 +321,6 @@
 #define IDC_DONTASKAGAIN                1034
 #define IDC_AUTOCHECK                   1034
 #define IDC_USELOGIN                    1034
-#define IDC_AUTO                        1034
 #define IDC_DETECTACTIVITY              1034
 #define IDC_VALIDHTTP                   1034
 #define IDC_DETAILEDLOG                 1034
@@ -359,7 +352,6 @@
 #define IDC_AUTOSTART                   1035
 #define IDC_USEDEFGROUP                 1035
 #define IDC_SIZEINBYTES                 1035
-#define IDC_CALCSPEED                   1035
 #define IDC_APPEND                      1035
 #define IDC_CONFIRMDELETION             1035
 #define IDC_HISTOFDLDS                  1035
@@ -377,7 +369,6 @@
 #define IDC_SHUTDOWNTYPE                1036
 #define IDC_MONWITHEXTS                 1036
 #define IDC_VALIDHTTPS                  1036
-#define IDC_VIRCHECK                    1036
 #define IDC_ALL                         1036
 #define IDC_BYPASSCOMPLETED             1036
 #define IDC_CHECK10                     1036
@@ -430,16 +421,13 @@
 #define IDC_CHECKEXISTS                 1039
 #define IDC_MNCPS_SETTO                 1039
 #define IDC_USECOOKIE                   1040
-#define IDC_DISPLAYOPINIONS2            1040
 #define IDC_MNT_MANAGEAUTO              1040
 #define IDC_ASCIIEXTS                   1041
 #define IDC_IEXPLORE                    1041
-#define IDC_SWITCHTOOPINIONS2           1041
 #define IDC_MNT_SETTO                   1041
 #define IDC_CHECK4                      1042
 #define IDC_MON                         1042
 #define IDC_USEFTPPASSIVE               1042
-#define IDC_RECALCSPEED                 1042
 #define IDC_RESTARTCOMPDLS              1042
 #define IDC_DELETED                     1042
 #define IDC_USEZIP                      1042
@@ -451,7 +439,6 @@
 #define IDC_IGNOREALLRESTRICTIONS       1043
 #define IDC_CHECK5                      1043
 #define IDC_WED                         1043
-#define IDC_DONTIFSIZEUNK               1043
 #define IDC_USESIZE                     1043
 #define IDC_DONTSENDLIST2               1043
 #define IDC_ALLOWICONS2                 1043
@@ -463,7 +450,6 @@
 #define IDC__PORT                       1046
 #define IDC_CHECK6                      1046
 #define IDC_THU                         1046
-#define IDC_CHECKIFDLDISMIRR            1046
 #define IDC_SHOWTIPS                    1046
 #define IDC_FILENOTFOUND                1047
 #define IDC_CHECK7                      1047
@@ -593,6 +579,7 @@
 #define IDC_SETGRPSFLDR                 1120
 #define IDC_MEASUREAGAIN                1120
 #define IDC_CONNECTIONSPEEDINFO         1120
+#define IDC_CHOOSEYTDLPPATH             1120
 #define IDC_ORDER                       1121
 #define IDC__LICTO                      1121
 #define IDC_SHAREIT                     1121
@@ -646,25 +633,15 @@
 #define IDC__STEP                       1175
 #define IDC__SAMPLE                     1176
 #define IDC__NUMBER                     1176
-#define IDC__ARGS                       1177
 #define IDC__FROM2                      1177
 #define IDC__TO2                        1178
-#define IDC_VIRNAME                     1179
-#define IDC_CHOOSEVIR                   1180
 #define IDC__MSG                        1182
 #define IDC_DONTASK                     1183
 #define IDC__SUPPORT1                   1184
 #define IDC__SUPPORT2                   1185
 #define IDC_URLLIST                     1188
 #define IDC__SEC                        1190
-#define IDC_MAXMIRRORSVAL               1191
 #define IDC__SEC2                       1191
-#define IDC_MAXMIRRORSSPIN              1192
-#define IDC_RECALCVAL                   1193
-#define IDC_RECALCSPIN                  1194
-#define IDC__DONTSEARCH                 1195
-#define IDC_FILEMINSIZE                 1196
-#define IDC_FILEMINSIZEDIM              1197
 #define IDC__SETGROUPTO                 1198
 #define IDC__SETGROUPTO2                1199
 #define IDC__DOWNLOADS                  1203
@@ -688,7 +665,6 @@
 #define IDC_ROLLBACKSIZE                1225
 #define IDC__ROLSIZE                    1226
 #define IDC__BYTES                      1227
-#define IDC__MIRRSERVER                 1232
 #define IDC__TEXT1                      1233
 #define IDC__TEXT2                      1234
 #define IDC__TEXT3                      1235
@@ -752,7 +728,6 @@
 #define IDC__FLOATING_WINDOWS           1332
 #define IDC__SERVICE_FILES              1333
 #define IDC__SERVCE_FILES               1333
-#define IDC__FDM_COMMUNITY              1334
 #define IDC__PASSWORDS                  1335
 #define IDC_DONTCHECKAGAIN              1339
 #define IDC_SETLIMIT                    1340
@@ -781,6 +756,7 @@
 #define IDC__DOWNLOADSPEED              1378
 #define IDC__UPLOADSPEED                1379
 #define IDC_INBITS                      1380
+#define IDC__YTDLPPATH                  1561
 #define IDC__COPYRIGHT                  1900
 #define IDC__REGTO                      1901
 #define IDC_USEMAXCONNS                 2034
@@ -924,13 +900,13 @@
 #define ID_SB_TOTALSPEED                61207
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        505
+#define _APS_NEXT_RESOURCE_VALUE        506
 #define _APS_NEXT_COMMAND_VALUE         33238
-#define _APS_NEXT_CONTROL_VALUE         1561
+#define _APS_NEXT_CONTROL_VALUE         1562
 #define _APS_NEXT_SYMED_VALUE           137
 #endif
 #endif

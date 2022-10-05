@@ -713,20 +713,20 @@ float fsAppSettings::View_SplitterRatio(LPCSTR pszName)
 	return f;
 }
 
-void fsAppSettings::View_Language(LPCSTR pszLang)
-{
-	m_stgs.WriteProfileString (_T ("View"), _T ("Language"), pszLang);
-}
-
-CString fsAppSettings::View_Language()
-{
-	CString strLang = m_stgs.GetProfileString (_T ("View"), _T ("Language"), _T (""));
-	if (strLang == "")
-	{
-		strLang = "English";
-	}
-	return strLang;
-}
+//void fsAppSettings::View_Language(LPCSTR pszLang)
+//{
+//	m_stgs.WriteProfileString (_T ("View"), _T ("Language"), pszLang);
+//}
+//
+//CString fsAppSettings::View_Language()
+//{
+//	CString strLang = m_stgs.GetProfileString (_T ("View"), _T ("Language"), _T (""));
+//	if (strLang == "")
+//	{
+//		strLang = "English";
+//	}
+//	return strLang;
+//}
 
 int fsAppSettings::Last_Autostart()
 {
@@ -758,35 +758,35 @@ void fsAppSettings::TUMManage(fsTUMManage en)
 	m_stgs.WriteProfileInt (_T ("Network"), _T ("TUMManage"), en);
 }
 
-BYTE fsAppSettings::DropBoxWndBlend()
-{
-	return (BYTE) m_stgs.GetProfileInt (_T ("View"), _T ("DropBoxWndBlend"), 150);
-}
+//BYTE fsAppSettings::DropBoxWndBlend()
+//{
+//	return (BYTE) m_stgs.GetProfileInt (_T ("View"), _T ("DropBoxWndBlend"), 150);
+//}
+//
+//void fsAppSettings::DropBoxWndBlend(BYTE b)
+//{
+//	m_stgs.WriteProfileInt (_T ("View"), _T ("DropBoxWndBlend"), b);
+//}
+//
+//BYTE fsAppSettings::DownloadsInfoWndBlend()
+//{
+//	return (BYTE) m_stgs.GetProfileInt (_T ("View"), _T ("DownloadsInfoWndBlend"), 150);
+//}
+//
+//void fsAppSettings::DownloadsInfoWndBlend(BYTE b)
+//{
+//	m_stgs.WriteProfileInt (_T ("View"), _T ("DownloadsInfoWndBlend"), b);
+//}
 
-void fsAppSettings::DropBoxWndBlend(BYTE b)
-{
-	m_stgs.WriteProfileInt (_T ("View"), _T ("DropBoxWndBlend"), b);
-}
-
-BYTE fsAppSettings::DownloadsInfoWndBlend()
-{
-	return (BYTE) m_stgs.GetProfileInt (_T ("View"), _T ("DownloadsInfoWndBlend"), 150);
-}
-
-void fsAppSettings::DownloadsInfoWndBlend(BYTE b)
-{
-	m_stgs.WriteProfileInt (_T ("View"), _T ("DownloadsInfoWndBlend"), b);
-}
-
-BOOL fsAppSettings::View_FloatingWindow()
-{
-	return m_stgs.GetProfileInt (_T ("View"), _T ("ShowFW"), TRUE);
-}
-
-void fsAppSettings::View_FloatingWindow(BOOL b)
-{
-	m_stgs.WriteProfileInt (_T ("View"), _T ("ShowFW"), b);
-}
+//BOOL fsAppSettings::View_FloatingWindow()
+//{
+//	return m_stgs.GetProfileInt (_T ("View"), _T ("ShowFW"), TRUE);
+//}
+//
+//void fsAppSettings::View_FloatingWindow(BOOL b)
+//{
+//	m_stgs.WriteProfileInt (_T ("View"), _T ("ShowFW"), b);
+//}
 
 BOOL fsAppSettings::DetLog()
 {
@@ -859,25 +859,25 @@ void fsAppSettings::View_SizesInBytes(BOOL b)
 //	m_stgs.WriteProfileString (_T ("Avir"), _T ("Exts"), psz);
 //}
 
-BOOL fsAppSettings::NewVerExists()
-{
-	return m_stgs.GetProfileInt (_T ("Update"), _T ("NewVerExists"), FALSE);
-}
+//BOOL fsAppSettings::NewVerExists()
+//{
+//	return m_stgs.GetProfileInt (_T ("Update"), _T ("NewVerExists"), FALSE);
+//}
+//
+//void fsAppSettings::NewVerExists(BOOL b)
+//{
+//	m_stgs.WriteProfileInt (_T ("Update"), _T ("NewVerExists"), b);
+//}
 
-void fsAppSettings::NewVerExists(BOOL b)
-{
-	m_stgs.WriteProfileInt (_T ("Update"), _T ("NewVerExists"), b);
-}
-
-BOOL fsAppSettings::Network_Br_SettingsSaved()
-{
-	return m_stgs.GetProfileInt (_T ("Network"), _T ("BrUA_Saved"), FALSE);
-}
-
-void fsAppSettings::Network_Br_SettingsSaved(BOOL b)
-{
-	m_stgs.WriteProfileInt (_T ("Network"), _T ("BrUA_Saved"), b);
-}
+//BOOL fsAppSettings::Network_Br_SettingsSaved()
+//{
+//	return m_stgs.GetProfileInt (_T ("Network"), _T ("BrUA_Saved"), FALSE);
+//}
+//
+//void fsAppSettings::Network_Br_SettingsSaved(BOOL b)
+//{
+//	m_stgs.WriteProfileInt (_T ("Network"), _T ("BrUA_Saved"), b);
+//}
 
 BOOL fsAppSettings::Notif_UseBalloon()
 {
@@ -918,8 +918,7 @@ void fsAppSettings::NewDL_GroupId(UINT n)
 
 UINT fsAppSettings::NewDL_GroupId()
 {
-	return m_stgs.GetProfileInt (_T ("NewDownload"), _T ("GroupId"),
-		-1);
+	return m_stgs.GetProfileInt (_T ("NewDownload"), _T ("GroupId"), -1);
 }
 
 void fsAppSettings::NewDL_Group_old(LPCSTR psz)
@@ -1303,15 +1302,15 @@ void fsAppSettings::SM_DontSavePwdsToDisk(BOOL b)
 	m_stgs.WriteProfileInt (_T ("SiteManager"), _T ("DontSavePwdsToDisk"), b);
 }
 
-BOOL fsAppSettings::FloatingWndsHideInFSMode()
-{
-	return m_stgs.GetProfileInt (_T ("General"), _T ("FltWndsHideInFSMode"), TRUE);
-}
-
-void fsAppSettings::FloatingWndsHideInFSMode(BOOL b)
-{
-	m_stgs.WriteProfileInt (_T ("General"), _T ("FltWndsHideInFSMode"), b);
-}
+//BOOL fsAppSettings::FloatingWndsHideInFSMode()
+//{
+//	return m_stgs.GetProfileInt (_T ("General"), _T ("FltWndsHideInFSMode"), TRUE);
+//}
+//
+//void fsAppSettings::FloatingWndsHideInFSMode(BOOL b)
+//{
+//	m_stgs.WriteProfileInt (_T ("General"), _T ("FltWndsHideInFSMode"), b);
+//}
 
 BOOL fsAppSettings::NewDL_GenerateNameAutomatically()
 {
@@ -1373,15 +1372,15 @@ BOOL fsAppSettings::LoadStringList(LPCSTR pszSubKey, LPCSTR pszValue, CStringLis
 	return TRUE;
 }
 
-BOOL fsAppSettings::FilesToDelete(CStringList &v)
-{
-	return LoadStringList ("FilesToDelete", "", &v);
-}
-
-void fsAppSettings::FilesToDelete_save(CStringList &v)
-{
-	SaveStringList ("FilesToDelete", "", v);
-}
+//BOOL fsAppSettings::FilesToDelete(CStringList &v)
+//{
+//	return LoadStringList ("FilesToDelete", "", &v);
+//}
+//
+//void fsAppSettings::FilesToDelete_save(CStringList &v)
+//{
+//	SaveStringList ("FilesToDelete", "", v);
+//}
 
 BOOL fsAppSettings::View_GCVButton()
 {
@@ -1445,35 +1444,35 @@ void fsAppSettings::DontSaveLogs(BOOL b)
 	m_stgs.WriteProfileInt (_T ("General"), _T ("DontSaveLogs"), m_bDontSaveLogs = b);
 }
 
-int fsAppSettings::Export_WhichHist()
-{
-	return m_stgs.GetProfileInt (_T ("Export"), _T ("WhichHist"), 0);
-}
-
-void fsAppSettings::Export_WhichHist(int i)
-{
-	m_stgs.WriteProfileInt (_T ("Export"), _T ("WhichHist"), i);
-}
-
-BOOL fsAppSettings::Export_Hist_CompletedOnly()
-{
-	return m_stgs.GetProfileInt (_T ("Export"), _T ("Hist_CompletedOnly"), TRUE);
-}
-
-void fsAppSettings::Export_Hist_CompletedOnly(BOOL b)
-{
-	m_stgs.WriteProfileInt (_T ("Export"), _T ("Hist_CompletedOnly"), b);
-}
-
-BOOL fsAppSettings::Export_Hist_Append()
-{
-	return m_stgs.GetProfileInt (_T ("Export"), _T ("Hist_Append"), TRUE);
-}
-
-void fsAppSettings::Export_Hist_Append(BOOL b)
-{
-	m_stgs.WriteProfileInt (_T ("Export"), _T ("Hist_Append"), b);
-}
+//int fsAppSettings::Export_WhichHist()
+//{
+//	return m_stgs.GetProfileInt (_T ("Export"), _T ("WhichHist"), 0);
+//}
+//
+//void fsAppSettings::Export_WhichHist(int i)
+//{
+//	m_stgs.WriteProfileInt (_T ("Export"), _T ("WhichHist"), i);
+//}
+//
+//BOOL fsAppSettings::Export_Hist_CompletedOnly()
+//{
+//	return m_stgs.GetProfileInt (_T ("Export"), _T ("Hist_CompletedOnly"), TRUE);
+//}
+//
+//void fsAppSettings::Export_Hist_CompletedOnly(BOOL b)
+//{
+//	m_stgs.WriteProfileInt (_T ("Export"), _T ("Hist_CompletedOnly"), b);
+//}
+//
+//BOOL fsAppSettings::Export_Hist_Append()
+//{
+//	return m_stgs.GetProfileInt (_T ("Export"), _T ("Hist_Append"), TRUE);
+//}
+//
+//void fsAppSettings::Export_Hist_Append(BOOL b)
+//{
+//	m_stgs.WriteProfileInt (_T ("Export"), _T ("Hist_Append"), b);
+//}
 
 BOOL fsAppSettings::DownloadDialog_AutoClose()
 {
@@ -1580,20 +1579,20 @@ void fsAppSettings::WD_DisableAfterExec(BOOL b)
 	m_stgs.WriteProfileInt (_T ("Last"), _T ("WD_DisableAfterExec"), b);
 }
 
-BOOL fsAppSettings::IsArchivePackInstalled()
-{
-	return m_stgs.GetProfileInt ("", "apinstalled", FALSE);
-}
-
-BOOL fsAppSettings::DontShowInstallAP()
-{
-	return m_stgs.GetProfileInt ("View", "DontShowInstallAP", FALSE);
-}
-
-void fsAppSettings::DontShowInstallAP(BOOL b)
-{
-	m_stgs.WriteProfileInt ("View", "DontShowInstallAP", b);
-}
+//BOOL fsAppSettings::IsArchivePackInstalled()
+//{
+//	return m_stgs.GetProfileInt ("", "apinstalled", FALSE);
+//}
+//
+//BOOL fsAppSettings::DontShowInstallAP()
+//{
+//	return m_stgs.GetProfileInt ("View", "DontShowInstallAP", FALSE);
+//}
+//
+//void fsAppSettings::DontShowInstallAP(BOOL b)
+//{
+//	m_stgs.WriteProfileInt ("View", "DontShowInstallAP", b);
+//}
 
 CString fsAppSettings::Hash_LastAlgorithm()
 {
@@ -2077,12 +2076,62 @@ void fsAppSettings::SpecifyNetworkSpeedValueInBits(bool b)
 	m_stgs.WriteProfileInt (_T ("View"), _T ("SpecifyNetworkSpeedValueInBits"), b);
 }
 
-//BOOL fsAppSettings::ActivateWebinterface()
-//{
-//	return m_stgs.GetProfileInt (_T ("View"), _T ("ShowFIW"), TRUE);
-//}
-//
-//void fsAppSettings::ActivateWebinterface(BOOL b)
-//{
-//	m_stgs.WriteProfileInt (_T ("View"), _T ("ShowFIW"), b);
-//}
+BOOL fsAppSettings::Webinterface_AutoStart()
+{
+	return m_stgs.GetProfileInt (_T ("Webinterface"), _T ("AutoStart"), FALSE);
+}
+
+void fsAppSettings::Webinterface_AutoStart(BOOL b)
+{
+	m_stgs.WriteProfileInt (_T ("Webinterface"), _T ("AutoStart"), b);
+}
+
+UINT fsAppSettings::Webinterface_Port()
+{
+	return m_stgs.GetProfileInt (_T ("Webinterface"), _T ("Port"), 8888);
+}
+
+void fsAppSettings::Webinterface_Port(UINT n)
+{
+	m_stgs.WriteProfileInt (_T ("Webinterface"), _T ("Port"), n);
+}
+
+BOOL fsAppSettings::Webinterface_UsePwd()
+{
+	return m_stgs.GetProfileInt (_T ("Webinterface"), _T ("UsePwd"), FALSE);
+}
+
+void fsAppSettings::Webinterface_UsePwd(BOOL b)
+{
+	m_stgs.WriteProfileInt (_T ("Webinterface"), _T ("UsePwd"), b);
+}
+
+CString fsAppSettings::Webinterface_Login()
+{
+	return m_stgs.GetProfileString (_T ("Webinterface"), _T ("Login"), "");
+}
+
+void fsAppSettings::Webinterface_Login(LPCSTR psz)
+{
+	m_stgs.WriteProfileString (_T ("Webinterface"), _T ("Login"), psz);
+}
+
+CString fsAppSettings::Webinterface_Password()
+{
+	return m_stgs.GetProfileString (_T ("Webinterface"), _T ("Password"), "");
+}
+
+void fsAppSettings::Webinterface_Password(LPCSTR psz)
+{
+	m_stgs.WriteProfileString (_T ("Webinterface"), _T ("Password"), psz);
+}
+
+CString fsAppSettings::YtDlp_Path()
+{
+	return m_stgs.GetProfileString (_T ("YtDlp"), _T ("Path"), "");
+}
+
+void fsAppSettings::YtDlp_Path(LPCSTR psz)
+{
+	m_stgs.WriteProfileString (_T ("YtDlp"), _T ("Path"), psz);
+}

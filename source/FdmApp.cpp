@@ -9,8 +9,11 @@
 #include "MainFrm.h"
 #include "UrlWnd.h"
 #include "fsFDMCmdLineParser.h"
-#include "vmsFilesToDelete.h"
 #include "vmsAppMutex.h"
+
+//#include "json.hpp"
+//
+//using json = nlohmann::json;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -23,6 +26,32 @@ BEGIN_MESSAGE_MAP(CFdmApp, CWinApp)
 	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
+
+
+//std::string exec(const char* cmd)
+//{
+//	char buffer[128];
+//	std::string result = "";
+//	FILE* pipe = _popen(cmd, "r");
+//	if (!pipe) throw std::runtime_error("popen() failed!");
+//	try
+//	{
+//		while (fgets(buffer, sizeof buffer, pipe) != NULL)
+//		{
+//			result += buffer;
+//		}
+//	}
+//	catch (...)
+//	{
+//		_pclose(pipe);
+//		throw;
+//	}
+//	_pclose(pipe);
+//	return result;
+//}
+
+
+
 
 CFdmApp::CFdmApp()
 {
@@ -40,29 +69,35 @@ CFdmApp::CFdmApp()
 	m_bStarting = TRUE;
 
 	SYSTEMTIME time;
-	GetLocalTime (&time);
-	SystemTimeToFileTime (&time, &_timeAppHasStarted);
+	GetLocalTime(&time);
+	SystemTimeToFileTime(&time, &_timeAppHasStarted);
 
 	m_pModuleState;
-
-
-
 }
 
 CFdmApp theApp;
-vmsAppMutex _appMutex (_T ("Free Download Manager"));
+vmsAppMutex _appMutex (_T ("FDM-UL"));
+
+#include <iostream>
+#include <fstream>
 
 BOOL CFdmApp::InitInstance()
 {
-	//if (strPath == "" || FALSE == SetCurrentDirectory (strPath))
 	_dwAppState |= APPSTATE_PORTABLE_MODE;
 	_dwAppState |= APPSTATE_PORTABLE_MODE_NOREG;
 
 	char szExeDir [MY_MAX_PATH], szExeFile [MY_MAX_PATH];
 	GetModuleFileName (NULL, szExeFile, sizeof (szExeFile));
 	fsGetPath (szExeFile, szExeDir);
-
 	SetCurrentDirectory (szExeDir);
+
+
+
+
+
+
+
+
 
 	m_strAppPath = szExeDir;
 
@@ -82,28 +117,13 @@ BOOL CFdmApp::InitInstance()
 	free((void*)m_pszProfileName);
 	m_pszProfileName = _tcsdup(strIniFile);
 
-	//vmsAppSettingsStore* pStgs = _App.get_SettingsStore ();
-	//CString strStgsFile = m_strAppPath + "Data\\settings.dat";
-	//fsBuildPathToFile (strStgsFile);
-	//pStgs->LoadSettingsFromFile (strStgsFile);
-
 	_App.ApplySettingsToMutexes (); // ???
 
-
-	BOOL bNoLng = FALSE;
-
-	if (FALSE == InitLanguage ())
-		bNoLng = TRUE;
+	InitLanguage();
 
 	_SkinMgr.Initialize ();
 
-	//vmsAppGlobalObjects::Create2 (currentVersionFirstRun);
-
 	fsFDMCmdLineParser cmdline;
-
-//	cmdline.Parse (fsFDMCmdLineParser::Elevated);
-//	if (cmdline.isNeedExit ())
-//		return FALSE;
 
 	m_bForceSilentSpecified = cmdline.is_ForceSilentSpecified ();
 
@@ -111,8 +131,6 @@ BOOL CFdmApp::InitInstance()
 
 	if (CheckFdmStartedAlready (m_bForceSilentSpecified == FALSE))
 		return FALSE;
-
-	vmsFilesToDelete::Process ();
 
 #ifdef _AFXDLL
 	Enable3dControls();
@@ -167,7 +185,7 @@ public:
 
 	//{{AFX_DATA(CAboutDlg)
 	enum { IDD = IDD_ABOUTBOX };
-	CUrlWnd	m_wndDLURL;
+	//CUrlWnd	m_wndDLURL;
 	CUrlWnd	m_wndFirm;
 	//}}AFX_DATA
 
@@ -180,7 +198,7 @@ protected:
 	CFont m_fntUnderline;
 	CFont m_fontRegInfo;
 	CFont m_fontWarn;
-	CUrlWnd m_wndSupport;
+	//CUrlWnd m_wndSupport;
 	//{{AFX_MSG(CAboutDlg)
 	virtual BOOL OnInitDialog();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
@@ -252,9 +270,9 @@ HBRUSH CAboutDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
 	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 
-	if (pWnd->m_hWnd == m_wndFirm.m_hWnd ||
-		 pWnd->m_hWnd == m_wndDLURL.m_hWnd ||
-		 pWnd->m_hWnd == m_wndSupport.m_hWnd)
+	if (pWnd->m_hWnd == m_wndFirm.m_hWnd
+		//|| pWnd->m_hWnd == m_wndDLURL.m_hWnd || pWnd->m_hWnd == m_wndSupport.m_hWnd
+	)
 	{
 		pDC->SetTextColor (GetSysColor (26));
         pDC->SelectObject (&m_fntUnderline);
@@ -296,26 +314,28 @@ BOOL CFdmApp::InitLanguage()
 
 BOOL CFdmApp::CheckFdmStartedAlready(BOOL bSetForIfEx)
 {
-	LPCSTR pszMainWnd = "Free Download Manager Main Window";
 	if (_appMutex.isAnotherInstanceStartedAlready ())
 	{
 		_appMutex.CloseMutex ();
 
 		if (bSetForIfEx)
 		{
-			HWND hWnd = FindWindow (pszMainWnd, NULL);
-			if (IsIconic (hWnd))
-				ShowWindow (hWnd, SW_RESTORE);
-			else
+			HWND hWnd = FindWindow(MY_CLASSNAME, NULL);
+			if (hWnd)
 			{
-				WINDOWPLACEMENT wc;
-				GetWindowPlacement (hWnd, &wc);
-				if (wc.showCmd == SW_HIDE)
-					ShowWindow (hWnd, SW_RESTORE);
-			}
+				if (IsIconic(hWnd))
+					ShowWindow(hWnd, SW_RESTORE);
+				else
+				{
+					WINDOWPLACEMENT wc;
+					GetWindowPlacement(hWnd, &wc);
+					if (wc.showCmd == SW_HIDE)
+						ShowWindow(hWnd, SW_RESTORE);
+				}
 
-			SetForegroundWindow (hWnd);
-			SetFocus (hWnd);
+				SetForegroundWindow(hWnd);
+				SetFocus(hWnd);
+			}
 		}
 
 		return TRUE;
@@ -349,12 +369,12 @@ void CFdmApp::CheckLocked()
 	while (dwRes == ERROR_ALREADY_EXISTS);
 }
 
-void CFdmApp::SaveSettings()
-{
+//void CFdmApp::SaveSettings()
+//{
 //		vmsAppSettingsStore* pStgs = _App.get_SettingsStore ();
 //		CString strStgsFile = fsGetDataFilePath ("settings.dat");
 //		pStgs->SaveSettingsToFile (strStgsFile);
-}
+//}
 
 DWORD WINAPI CFdmApp::_threadExitProcess(LPVOID lp)
 {

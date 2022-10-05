@@ -48,7 +48,6 @@ public:
 public:
 	BOOL m_bInited;
 
-	//void ApplyShowSmallTipsSetting();
 	static void ShowOnDownloadDoneBalloon (fsDownload* dld);
 	void SetActivePlugin (int nIndex);
 
@@ -114,10 +113,6 @@ protected:
 
 	afx_msg void OnUpdateTotalSpeed (CCmdUI* pCmdUI);
 
-//	afx_msg void OnLDF (UINT nID);
-
-	//bool m_bDontShowSHD;
-
 	BOOL ImportListOfDownloads_FromDLInfoListFile(LPCSTR pszFile);
 	BOOL ImportDownload (IXMLDOMNode* pNode, DLDS_LIST_REF v);
 
@@ -128,11 +123,6 @@ protected:
 	BOOL is_MouseInTray();
 
 	afx_msg LRESULT OnSaveAllData (WPARAM, LPARAM);
-
-	//afx_msg void OnUpdateSkin (CCmdUI* pCmdUI);
-	//afx_msg void OnSkin (UINT nID);
-	//void BuildSkinsMenu();
-	//int get_SkinsMenuPos();
 
 	CReBar m_wndReBar;
 
@@ -173,9 +163,6 @@ protected:
 
 	void UpdateSettings();
 
-	//afx_msg void OnImportSettings();
-	//afx_msg void OnExportSettings();
-
 	void SetMenuImages();
 
 	void ApplyLanguageToMenu();
@@ -207,10 +194,8 @@ protected:
 	int m_cMenuMainItemsAdded,
 		m_cMenuViewItemsAdded;
 
-	void appendDiagnostics(CString& sMsg, const CString& sDiagnostics) const;
-	void appendErrorCode(CString& sMsg, HRESULT hr) const;
-
 	//{{AFX_MSG(CMainFrame)
+	afx_msg BOOL OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSetFocus(CWnd *pOldWnd);
 	afx_msg void OnClose();
@@ -222,7 +207,6 @@ protected:
 	afx_msg void OnUpdateTumLight(CCmdUI* pCmdUI);
 	afx_msg void OnTumMedium();
 	afx_msg void OnUpdateTumMedium(CCmdUI* pCmdUI);
-	//afx_msg void OnOptmaster();
 	afx_msg void OnDldCreate();
 	afx_msg void OnTaskCreateNew();
 	afx_msg void OnNeedExit();
@@ -234,9 +218,6 @@ protected:
 	afx_msg void OnShowmainwindow();
 	afx_msg void OnStartall();
 	afx_msg void OnStopall();
-	afx_msg void OnHelp();
-	afx_msg void OnHomepage();
-//	afx_msg void OnProggeneralsettings();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnEndSession(BOOL bEnding);
 	afx_msg void OnTurnoffwhendone();
@@ -254,6 +235,7 @@ protected:
 
 	//afx_msg void OnUpdateLngMenu (CCmdUI* pCmdUI);
 	//afx_msg void OnDllangfiles();
+
 	afx_msg void OnProceedFurherInitialization();
 	afx_msg void OnAppAbout();
 	afx_msg void OnExportlistofdownloads();
@@ -267,12 +249,6 @@ protected:
 	afx_msg void OnDldCreatebatch();
 	afx_msg void OnFileImportImportlistofdownloadsfromclipboard();
 	afx_msg void OnOptionsSm();
-	//afx_msg void OnExportdlhist();
-	//afx_msg void OnUpdateExportdlhist(CCmdUI* pCmdUI);
-
-//	afx_msg void OnUpdateLdf0(CCmdUI* pCmdUI);
-//	afx_msg void OnLdfClear();
-//	afx_msg void OnUpdateLdfClear(CCmdUI* pCmdUI);
 
 	afx_msg void OnPausealldlds();
 	afx_msg void OnUpdatePausealldlds(CCmdUI* pCmdUI);

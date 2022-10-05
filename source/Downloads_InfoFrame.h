@@ -26,7 +26,7 @@ public:
 
 	void SetChildWnd (CWnd *pWnd);
 	BOOL Create (CWnd *pParent);
-	virtual ~CDownloads_InfoFrame();
+	//virtual ~CDownloads_InfoFrame();
 
 protected:
 

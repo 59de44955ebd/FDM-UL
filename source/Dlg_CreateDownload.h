@@ -36,7 +36,6 @@ public:
 	vmsDownloadsGroupSmartPtr m_pGroup;
 
 	static fsSiteInfo* _SavePassword (vmsDownloadSmartPtr dld);
-
 	static fsSiteInfo* _SavePassword(LPCSTR pszServer, fsNetworkProtocol np, LPCSTR pszUser, LPCSTR pszPwd);
 
 	static int _CheckDownloadAlrExists (
@@ -46,8 +45,11 @@ public:
 	fsScheduleEx m_schScheduleParam;
 	BOOL m_bScheduled;
 	BOOL m_bAuthorization;
+
 	CString m_strUrl;
-	//class CFdmUiWindow *m_pUiWindow;
+
+	CString m_strFileName;
+	CString m_strOutFolder;
 
 	CCreateDownloadDlg(vmsDownloadSmartPtr dld, CWnd* pParent = NULL);
 
@@ -116,6 +118,7 @@ protected:
 	afx_msg void OnFileauto();
 	afx_msg void OnSelchangeDldtype();
 	afx_msg void OnOutfolderSetdefault();
+	afx_msg void OnYtDlp();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

@@ -68,7 +68,7 @@ public:
 	BOOL Create (CWnd *pParent);
 	void getObjectItselfStateBuffer(LPBYTE pb, LPDWORD pdwSize, bool bSaveToStorage);
 	bool loadObjectItselfFromStateBuffer(LPBYTE pb, LPDWORD pdwSize, DWORD dwVer);
-	virtual ~CShedulerWnd();
+	//virtual ~CShedulerWnd();
 
 protected:
 	virtual void onChildObjectLoadFinished (vmsPersistObject *pObject, bool bResult);

@@ -27,12 +27,10 @@ BOOL vmsFdmWebInterfaceServer::ProcessRequest(vmsHttpRequest &request, vmsHttpRe
 	if (lstrcmpi (request.get_RequestType (), "GET"))
 		return FALSE;
 
-	BOOL b = AfxGetApp()->GetProfileInt("Webinterface", "UsePwd", 0) == 1;
-	if (b)
+	if (_App.Webinterface_UsePwd())
 	{
-		CString strU = AfxGetApp ()->GetProfileString ("Webinterface", "Login"),
-			strP = AfxGetApp ()->GetProfileString ("Webinterface", "Password");
-
+		CString strU = _App.Webinterface_Login();
+		CString strP = _App.Webinterface_Password();
 		if (strU.IsEmpty () == FALSE && lstrcmp (request.get_Auth (), strU + ":" + strP))
 		{
 			response.set_ResponseCode ("401 Authorization Required");

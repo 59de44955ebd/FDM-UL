@@ -17,9 +17,9 @@ CDownloads_Info::CDownloads_Info()
 {
 }
 
-CDownloads_Info::~CDownloads_Info()
-{
-}
+//CDownloads_Info::~CDownloads_Info()
+//{
+//}
 
 BEGIN_MESSAGE_MAP(CDownloads_Info, CTabCtrl)
 	//{{AFX_MSG_MAP(CDownloads_Info)

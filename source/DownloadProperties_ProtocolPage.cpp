@@ -57,16 +57,16 @@ END_MESSAGE_MAP()
 
 LPCSTR _ppszAgentNames [] = {
 	vmsFdmAppMgr::getAppAgentNameUf (),
-	"Microsoft Internet Explorer 5.0",
-	"Netscape Communicator 4.0",
-	"Opera 3.6"
+	"Firefox 105.0",
+	"Chrome 106.0",
+	"Edge 106.0"
 };
 
 LPCSTR _ppszAgentValues [] = {
 	vmsFdmAppMgr::getAppAgentName (),
-	"Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)",
-	"Mozilla/4.05 [en] (Win95; I)",
-	"Mozilla/4.0 (Windows 95;US) Opera 3.60  [en]"
+	"Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0",
+	"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
+	"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36 Edg/106.0.1370.34"
 };
 
 #define DNP_OFFSET(member) ( LPBYTE (&dnp.member) - LPBYTE (&dnp) )
@@ -160,7 +160,7 @@ BOOL CDownloadProperties_ProtocolPage::OnInitDialog()
 	ApplyLanguage ();
 
 	return TRUE;
-	
+
 }
 
 void CDownloadProperties_ProtocolPage::UpdateEnabled()

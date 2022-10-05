@@ -14,7 +14,6 @@
 #include "fsSitesMgr.h"
 #include "misc.h"
 #include "system.h"
-#include "vmsFilesToDelete.h"
 #include "../Hash/vmsHash.h"
 #include "Dlg_CheckFileIntegrity_Result.h"
 #include "vmsMetalinkFile.h"
@@ -707,17 +706,6 @@ BOOL fsDownloadsMgr::Save()
 		if (FALSE == m_saver.Save (m_vDownloads, "downloads"))
 			b = FALSE;
 		vmsAUTOLOCKRW_READ_UNLOCK (m_rwlDownloads);
-
-		//vmsAUTOLOCKSECTION (m_csDeletedDownloads);
-		//if (FALSE == m_saver.Save (m_vDeletedDownloads, "downloads.del"))
-		//	b = FALSE;
-		//vmsAUTOLOCKSECTION_UNLOCK (m_csDeletedDownloads);
-
-		//if (FALSE == m_histmgr.SaveHistory ())
-		//	b = FALSE;
-
-		//if (FALSE == SaveStateInformation ())
-		//	b = FALSE;
 	}
 	catch (const std::exception& ex)
 	{

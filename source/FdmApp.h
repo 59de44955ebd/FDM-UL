@@ -32,7 +32,7 @@ public:
 	AFX_MODULE_STATE* GetModuleState();
 	static void ScheduleExitProcess (DWORD dwSeconds);
 
-	void SaveSettings();
+	//void SaveSettings();
 
 	CString m_strAppPath;
 

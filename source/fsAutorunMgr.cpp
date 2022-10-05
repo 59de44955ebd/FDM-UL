@@ -35,11 +35,11 @@ BOOL fsAutorunMgr::SetAutoStart(BOOL bSet)
 	if (bSet)
 	{
 		_tcscat (szModule, _T (" -autorun"));
-		bRet = ERROR_SUCCESS == RegSetValueEx (m_hAutoStart, _T ("Free Download Manager"), 0, REG_SZ, (CONST BYTE*) szModule, _tcslen (szModule) + 1);
+		bRet = ERROR_SUCCESS == RegSetValueEx (m_hAutoStart, _T ("FDM-UL"), 0, REG_SZ, (CONST BYTE*) szModule, _tcslen (szModule) + 1);
 	}
 	else
 	{
-		bRet = ERROR_SUCCESS == RegDeleteValue (m_hAutoStart, _T ("Free Download Manager"));
+		bRet = ERROR_SUCCESS == RegDeleteValue (m_hAutoStart, _T ("FDM-UL"));
 	}
 
 	CloseAutoStartKey ();
@@ -65,6 +65,6 @@ BOOL fsAutorunMgr::IsAutoStart()
 	if (FALSE == OpenAutoStartKey ())
 		return FALSE;
 	DWORD dwType;
-	return ERROR_SUCCESS == RegQueryValueEx (m_hAutoStart, _T ("Free Download Manager"), NULL,
+	return ERROR_SUCCESS == RegQueryValueEx (m_hAutoStart, _T ("FDM-UL"), NULL,
 		&dwType, NULL, NULL);
 }

@@ -9,8 +9,6 @@
 #include "fsDownloadMgr.h"
 #include "plugins.h"
 #include "DownloadPropertiesSheet.h"
-#include "DownloaderPropertiesSheet.h"
-//#include "Dlg_NOW.h"
 #include "ShedulerWnd.h"
 #include "plugincmds.h"
 #include "system.h"
@@ -23,6 +21,11 @@
 #include "vmsDownloadsGroupsMgr.h"
 #include "WndDlDoneNotification.h"
 #include "vmsLogger.h"
+
+#include "Dlg_YtDlp.h"
+#include "utils.h"
+#include "json.hpp"
+using json = nlohmann::json;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -46,10 +49,10 @@ CDownloadsWnd::CDownloadsWnd()
 	m_bCreatingLotOfDownloads = false;
 }
 
-CDownloadsWnd::~CDownloadsWnd()
-{
-	_DldsMgr.SetEventsFunc (NULL, NULL);
-}
+//CDownloadsWnd::~CDownloadsWnd()
+//{
+//	_DldsMgr.SetEventsFunc (NULL, NULL);
+//}
 
 BEGIN_MESSAGE_MAP(CDownloadsWnd, CWnd)
 	//{{AFX_MSG_MAP(CDownloadsWnd)
@@ -537,38 +540,25 @@ void CDownloadsWnd::OnDownloadDefProperties()
     _DlgMgr.OnEndDialog (&sheet);
 }
 
-void CDownloadsWnd::OnDownloaderProperties()
-{
-	CDownloaderPropertiesSheet sheet (LS (L_DLDR_OPTIONS), this);
-
-	sheet.Init ();
-     _DlgMgr.OnDoModal (&sheet);
-	sheet.DoModal ();
-    _DlgMgr.OnEndDialog (&sheet);
-	_TumMgr.SaveSettings ();
-	_DldsMgr.SaveSettings ();
-	_DldsMgr.setNeedProcessDownloads ();
-}
-
-//void CDownloadsWnd::OnOptimizationWizard()
+//void CDownloadsWnd::OnDownloaderProperties()
 //{
-//	CNOWDlg dlg;
+//	CDownloaderPropertiesSheet sheet (LS (L_DLDR_OPTIONS), this);
 //
-//    _DlgMgr.OnDoModal (&dlg);
-//
-//	if (IDOK != dlg.DoModal ())
-//	{
-//	   _DlgMgr.OnEndDialog (&dlg);
-//		return;
-//	}
-//
-//	_DlgMgr.OnEndDialog (&dlg);
+//	sheet.Init ();
+//     _DlgMgr.OnDoModal (&sheet);
+//	sheet.DoModal ();
+//    _DlgMgr.OnEndDialog (&sheet);
+//	_TumMgr.SaveSettings ();
+//	_DldsMgr.SaveSettings ();
+//	_DldsMgr.setNeedProcessDownloads ();
 //}
 
 void CDownloadsWnd::OnDestroy()
 {
+	_DldsMgr.SetEventsFunc (NULL, NULL); //TEST
 	CWnd::OnDestroy();
-	SAFE_DELETE (_pwndDownloads);
+	//SAFE_DELETE (_pwndDownloads);
+	_pwndDownloads = NULL; //TEST
 }
 
 LRESULT CDownloadsWnd::OnAppQueryExit(WPARAM, LPARAM)
@@ -614,14 +604,15 @@ void CDownloadsWnd::OnDldstop()
 }
 
 UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, LPCSTR pszComment, LPCSTR pszReferer,
-	BOOL bSilent, DWORD dwForceAutoLaunch, BOOL *pbAutoStart, vmsDWCD_AdditionalParameters* pParams, UINT* pRes)
+	BOOL bSilent, DWORD dwForceAutoLaunch, BOOL *pbAutoStart, vmsDWCD_AdditionalParameters* pParams, UINT* pRes
+)
 {
 	UINT res = IDOK;
 
 	std::string strUrlTmp;
 	if (pszStartUrl == NULL || *pszStartUrl == NULL)
 	{
-		pszStartUrl = "http://";
+		pszStartUrl = "https://";
 		if (!bSilent)
 		{
 			LPCSTR psz = _ClipbrdMgr.Text ();
@@ -685,7 +676,29 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 		{
 			//assert (dlg.m_strUrl != pszStartUrl);
 			if (dlg.m_strUrl != pszStartUrl)
-				return CreateDownload (dlg.m_strUrl, bReqTopMostDialog, pszComment, pszReferer, bSilent, dwForceAutoLaunch, pbAutoStart, pParams, pRes);
+			{
+				if (!dlg.m_strFileName.IsEmpty())
+				{
+					if (!pParams)
+						pParams = new vmsDWCD_AdditionalParameters();
+					pParams->strFileName = dlg.m_strFileName.GetString();
+					if (!dlg.m_strOutFolder.IsEmpty())
+						pParams->strDstFolder = dlg.m_strOutFolder;
+					pParams->dwFlags = 0;
+					pParams->dwMask = DWCDAP_FILENAME;
+				}
+
+				//ORG
+				//return CreateDownload(dlg.m_strUrl, bReqTopMostDialog, pszComment, pszReferer, bSilent, dwForceAutoLaunch, pbAutoStart, pParams, pRes);
+
+				return CreateDownload (dlg.m_strUrl, bReqTopMostDialog, pszComment, pszReferer,
+					TRUE, //bSilent,
+					dwForceAutoLaunch, pbAutoStart,
+					pParams, //&params, //pParams,
+					pRes
+					//NULL //dlg.m_strFileName.IsEmpty() ? NULL: dlg.m_strFileName.GetString()
+				);
+			}
 		}
 
 		bPlaceToTop = dlg.m_bPlaceAtTop;
@@ -786,8 +799,7 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 		if (pParams->dwMask & DWCDAP_FILENAME)
 		{
 			fsDownload_Properties *dp = dld->pMgr->GetDownloadMgr ()->GetDP ();
-			if (dp->pszFileName [lstrlen (dp->pszFileName) - 1] == '\\' ||
-					dp->pszFileName [lstrlen (dp->pszFileName) - 1] == '/')
+			if (dp->pszFileName [lstrlen (dp->pszFileName) - 1] == '\\' || dp->pszFileName [lstrlen (dp->pszFileName) - 1] == '/')
 			{
 				LPSTR psz = new char [lstrlen (dp->pszFileName) + pParams->strFileName.GetLength () + 1];
 				lstrcpy (psz, dp->pszFileName);
@@ -855,6 +867,7 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 
 	OnDownloadPostCreate (dld);
 
+	//vmsDownloadSmartPtr dld, fsSchedule *task, BOOL bDontUseSounds, bool bPlaceToTop
 	CreateDownload (dld, bScheduled ? &task : NULL, FALSE, bPlaceToTop);
 
 	return dld->nID;
@@ -1513,10 +1526,6 @@ BOOL CDownloadsWnd::CreateDownloadWithDefSettings(vmsDownloadSmartPtr dld, LPCST
 	dld->pGroup = pGroup;
 
 	dld->bAutoStart = _App.NewDL_AutoStart ();
-	//if (_App.NewDL_UseZIPPreview ())
-	//	dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags |= DPF_USEZIPPREVIEW;
-	//else
-//		dld->pMgr->GetDownloadMgr ()->GetDP ()->dwFlags &= ~DPF_USEZIPPREVIEW;
 
 	if (strFolder.GetLength () == 0)
 		strFolder = pGroup->strOutFolder;

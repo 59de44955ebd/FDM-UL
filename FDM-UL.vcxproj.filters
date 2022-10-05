@@ -44,18 +44,6 @@
     <ClCompile Include="source\CreateBatchDownload.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\DownloaderProperties_ListPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DownloaderProperties_NewDownloadPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DownloaderProperties_NotificationsPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\DownloaderPropertiesSheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\DownloadProperties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -353,9 +341,6 @@
     <ClCompile Include="source\vmsFileRecentList.cpp">
       <Filter>Source Files\vms</Filter>
     </ClCompile>
-    <ClCompile Include="source\vmsFilesToDelete.cpp">
-      <Filter>Source Files\vms</Filter>
-    </ClCompile>
     <ClCompile Include="source\vmsFileUtil.cpp">
       <Filter>Source Files\vms</Filter>
     </ClCompile>
@@ -601,6 +586,9 @@
     </ClCompile>
     <ClCompile Include="source\Schedule_WTSPage.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_YtDlp.cpp">
+      <Filter>Source Files\dlg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

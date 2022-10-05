@@ -285,8 +285,6 @@ When deleting an incomplete download
 Automatically remove completed downloads from list
 Don't delete file
 Delete file
-Specify here what FDM should do with the file on the disk when deleting an incomplete download
-Check this box if you want to delete download automatically from the list when finished
 Startup
 Load on startup
 Start minimized
@@ -466,7 +464,6 @@ Query the size of a download from the server
 Yes to all
 No to all
 Detailed log
-If checked, FDM will show responses from the server
 Changes will take effect after you restart browser.
 List of tasks
 List of sites
@@ -488,7 +485,6 @@ Please use (*) in the URL to specify template for URL
 Create an extension if a file doesn't have one
 Check this box to create a specified extension for a file which doesn't have it. For example if the file name is "file" and you specify "txt", the result will be "file.txt"
 Show sizes in bytes only
-Check this box to show all sizes in bytes instead of kilobytes or megabytes
 Disable task after execution
 Delete task after execution
 Check this box to disable task automatically after execution
@@ -506,18 +502,13 @@ There are no active downloads currently
 Notifications
 Use tray "balloons"
 Timeout
-Check this box to enable tray "balloon" notifications when a download has stopped or finished. Note: this feature works only on Windows 2000/XP and above
-A "balloon" will be closed automatically after the expiration of this time
 Waiting...
 Mirror URL for download
 File size exceeds 2GB. Such downloads are supported via FTP only
 New Download
 Determine group for download automatically
-Check this box if you want the download group to be determined by extension of file or settings of Site Manager
 Customize
 Use sounds
-Check this box if you want FDM to play sounds on some events (e.g. when download is completed)
-Choose sound for each event
 Customize sounds
 Set sound
 Remove
@@ -602,7 +593,6 @@ Filter
 Use hidden attribute for uncompleted download
 Append comment to the file name when done
 Start download automatically
-Check this box if you want FDM to start each new download automatically
 Add
 Use rollback on broken connections
 Size of rollback
@@ -659,7 +649,6 @@ This file has been downloaded from
 Don't retrieve the file date from the server
 This option allows you to increase the speed of starting an FTP download. Free Download Manager will use SIZE command instead of LIST.
 Don't save logs of downloads
-Enabling this option will make Free Download Manager start and shut down faster and will decrease memory usage.
 Saved in
 File size
 Resume support
@@ -674,7 +663,6 @@ Set groups' root folder
 Select groups' root folder.\nChanges will be applied to new downloads only.
 Pause all downloads
 Show downloading progress window
-If checked, FDM will create a special window with information about downloading for each running download
 Timeouts for confirmations
 Launch download
 Ask for shutdown type
@@ -691,7 +679,7 @@ Single number
 Number
 Assign set of numbers
 Syntax error
-Disable Tools | "when done" task after execution
+Disable tasks after execution
 Move up
 Move down
 Move selected download(s) up
@@ -714,12 +702,8 @@ Invalid save as template specified.\nMake sure it corresponds to the URL templat
 When done
 When done (all completed or in error)
 What's This?
-FDM Community
-Switch to "Opinions" after download
-Display opinions when downloading
 Close
 Cache the operations of writing the downloaded data to disk
-If enabled, FDM will use internal cache buffer with the size you specified for operations of writing the downloaded data. This will reduce the number of times your HDD is used. This may increase the speed of downloading for high-speed connections.\nHowever, because downloaded data is not written to HDD immediately, it will be required to re-download this data again if a computer failure occurs (at worst, you will have to re-download as much data as you specified for the cache size).\nRecommended for high-speed connections.
 Move files to folder
 Speed is too low. Restarting section...
 Restart if speed is too low during (in min):
@@ -734,7 +718,6 @@ Disable
 Switch
 If the Pause all downloads mode is enabled, it will be disabled, otherwise it will be enabled.
 Disable all notifications for batch downloads
-Check this options in order to disable all (balloon, sounds) notifications for downloads created by "%s" command.
 Integrity
 Perform the integrity check when file is downloaded
 In order to perform the integrity check Free Download Manager should know the valid checksum of the file. In most cases you should provide it for each download.
@@ -791,7 +774,6 @@ Set default download folder
 Prevent computer from stand by while downloading
 Source
 Save
-Default settings for site downloads
 You have paused all downloads. This means all downloads will download at a very low speed (1B/s usually).\nThis allows to "pause" even downloads with no resume support.\n\nYou should call this command again or restart FDM in order to return to normal state.
 Check if download with the same URL already exists
 Default settings of BitTorrent downloads
@@ -810,8 +792,6 @@ after "silent" creation
 %d%% downloaded in total
 %s left to download at
 Path to user profile folder.
-Cannot detect the path to the Orbit Downloader's application data.
-Error: %d (%02X)
 System diagnostics: %s
 Fatal error occurred while loading the list of downloads.\nClick OK to continue (some or all downloads will be lost) or CANCEL to exit.\nThis problem can be caused by incorrect installation of FDM or damaged data file.
 You'll need to provide administrator permission to apply settings.
