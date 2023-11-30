@@ -7,6 +7,8 @@ FDM-UL is based on the source code of [FDM 3.9.7](https://sourceforge.net/p/free
 **New Features**
 
 * SOCKS5 proxy support
+* Partially downloaded files can now be launched (Ctrl+R).  
+  This allows to watch .mp4s e.g. in VLC or MPC-HC while they are still downloading/streaming from a video host in the background.
 * Integrated minimal HTTP interface  
   If activated, it only provides the single HTTP endpoint "/adddownload.req?URL=[url]". Useful for adding download jobs to FDM-UL from a browser via [boomarklet](https://en.wikipedia.org/wiki/Bookmarklet) or [contextlet](https://github.com/davidmhammond/contextlets) using fetch.
 * URL extraction based on yt-dlp  
