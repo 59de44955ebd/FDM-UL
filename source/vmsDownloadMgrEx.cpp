@@ -388,15 +388,21 @@ void vmsDownloadMgrEx::Do_OpenFolder()
 		if (GetFileAttributes (strFileName) == DWORD (-1))
 		{
 			char szPath [MY_MAX_PATH];
-
 			fsGetPath (strFileName, szPath);
 			ShellExecute (NULL, "explore", szPath, NULL, NULL, SW_SHOW);
 		}
 		else
 		{
-			CString strCmd;
-			strCmd.Format ("/select,\"%s\"", strFileName.GetString());
-				ShellExecute (NULL, "open", "explorer.exe", strCmd.GetString(), NULL, SW_SHOW);
+			// ugly, always creates new explorer instance
+			//CString strCmd;
+			//strCmd.Format ("/select,\"%s\"", strFileName.GetString());
+			//ShellExecute (NULL, "open", "explorer.exe", strCmd.GetString(), NULL, SW_SHOW);
+
+			CStringW wideStr = strFileName.GetString();
+			PIDLIST_ABSOLUTE pidl;
+			//SHILCreateFromPath(wideStr, &pidl, 0);
+			SHParseDisplayName(wideStr, NULL, &pidl, 0, 0);
+			SHOpenFolderAndSelectItems(pidl, 0, 0, 0);
 		}
 	}
 }

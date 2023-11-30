@@ -916,8 +916,10 @@ void CDownloadsWnd::DeleteDownloadsInList()
 		return;
 
 	if (_App.Deleted_ConfirmDeletion ())
-	if (IDNO == MessageBox (LS (L_AREYOUSURE), LS (L_CONFIRMATION), MB_ICONQUESTION|MB_YESNO))
-		return;
+	{
+		if (IDNO == MessageBox (LS (L_AREYOUSURE), LS (L_CONFIRMATION), MB_ICONQUESTION|MB_YESNO))
+			return;
+	}
 
 	cDlds = tasks->GetItemCount ();
 

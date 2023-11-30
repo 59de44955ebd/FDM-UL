@@ -1553,7 +1553,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "&Delete download\tDel",       ID_DLDDELETE
         MENUITEM SEPARATOR
-        MENUITEM "&Launch file",                ID_DLDLAUNCH
+        MENUITEM "&Launch file\tCtrl+R",                ID_DLDLAUNCH
         MENUITEM "&Open folder",                ID_DLDOPENFOLDER
         MENUITEM SEPARATOR
         MENUITEM "&Find",                       ID_DLDFIND
@@ -2212,6 +2212,7 @@ BEGIN
     "L",            ID_SPIDERDLWEBPAGE,     VIRTKEY, CONTROL, NOINVERT
     "N",            ID_DLD_CREATE,          VIRTKEY, CONTROL, NOINVERT
     "O",            ID_DLDROPTIONS,         VIRTKEY, CONTROL, NOINVERT
+	"R",			ID_DLDLAUNCH,			VIRTKEY, CONTROL, NOINVERT
     "S",            ID_SAVEALL,             VIRTKEY, CONTROL, NOINVERT
     "T",            ID_TASK_CREATE_NEW,     VIRTKEY, CONTROL, NOINVERT
     "V",            ID_FILE_IMPORT_IMPORTLISTOFDOWNLOADSFROMCLIPBOARD, VIRTKEY, SHIFT, CONTROL, NOINVERT

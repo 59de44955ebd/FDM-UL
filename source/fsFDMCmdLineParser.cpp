@@ -14,7 +14,7 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
-fsFDMCmdLineParser::fsFDMCmdLineParser() 
+fsFDMCmdLineParser::fsFDMCmdLineParser()
 	//:
 	//m_bRunAsElevatedTasksProcessor (false),
 	//m_bInstallIeIntegration (false)
@@ -52,7 +52,14 @@ void fsFDMCmdLineParser::Parse(PerformTasksOfType enPTT)
 
 		if (strcmp (pszParam, "?") == 0 && enPTT == Normal)
 		{
-			MessageBox (0, "fdm.exe [-fs] [-url=]url1 [-url=]url2 ...\n\n-fs - force silent mode.\nIf url contains spaces it should be in quotes.\n\nExample:\nfdm.exe -fs \"https://site.com/read me.txt\"", "Command line usage", 0);
+			MessageBox (0,
+				"fdm.exe [-fs] [-fn=...] [-url=]url1 [-fn=...] [-url=]url2 ...\n\n"
+				"-fs - force silent mode.\n"
+				"-fn - use this filename (silent mode only)"
+				//"If url contains spaces it should be in quotes.\n\n"
+				//"Example:\n"
+				//"fdm.exe -fs \"https://site.com/read me.txt\"",
+				,"Command line usage", 0);
 		}
 		else if (stricmp (pszParam, "fs") == 0)
 		{
@@ -81,17 +88,24 @@ void fsFDMCmdLineParser::Parse(PerformTasksOfType enPTT)
 				//	pAdd->Release ();
 				//}
 
+				CHAR _url[L_MAX_URL_LENGTH];
+				strcpy(_url, pszValue);
+				if (i > 0 && stricmp(m_parser.Get_Parameter(i - 1), "fn") == 0)
+				{
+					strcat(_url, " ");
+					strcat(_url, m_parser.Get_ParameterValue(i - 1));
+				}
 
 				COPYDATASTRUCT ds;
-				ds.dwData = m_bForceSilent ? 1 : 0;
-				ds.cbData = strlen(pszValue);
-				ds.lpData = (void *)pszValue;
 
-				//CFdmApp::_inc_UrlToAdd _url;
-				//_url.strUrl = pszValue;
-				//_url.bForceSilent = m_bForceSilent;
-				//ds.cbData = sizeof(&_url);
-				//ds.lpData = (void *)&_url;
+				// ORG
+				ds.dwData = m_bForceSilent ? 1 : 0;
+				//ds.cbData = strlen(pszValue);
+				//ds.lpData = (void *)pszValue;
+
+				//NEW
+				ds.cbData = strlen(_url);
+				ds.lpData = (void *)_url;
 
 				SendMessage(hWnd, WM_COPYDATA, (WPARAM)(HWND)0, (LPARAM)&ds);
 			}
@@ -100,6 +114,17 @@ void fsFDMCmdLineParser::Parse(PerformTasksOfType enPTT)
 				CFdmApp::_inc_UrlToAdd _url;
 				_url.strUrl = pszValue;
 				_url.bForceSilent = m_bForceSilent;
+
+				if (i > 0 && stricmp(m_parser.Get_Parameter(i - 1), "fn") == 0)
+				{
+					_url.strFilename = m_parser.Get_ParameterValue(i - 1);
+					_url.bForceFilename = TRUE;
+				}
+				//else
+				//{
+				//	_url.bForceFilename = FALSE;
+				//}
+
 				app->m_vUrlsToAdd.add (_url);
 			}
 		}

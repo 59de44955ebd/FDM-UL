@@ -52,21 +52,28 @@ void fsTrayIconMgr::LoadIcons(UINT *pIcons, UINT cIcons)
 
 void fsTrayIconMgr::Remove()
 {
+	if (m_pIcons == NULL)
+		return;
+
 	NOTIFYICONDATA data;
 
 	data.cbSize = m_cbNIDSize;
 	data.hWnd = m_hWnd;
 	data.uID = m_nID;
 
+	//VS FIX
+	data.hIcon = m_pIcons[m_iCurIconIndex];
+	data.uFlags = NIF_ICON;
+
 	Shell_NotifyIcon (NIM_DELETE, &data);
 }
 
 BOOL fsTrayIconMgr::ShowIcon(int iIndex)
 {
-	NOTIFYICONDATA data;
-
 	if (m_pIcons == NULL)
 		return FALSE;
+
+	NOTIFYICONDATA data;
 
 	data.cbSize = m_cbNIDSize;
 	data.hIcon = m_pIcons [m_iCurIconIndex = iIndex];

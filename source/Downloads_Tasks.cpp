@@ -310,10 +310,12 @@ void CDownloads_Tasks::DeleteSelected(BOOL bDontConfirmFileDeleting)
 		return;
 
 	if (bDontConfirmFileDeleting || _App.Deleted_ConfirmDeletion ())
-		if (IDNO == MessageBox (bDontConfirmFileDeleting ? LS (L_DLDWBDELETEDFROMDISK) : LS (L_AREYOUSURE), LS (L_CONFIRMATION), MB_YESNO|MB_ICONQUESTION))
 	{
-		SetFocus ();
-		return;
+		if (IDNO == MessageBox (bDontConfirmFileDeleting ? LS (L_DLDWBDELETEDFROMDISK) : LS (L_AREYOUSURE), LS (L_CONFIRMATION), MB_YESNO|MB_ICONQUESTION))
+		{
+			SetFocus ();
+			return;
+		}
 	}
 
 	pos = GetFirstSelectedItemPosition ();
@@ -470,7 +472,7 @@ void CDownloads_Tasks::OnDldlaunch()
 	while (pos)
 	{
 		vmsDownloadSmartPtr dld = m_vDownloads [GetNextSelectedItem (pos)];
-		if (dld->pMgr->IsDone ())
+		//if (dld->pMgr->IsDone ())
 			_DldsMgr.LaunchDownload (dld);
 	}
 }
@@ -607,10 +609,10 @@ void CDownloads_Tasks::UpdateMenu(CMenu *pPopup)
 				pPopup->EnableMenuItem (ID_DLDSCHEDULESTOP, MF_BYCOMMAND | MF_GRAYED);
 			}
 
-			if (bDone == FALSE)
-			{
-				pPopup->EnableMenuItem (ID_DLDLAUNCH, MF_BYCOMMAND | MF_GRAYED);
-			}
+			//if (bDone == FALSE)
+			//{
+			//	pPopup->EnableMenuItem (ID_DLDLAUNCH, MF_BYCOMMAND | MF_GRAYED);
+			//}
 
 			if (bCanQuery == FALSE)
 				pPopup->EnableMenuItem (ID_DLDQSIZE, MF_BYCOMMAND | MF_GRAYED);
@@ -881,7 +883,11 @@ void CDownloads_Tasks::ApplyLanguageToMenu(CMenu *menu)
 	str = LS (L_DELETEDLD); str += "\tDel (Shift+Del)";
 	menu->ModifyMenu (ID_DLDDELETE, MF_BYCOMMAND|MF_STRING, ID_DLDDELETE, str);
 
-	menu->ModifyMenu (ID_DLDLAUNCH, MF_BYCOMMAND|MF_STRING, ID_DLDLAUNCH, LS (L_LAUNCHFILE));
+	//menu->ModifyMenu (ID_DLDLAUNCH, MF_BYCOMMAND|MF_STRING, ID_DLDLAUNCH, LS (L_LAUNCHFILE));
+
+	str = LS(L_LAUNCHFILE); str += "\tCtrl+R";
+	menu->ModifyMenu(ID_DLDLAUNCH, MF_BYCOMMAND | MF_STRING, ID_DLDLAUNCH, str);
+
 	menu->ModifyMenu (ID_DLDOPENFOLDER, MF_BYCOMMAND|MF_STRING, ID_DLDOPENFOLDER, LS (L_OPENFOLDER));
 
 	str = LS (L_AUTOSTARTDLD); str += '\t';

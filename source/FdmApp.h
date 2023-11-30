@@ -41,6 +41,15 @@ public:
 	struct _inc_UrlToAdd {
 		fsString strUrl;
 		BOOL bForceSilent;
+
+		//TEST
+		BOOL bForceFilename;
+		fsString strFilename;
+
+		_inc_UrlToAdd()
+		{
+			bForceFilename = FALSE;
+		}
 	};
 
 	fs::list <_inc_UrlToAdd> m_vUrlsToAdd;

@@ -186,21 +186,45 @@ CMainFrame::~CMainFrame()
 		Sleep (10);
 }
 
+
 // Allows to add download URL via WM_COPYDATA message to main window
-// lpData: the URL
+// lpData: the URL (optionally appended with SPACE and filename to use (silent mode only))
 // dwData: silent (1) or not (0)
 BOOL CMainFrame::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
 {
-	char * data = (char*)malloc(pCopyDataStruct->cbData + 1);
-	if (data)
+	// ORG
+	char * pszStartUrl = (char*)malloc(pCopyDataStruct->cbData + 1);
+	if (pszStartUrl)
 	{
-		memcpy(data, (LPCSTR)pCopyDataStruct->lpData, pCopyDataStruct->cbData);
-		data[pCopyDataStruct->cbData] = 0;
+		memcpy(pszStartUrl, (LPCSTR)pCopyDataStruct->lpData, pCopyDataStruct->cbData);
+		pszStartUrl[pCopyDataStruct->cbData] = 0;
+
 		BOOL bSilent = pCopyDataStruct->dwData;
-		BOOL bAdded = UINT_MAX != _pwndDownloads->CreateDownload(data, FALSE, NULL, NULL, bSilent);
+		BOOL bAdded;
+
+		char * pch;
+		pch = strchr(pszStartUrl, ' ');
+		if (pch && *(pch + 1) != 0)
+		{
+			*pch = 0;
+
+			vmsDWCD_AdditionalParameters params;
+			params.dwMask = DWCDAP_FILENAME;
+			params.strFileName = pch + 1;
+
+			bAdded = UINT_MAX != _pwndDownloads->CreateDownload(pszStartUrl, FALSE, NULL, NULL, bSilent,
+				DWCD_NOFORCEAUTOLAUNCH,
+				NULL,
+				&params
+			);
+		}
+		else
+			bAdded = UINT_MAX != _pwndDownloads->CreateDownload(pszStartUrl, FALSE, NULL, NULL, bSilent);
+
+		//BOOL bAdded = UINT_MAX != _pwndDownloads->CreateDownload(pszStartUrl, FALSE, NULL, NULL, bSilent);
 		if (bAdded && bSilent)
-			ShowTimeoutBalloon(data, LS(L_DOWNLOADADDED), NIIF_INFO, TRUE);
-		free(data);
+			ShowTimeoutBalloon(pszStartUrl, LS(L_DOWNLOADADDED), NIIF_INFO, TRUE);
+		free(pszStartUrl);
 	}
 
 	return TRUE;
@@ -1448,8 +1472,41 @@ void CMainFrame::OnProceedFurherInitialization()
 	for (i = 0; i < app->m_vUrlsToAdd.size (); i++)
 	{
 		BOOL bSilent = app->m_vUrlsToAdd[i].bForceSilent;// ? TRUE : _App.Monitor_Silent();
-		BOOL bAdded = UINT_MAX != _pwndDownloads->CreateDownload (app->m_vUrlsToAdd [i].strUrl, FALSE, NULL,
-			NULL, bSilent);
+		BOOL bAdded;
+
+		//TEST
+		if (app->m_vUrlsToAdd[i].bForceFilename)
+		{
+			vmsDWCD_AdditionalParameters params;
+			params.dwMask = DWCDAP_FILENAME;
+			params.strFileName = app->m_vUrlsToAdd[i].strFilename;
+
+			//UINT CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog = FALSE, LPCSTR pszComment = NULL, LPCSTR pszReferer = NULL,	BOOL bSilent = FALSE,
+			//	DWORD dwForceAutoLaunch = DWCD_NOFORCEAUTOLAUNCH, BOOL* pbAutoStart = NULL, vmsDWCD_AdditionalParameters* pParams = NULL, UINT* pRes = NULL
+			//);
+			bAdded = UINT_MAX != _pwndDownloads->CreateDownload(
+				app->m_vUrlsToAdd[i].strUrl,
+				FALSE,
+				NULL,
+				NULL,
+				bSilent,
+
+				DWCD_NOFORCEAUTOLAUNCH,
+				NULL,
+				&params
+			);
+		}
+		else
+		{
+			bAdded = UINT_MAX != _pwndDownloads->CreateDownload(
+				app->m_vUrlsToAdd[i].strUrl,
+				FALSE,
+				NULL,
+				NULL,
+				bSilent
+			);
+		}
+
 
 		if (bAdded && bSilent)
 			ShowTimeoutBalloon (app->m_vUrlsToAdd [i].strUrl, LS (L_DOWNLOADADDED), NIIF_INFO, TRUE);
