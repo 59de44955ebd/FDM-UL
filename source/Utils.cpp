@@ -152,7 +152,7 @@ CString execCmd(const CHAR* cmd, LPDWORD lpExitCode)
 	STARTUPINFOA si = { sizeof(STARTUPINFOA) };
 	si.dwFlags = STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
 	si.hStdOutput = hPipeWrite;
-	si.hStdError = hPipeWrite;
+	si.hStdError = NULL; // hPipeWrite;
 	si.wShowWindow = SW_HIDE;
 
 	PROCESS_INFORMATION pi = { 0 };

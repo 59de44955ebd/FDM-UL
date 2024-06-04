@@ -1792,18 +1792,18 @@ END
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE 
+1 TEXTINCLUDE
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE 
+2 TEXTINCLUDE
 BEGIN
     "#include ""afxres.h""\r\n"
     "#include ""source\\plugincmds.h""\0"
 END
 
-3 TEXTINCLUDE 
+3 TEXTINCLUDE
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
     "#define _AFX_NO_OLE_RESOURCES\r\n"
@@ -1837,8 +1837,8 @@ IDC_HAND_               CURSOR                  "res\\hand.cur"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
- PRODUCTVERSION 1,0,0,0
+ FILEVERSION 1,1,0,0
+ PRODUCTVERSION 1,1,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -1855,10 +1855,10 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "FDM-UL"
             VALUE "FileDescription", "FDM-UL"
-            VALUE "FileVersion", "1.0.0.0"
-            VALUE "LegalCopyright", "Copyright © 2022"
+            VALUE "FileVersion", "1.1.0.0"
+            VALUE "LegalCopyright", "Copyright © 2024"
             VALUE "ProductName", "FDM-UL"
-            VALUE "ProductVersion", "1.0.0 "
+            VALUE "ProductVersion", "1.1.0 "
         END
     END
     BLOCK "VarFileInfo"

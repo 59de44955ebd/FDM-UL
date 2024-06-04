@@ -1082,11 +1082,12 @@ void CCreateDownloadDlg::OnYtDlp()
 
 	DWORD dwExitCode;
 	CString sCmd;
-	sCmd.Format("%s -q --dump-json %s", _App.m_szYtDlpPath, strURL.GetString());
+	sCmd.Format("%s -q --no-warnings --dump-json %s", _App.m_szYtDlpPath, strURL.GetString());
 	CString sJson = execCmd(sCmd, &dwExitCode);
 	if (dwExitCode == 0)
 	{
-		json j = json::parse(sJson.GetString());
+		LPCSTR json_res = sJson.GetString();
+		json j = json::parse(json_res, nullptr, false, true);
 
 		CString sFormat;
 		if (j.contains("formats"))
